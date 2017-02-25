@@ -13,6 +13,15 @@ class Utilisateur extends CI_Controller {
         //$this->data['session']=$this->session->all_userdata();        
     }
     
+    public function activation($mail_encode=null,$code_encode=null){
+        $mail = urldecode($mail_encode);
+        $code = urldecode($code_encode);
+        if($this->utilisateur_model->activer_compte($mail,$code))
+           redirect('utilisateur/connexion/activation_succes', 'refresh');
+        else
+           redirect('utilisateur/connexion/activation_echec', 'refresh');
+    }
+    
     public function inscription() {
         $data['page_title'] = 'GoSciences - Inscription';        
         $this->load->view('site/header', $data);
@@ -44,22 +53,21 @@ class Utilisateur extends CI_Controller {
 
     public function connexion($msg=NULL) {
         $data['page_title'] = 'GoSciences - Connexion';
-
         switch ($msg) { // Gestion des messages à afficher en page d'accueil
-            case 'ActivatingSuccess':
+            case 'activation_succes':
                 $type='success';
-                $message='Activation réussie.<br/>Vous pouvez désormais vous connecter avec vos identifiants.';
+                $message='<h5>Activation réussie.</h5>Vous pouvez désormais vous connecter avec vos identifiants.';
                 break;
-            case 'ActivatingFailed':
-                $type='error';
-                $message='Échec de l\'activation.<br/>Ce lien d\'activation ne correspond à aucun compte.<br/>Merci de contacter l\'administrateur grâce au menu "Contact" si le porblème persiste.';
+            case 'activation_echec':
+                $type='alert';
+                $message='<h5>Échec de l\'activation.</h5>Ce lien d\'activation ne correspond à aucun compte.<br/>Merci de contacter l\'administrateur grâce au menu "Contact" si le problème persiste.';
                 break;
             case 'inscription_ok':
                 $type='success';
-                $message='<h5>Inscription réussie.</h5><br/>Vous devez maintenant activer votre compte en cliquant sur le lien qui vous a été envoyé par e-mail.';
+                $message='<h5>Inscription réussie.</h5>Vous devez maintenant activer votre compte en cliquant sur le lien qui vous a été envoyé par e-mail.';
                 break;
-            case 'mustRegister':
-                $type='error';
+            case 'connexion_requise':
+                $type='warning';
                 $message='Vous devez d\'abord vous connecter pour faire cela.';
                 break;
             default:

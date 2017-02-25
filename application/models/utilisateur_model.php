@@ -7,6 +7,19 @@ class Utilisateur_model extends CI_Model {
 
     protected $table = 'utilisateur';
 
+     //Active le compte d'un utilisateur
+    public function activer_compte($mail,$code){
+        $user_id = $this->db->select('id')->from($this->table)
+                ->where('mail',$mail)
+                ->where('code_activation',$code)
+                ->where('etat','validation')->limit(1,0)->get()->row();
+        if (!empty($user_id)){
+            $this->db->where('id',$user_id->id)->set('etat','actif')->update($this->table);
+            return TRUE;
+        }else
+            return FALSE;
+    }
+    
     public function create($mail,$nom,$prenom,$pass,$ip){
         $this->load->helper('string');
         $this->load->library('format_string');
