@@ -16,7 +16,7 @@ class Utilisateur extends CI_Controller {
     public function activation($mail_encode=null,$code_encode=null){
         $mail = urldecode($mail_encode);
         $code = urldecode($code_encode);
-        if($this->utilisateur_model->activer_compte($mail,$code))
+        if($this->utilisateur_model->activerCompte($mail,$code))
            redirect('utilisateur/connexion/activation_succes', 'refresh');
         else
            redirect('utilisateur/connexion/activation_echec', 'refresh');
@@ -56,19 +56,23 @@ class Utilisateur extends CI_Controller {
         switch ($msg) { // Gestion des messages à afficher en page d'accueil
             case 'activation_succes':
                 $type='success';
-                $message='<h5>Activation réussie.</h5>Vous pouvez désormais vous connecter avec vos identifiants.';
+                $message='<h5>Activation réussie.</h5><p>Vous pouvez désormais vous connecter avec vos identifiants.</p>';
                 break;
             case 'activation_echec':
                 $type='alert';
-                $message='<h5>Échec de l\'activation.</h5>Ce lien d\'activation ne correspond à aucun compte.<br/>Merci de contacter l\'administrateur grâce au menu "Contact" si le problème persiste.';
+                $message='<h5>Échec de l\'activation.</h5><p>Ce lien d\'activation ne correspond à aucun compte.<br/>Merci de contacter l\'administrateur grâce au menu "Contact" si le problème persiste.</p>';
                 break;
             case 'inscription_ok':
                 $type='success';
-                $message='<h5>Inscription réussie.</h5>Vous devez maintenant activer votre compte en cliquant sur le lien qui vous a été envoyé par e-mail.';
+                $message='<h5>Inscription réussie.</h5><p>Vous devez maintenant activer votre compte en cliquant sur le lien qui vous a été envoyé par e-mail.</p>';
                 break;
             case 'connexion_requise':
                 $type='warning';
-                $message='Vous devez d\'abord vous connecter pour faire cela.';
+                $message='<p>Vous devez d\'abord vous connecter pour faire cela.</p>';
+                break;
+            case 'erreur_intervalle':
+                $type='warning';
+                $message='<h5>Échec de l\'envoi.</h5><p>Vous ne pouvez demander un mail d\'activation qu\'une fois toutes les 30min.</p>';
                 break;
             default:
                 $type=NULL;
@@ -83,32 +87,45 @@ class Utilisateur extends CI_Controller {
     }
     
     public function valid_connexion() {
-        $this->form_validation->set_rules('mail', 'E-mail', 'required|callback_verify_email');
+        $this->load->model('log_model');
+        $this->form_validation->set_rules('mail', 'E-mail', 'required|valid_email|callback_verify_email');
         $this->form_validation->set_rules('pass', 'Mot de passe', 'required|callback_verify_password');
         $this->form_validation->set_error_delimiters('<p class="help-text valid-error">', '</p>');
-
+        $mail = $this->input->post('mail');
+        
         if ($this->form_validation->run()) {
-            //$mail = $this->input->post('mail');
-            $ip = $this->input->ip_address();
+            $this->log_model->create('connexion','Connexion réussie','Mail: '.$mail,$mail);
+            $this->utilisateur_model->update(array('mail'=>$mail), array(),array('date_connexion'=>'NOW()'));
             redirect('site/accueil', 'refresh');
-        }else
+        }else{
+            $this->log_model->create('connexion','Tentative de connexion échouée','Mail: '.$mail,$mail);
             $this->connexion();
+        }
+    }
+        
+    public function renvoi_activation($mail=null){
+        if (empty($mail))
+            redirect('site/accueil', 'refresh');
+        else{            
+            $codeRetour = $this->utilisateur_model->sendActivationMail(urldecode($mail),'renvoi');
+            redirect('utilisateur/connexion/'.$codeRetour, 'refresh');
+        }
     }
 
     function verify_email(){   // fonction utilisée à la connexion pour vérifier si le compte existe et est actif
         $mail = $this->input->post('mail');
-        if ($mail != NULL) $etat_obj = $this->utilisateur_model->get_info('etat','mail',$this->input->post('mail'));
+        if ($mail != NULL) $etat_obj = $this->utilisateur_model->getInfo('etat','mail',$this->input->post('mail'));
         else $etat_obj = NULL;
         
         if ($etat_obj != NULL) $etat = $etat_obj->etat;
         else $etat = NULL;
-        
+        $link = site_url('utilisateur/renvoi_activation/'.urlencode($mail));
         switch ($etat){
             case NULL:
                 $this->form_validation->set_message('verify_email', '%s incorrect.');
                 return FALSE;
             case 'validation':
-                $this->form_validation->set_message('verify_email', 'Le compte lié à cet %s n\'a pas encore été activé. <a href="">Renvoyer le lien d\'activation</a>.');
+                $this->form_validation->set_message('verify_email', 'Le compte lié à cet email n\'a pas encore été activé. <a href="'.$link.'">Renvoyer le lien d\'activation</a>.');
                 return FALSE;
             case 'actif':
                 return TRUE;
@@ -119,7 +136,7 @@ class Utilisateur extends CI_Controller {
     }
 
     function verify_password(){   // fonction utilisée à la connexion pour vérifier si le mot de passe est correct
-        if ($this->utilisateur_model->verify_password($this->input->post('mail'),$this->input->post('pass')))
+        if ($this->utilisateur_model->verifyPassword($this->input->post('mail'),$this->input->post('pass')))
             return TRUE;
         else{
             $this->form_validation->set_message('verify_password', '%s incorrect.');
