@@ -1,10 +1,10 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-class Log_model extends CI_Model
+class Log_model extends MY_Model
 {
         protected $table = 'log';
         
         // Créer une entrée dans la tables des logs. $user = null OU utilisateur.id OU utilisateur.mail
-        public function create($type,$libelle,$detail="",$user=null){            
+        public function create_log($type,$libelle,$detail="",$user=null){            
             try {
                 $CI =& get_instance();
                 $CI->load->model('utilisateur_model');
@@ -16,25 +16,23 @@ class Log_model extends CI_Model
                 $platform=$this->agent->platform();
                 $ip=$this->input->ip_address();
                 if (!is_null($user)){
-                    if (is_int($user)) $uid = $user;
-                    else {
-                        $user_info = $CI->utilisateur_model->getInfo('id','mail',$user);
-                        $uid = (is_null($user_info))? null : $user_info->id;
+                    if (!is_int($user)){
+                        $user_obj = $CI->utilisateur_model->read('id',array('mail'=>$user))->row();
+                        $user = (is_null($user_obj))? null : $user_obj->id;
                     }
-                }else
-                    $uid = null;
-
-                $connexion_log = array(
-                    'date'          => date("Y-m-j H:i:s"),
+                }
+                
+                $options_echappees = array(
                     'ip'            => $ip,
                     'agent'         => $agent,
                     'platform'      => $platform,
                     'type'          => $type,
                     'libelle'       => $libelle,
                     'detail'        => $detail,
-                    'utilisateur_id'=> $uid);
-
-                return $this->db->insert($this->table, $connexion_log);
+                    'utilisateur_id'=> $user);
+                $options_non_echappees = array('date' => 'NOW()');
+                
+                return $this->create($options_echappees, $options_non_echappees);
             } catch( Exception $e ) {
                 log_message('error', 'Error in Log_model - Msg:'.$e->getMessage().' Trace:'.$e->getTraceAsString());
             }

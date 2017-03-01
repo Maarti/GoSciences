@@ -16,10 +16,10 @@ class Utilisateur extends CI_Controller {
     public function activation($mail_encode=null,$code_encode=null){
         $mail = urldecode($mail_encode);
         $code = urldecode($code_encode);
-        if($this->utilisateur_model->activerCompte($mail,$code))
-           redirect('utilisateur/connexion/activation_succes', 'refresh');
+       /* if(*/$this->utilisateur_model->activerCompte($mail,$code);//)
+       /*    redirect('utilisateur/connexion/activation_succes', 'refresh');
         else
-           redirect('utilisateur/connexion/activation_echec', 'refresh');
+           redirect('utilisateur/connexion/activation_echec', 'refresh');*/
     }
     
     public function inscription() {
@@ -42,10 +42,9 @@ class Utilisateur extends CI_Controller {
             $mail = $this->input->post('mail');
             $nom = $this->input->post('nom');
             $prenom = $this->input->post('prenom');
-            $pass = password_hash($this->input->post('pass'), PASSWORD_DEFAULT);
-            $ip = $this->input->ip_address();
+            $hashed_pass = password_hash($this->input->post('pass'), PASSWORD_DEFAULT);
             
-            $this->utilisateur_model->create($mail, $nom, $prenom, $pass, $ip);
+            $this->utilisateur_model->create_utilisateur($mail, $nom, $prenom, $hashed_pass);
             redirect('utilisateur/connexion/inscription_ok', 'refresh');
         }else
             $this->inscription();
@@ -94,11 +93,11 @@ class Utilisateur extends CI_Controller {
         $mail = $this->input->post('mail');
         
         if ($this->form_validation->run()) {
-            $this->log_model->create('connexion','Connexion réussie','Mail: '.$mail,$mail);
+            $this->log_model->create_log('connexion','Connexion réussie','Mail: '.$mail,$mail);
             $this->utilisateur_model->update(array('mail'=>$mail), array(),array('date_connexion'=>'NOW()'));
             redirect('site/accueil', 'refresh');
         }else{
-            $this->log_model->create('connexion','Tentative de connexion échouée','Mail: '.$mail,$mail);
+            $this->log_model->create_log('connexion','Tentative de connexion échouée','Mail: '.$mail,$mail);
             $this->connexion();
         }
     }
@@ -114,11 +113,11 @@ class Utilisateur extends CI_Controller {
 
     function verify_email(){   // fonction utilisée à la connexion pour vérifier si le compte existe et est actif
         $mail = $this->input->post('mail');
-        if ($mail != NULL) $etat_obj = $this->utilisateur_model->getInfo('etat','mail',$this->input->post('mail'));
-        else $etat_obj = NULL;
-        
-        if ($etat_obj != NULL) $etat = $etat_obj->etat;
-        else $etat = NULL;
+        if ($mail != NULL) $etat_obj = $this->utilisateur_model->read('etat', array('mail'=>$mail))->row();
+        else $etat_obj = NULL;        
+        $etat = ($etat_obj != NULL)? $etat_obj->etat : NULL;
+        var_dump($etat_obj);
+        var_dump($etat);
         $link = site_url('utilisateur/renvoi_activation/'.urlencode($mail));
         switch ($etat){
             case NULL:
