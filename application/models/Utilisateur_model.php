@@ -2,8 +2,8 @@
 
 class Utilisateur_model extends MY_Model {
 
-    protected $table = 'utilisateur';
-
+   protected $table = 'utilisateur';
+ 
     // Active le compte d'un utilisateur
     public function activerCompte($mail,$code){
         $CI =& get_instance();
@@ -12,7 +12,6 @@ class Utilisateur_model extends MY_Model {
                 array(  'mail'              =>$mail,
                         'code_activation'   =>$code,
                         'etat'              =>'validation'), 1, 0,'id DESC')->row();
-            var_dump($user_id);
         if (!empty($user_id)){
             $this->update(array('id'=>$user_id->id), array('etat'=>'actif'));
             $CI->log_model->create_log('compte','Activation du compte','Mail: '.$mail,$mail);
@@ -47,14 +46,21 @@ class Utilisateur_model extends MY_Model {
         return $return;
     }
     
-    /*public function getInfo($select,$field_name,$field_value){
-        // exemple : $this->utilisateur_model->getInfo('etat','mail',$this->input->post('mail'));
-        return $this->db->select($select)->from($this->table)->where($field_name,$field_value)->get()->row();
-    }*/
+    public function get_session_data($mail){
+        $session_data = $this->read('id,nom,prenom', array('utilisateur.mail'=>$mail), 1, 0)->row_array();
+        
+        // On récupère les rôles de l'utilisateur
+        $roles_array = array();
+        $role_query = $this->db->select('role_id')->from('utilisateur_has_role')->where('utilisateur_id',$session_data['id'])->get();        
+        foreach ($role_query->result() as $role)
+            array_push($roles_array, $role->role_id);        
+        $session_data['roles'] = $roles_array;
+        
+        return $session_data;        
+    }
     
      // Envoie le mail d'activation d'un compte
     public function sendActivationMail($mail,$type='first'){
-        //$result = $this->db->select('date_connexion,prenom,code_activation')->from($this->table)->where('mail',$mail)->get()->row();
         $result = $this->read('date_connexion,prenom,code_activation',array('mail'=>$mail))->row();
         $interval = strtotime(date("Y-m-j H:i:s")) - strtotime($result->date_connexion);
         if ($type=='first' || $interval<0 || $interval >(60*30) ){    // On doit patienter 30min avant de renvoyer un mail d'activation        
@@ -90,21 +96,7 @@ Msg: '.$message,$to);
         return $this->email->send();
     }
     
-    /*public function update($where, $options_echappees = array(), $options_non_echappees = array()){		
-	if(empty($options_echappees) AND empty($options_non_echappees))
-            return false;
-
-	if(is_integer($where))
-            $where = array('id' => $where);
-
-	return (bool) $this->db->set($options_echappees)
-                               ->set($options_non_echappees, null, false)
-                               ->where($where)
-                               ->update($this->table);
-    }*/
-    
     public function verifyPassword($mail,$pass){
-        //$hashpass = $this->db->select('pass')->from($this->table)->where('mail',$mail)->limit(1,0)->get()->row();
         $hashpass = $this->read('pass',array('mail'=>$mail),1,0)->row();
         if ($hashpass!=NULL && password_verify($pass,$hashpass->pass))
             return TRUE;

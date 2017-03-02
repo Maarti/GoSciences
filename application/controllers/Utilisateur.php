@@ -16,10 +16,10 @@ class Utilisateur extends CI_Controller {
     public function activation($mail_encode=null,$code_encode=null){
         $mail = urldecode($mail_encode);
         $code = urldecode($code_encode);
-       /* if(*/$this->utilisateur_model->activerCompte($mail,$code);//)
-       /*    redirect('utilisateur/connexion/activation_succes', 'refresh');
+       if($this->utilisateur_model->activerCompte($mail,$code))
+           redirect('utilisateur/connexion/activation_succes', 'refresh');
         else
-           redirect('utilisateur/connexion/activation_echec', 'refresh');*/
+           redirect('utilisateur/connexion/activation_echec', 'refresh');
     }
     
     public function inscription() {
@@ -95,11 +95,21 @@ class Utilisateur extends CI_Controller {
         if ($this->form_validation->run()) {
             $this->log_model->create_log('connexion','Connexion réussie','Mail: '.$mail,$mail);
             $this->utilisateur_model->update(array('mail'=>$mail), array(),array('date_connexion'=>'NOW()'));
+            
+            // Session init
+            $session_data = $this->utilisateur_model->get_session_data($mail);
+            $this->session->set_userdata($session_data);
+            
             redirect('site/accueil', 'refresh');
         }else{
             $this->log_model->create_log('connexion','Tentative de connexion échouée','Mail: '.$mail,$mail);
             $this->connexion();
         }
+    }
+    
+    public function deconnexion() {
+        session_destroy();
+        redirect('utilisateur/connexion', 'refresh');
     }
         
     public function renvoi_activation($mail=null){
@@ -116,8 +126,6 @@ class Utilisateur extends CI_Controller {
         if ($mail != NULL) $etat_obj = $this->utilisateur_model->read('etat', array('mail'=>$mail))->row();
         else $etat_obj = NULL;        
         $etat = ($etat_obj != NULL)? $etat_obj->etat : NULL;
-        var_dump($etat_obj);
-        var_dump($etat);
         $link = site_url('utilisateur/renvoi_activation/'.urlencode($mail));
         switch ($etat){
             case NULL:

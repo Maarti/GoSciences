@@ -43,8 +43,13 @@
       <li>
         <a href="<?= site_url('utilisateur/connexion')?>">Espace Client</a>
         <ul class="menu vertical">
-          <li><a href="<?= site_url('utilisateur/inscription')?>">Inscription</a></li>         
-          <li><a href="<?= site_url('utilisateur/connexion')?>">Connexion</a></li>
+          <? if(isset($_SESSION['id'])){?>
+            <li><a href="<?= site_url('utilisateur/mon_compte')?>">Mon compte</a></li>
+            <li><a href="<?= site_url('utilisateur/deconnexion')?>">Déconnexion</a></li>
+          <? }else{ ?>
+            <li><a href="<?= site_url('utilisateur/inscription')?>">Inscription</a></li>         
+            <li><a href="<?= site_url('utilisateur/connexion')?>">Connexion</a></li>
+          <? } ?>
         </ul>
       </li>
     </ul>
