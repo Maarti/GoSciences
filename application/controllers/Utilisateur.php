@@ -9,8 +9,7 @@ class Utilisateur extends CI_Controller {
         parent::__construct();
         $this->load->helper('form');
         $this->load->library('form_validation');
-        $this->load->model('utilisateur_model');        
-        //$this->data['session']=$this->session->all_userdata();        
+        $this->load->model('utilisateur_model');
     }
     
     public function activation($mail_encode=null,$code_encode=null){
