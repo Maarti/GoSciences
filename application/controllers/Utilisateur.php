@@ -4,19 +4,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Utilisateur extends CI_Controller {
 
-     public function __construct()
-    {
+     public function __construct() {
         parent::__construct();
         $this->load->helper('form');
         $this->load->library('form_validation');
         $this->load->model('utilisateur_model');
+        $this->output->enable_profiler(true);
     }
     
     public function activation($mail_encode=null,$code_encode=null){
         $mail = urldecode($mail_encode);
         $code = urldecode($code_encode);
-       if($this->utilisateur_model->activerCompte($mail,$code))
-           redirect('utilisateur/connexion/activation_succes', 'refresh');
+        if($this->utilisateur_model->activerCompte($mail,$code))
+           redirect('utilisateur/connexion/activation_succes/'.$mail_encode, 'refresh');
         else
            redirect('utilisateur/connexion/activation_echec', 'refresh');
     }
@@ -49,7 +49,7 @@ class Utilisateur extends CI_Controller {
             $this->inscription();
     }
 
-    public function connexion($msg=NULL) {
+    public function connexion($msg=NULL,$mail_encode=NULL) {
         $data['page_title'] = 'GoSciences - Connexion';
         switch ($msg) { // Gestion des messages à afficher en page d'accueil
             case 'activation_succes':
@@ -76,8 +76,12 @@ class Utilisateur extends CI_Controller {
                 $type=NULL;
                 $message=NULL;
         } 
-        if(!is_null($type)&&!is_null($message)){$data['msg']= '<div class="callout '.$type.'" data-closable>'.$message.'<button class="close-button" aria-label="Fermer" type="button" data-close><span aria-hidden="true">&times;</span></button></div>';}
-
+        if(!is_null($type)&&!is_null($message))
+            $data['msg']= '<div class="callout '.$type.'" data-closable>'.$message.'<button class="close-button" aria-label="Fermer" type="button" data-close><span aria-hidden="true">&times;</span></button></div>';
+        
+        // On alimente le champ email suite à une activation de compte
+        $data['mail'] = ($mail_encode==NULL)? '' : urldecode($mail_encode);
+        
         $this->load->view('site/header', $data);
         $this->load->view('site/menu', $data);
         $this->load->view('utilisateur/connexion', $data);

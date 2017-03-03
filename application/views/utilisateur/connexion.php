@@ -4,10 +4,10 @@
 
         <h1>Connexion</h1>
         <? if (isset($msg)) echo $msg; ?>
-        <?= form_open('utilisateur/valid_connexion'); ?>
+        <?= form_open('utilisateur/valid_connexion','data-abide'); ?>
 
         <label>E-mail
-            <input type="email" name="mail" value="<?php echo set_value('mail'); ?>" size="254" placeholder="exemple@domaine.fr" required>
+            <input type="email" name="mail" value="<?php echo set_value('mail',$mail); ?>" size="254" placeholder="exemple@domaine.fr" autofocus required>
             <?= form_error('mail'); ?>
         </label>
 

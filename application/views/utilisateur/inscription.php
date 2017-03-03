@@ -4,10 +4,10 @@
 
         <h1>Inscription</h1>
 
-        <?= form_open('utilisateur/valid_inscription'); ?>
+        <?= form_open('utilisateur/valid_inscription','data-abide'); ?>
 
         <label>E-mail
-            <input type="email" name="mail" value="<?php echo set_value('mail'); ?>" maxlength="254" placeholder="exemple@domaine.fr" required>
+            <input type="email" name="mail" value="<?php echo set_value('mail'); ?>" maxlength="254" placeholder="exemple@domaine.fr" autofocus required>
             <?= form_error('mail'); ?>
         </label>
 
@@ -22,12 +22,12 @@
         </label>
 
         <label>Mot de passe
-            <input type="password" name="pass" value="" maxlength="50" placeholder="******" required>
+            <input type="password" id="pass" name="pass" value="" maxlength="50" placeholder="******" required>
             <?= form_error('pass'); ?>
         </label>
 
         <label>Confirmation
-            <input type="password" name="passconf" value="" maxlength="50" placeholder="******" required>
+            <input type="password" name="passconf" value="" maxlength="50" placeholder="******" data-equalto="pass" required>
             <?= form_error('passconf'); ?>
         </label>
 

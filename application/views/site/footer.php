@@ -43,7 +43,7 @@
             <ul class="menu">
                 <li><a href="#">Mentions Légales</a></li>
                 <li><a href="#">Partenaires</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a href="<?= site_url('site/contact') ?>">Contact</a></li>
             </ul>
         </div>
         <div class="medium-6 columns">
