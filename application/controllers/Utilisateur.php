@@ -9,7 +9,7 @@ class Utilisateur extends CI_Controller {
         $this->load->helper('form');
         $this->load->library('form_validation');
         $this->load->model('utilisateur_model');
-        $this->output->enable_profiler(true);
+        //$this->output->enable_profiler(true);
     }
     
     public function activation($mail_encode=null,$code_encode=null){

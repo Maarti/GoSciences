@@ -5,7 +5,7 @@ class Site extends CI_Controller {
 
     public function __construct(){
         parent::__construct();        
-        $this->output->enable_profiler(true);
+        //$this->output->enable_profiler(true);
     }
     
         public function index(){
@@ -71,5 +71,14 @@ class Site extends CI_Controller {
             }else
                 $this->contact();
          }
+         
+         public function not_found(){
+            $this->output->set_status_header('404');
+            $data['page_title'] = 'GoSciences - Not found';            
+            $this->load->view('site/header', $data);
+            $this->load->view('site/menu', $data);
+            $this->load->view('site/error_404', $data);
+            $this->load->view('site/footer');
+	}
         
 }

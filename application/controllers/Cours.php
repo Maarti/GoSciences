@@ -5,7 +5,7 @@ class Cours extends CI_Controller {
 
     public function __construct(){
         parent::__construct();
-        $this->output->enable_profiler(true);
+        //$this->output->enable_profiler(true);
     }
     
         public function index(){
