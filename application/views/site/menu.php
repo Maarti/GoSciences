@@ -17,10 +17,10 @@ $classes = $this->classe_model->get_array();?>
        <ul class="menu vertical">
            <? foreach ($classes as $etab) {?>
            <li>     
-           <a href="<?= site_url('classe/'.$etab['id'])?>"><?=$etab['libelle']?></a>
+           <a href="<?= site_url('classe/infos')?>"><?=$etab['libelle']?></a>
            <ul class="menu">
                <? foreach ($etab['classes'] as $classe) { ?>
-               <li><a href="<?= site_url('classs/'.$etab['id'].'/'.$classe['id'])?>"><?=$classe['libelle']?></a></li>
+               <li><a href="<?= site_url('classe/infos/'.$classe['id'])?>"><?=$classe['libelle']?></a></li>
                 <?}?>
            </ul></li>
            <?}?>       
