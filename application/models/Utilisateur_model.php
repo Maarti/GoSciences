@@ -3,6 +3,7 @@
 class Utilisateur_model extends MY_Model {
 
    protected $table = 'utilisateur';
+   protected $table_role_util = 'utilisateur_has_role';
  
     // Active le compte d'un utilisateur
     public function activerCompte($mail,$code){
@@ -51,7 +52,7 @@ class Utilisateur_model extends MY_Model {
         
         // On récupère les rôles de l'utilisateur
         $roles_array = array();
-        $role_query = $this->db->select('role_id')->from('utilisateur_has_role')->where('utilisateur_id',$session_data['id'])->get();        
+        $role_query = $this->db->select('role_id')->from($this->table_role_util)->where('utilisateur_id',$session_data['id'])->get();        
         foreach ($role_query->result() as $role)
             array_push($roles_array, $role->role_id);        
         $session_data['roles'] = $roles_array;

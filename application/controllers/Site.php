@@ -6,6 +6,8 @@ class Site extends CI_Controller {
     public function __construct(){
         parent::__construct();        
         //$this->output->enable_profiler(true);
+        //$this->data['classes'] = $this->classe_model->get_array();
+                
     }
     
         public function index(){
@@ -15,6 +17,7 @@ class Site extends CI_Controller {
 	public function accueil(){            
             $data['page_title'] = 'GoSciences - Accueil';
             
+            //$data['classes'] = $this->classe_model->get_array();
             $this->load->view('site/header', $data);
             $this->load->view('site/menu', $data);
             $this->load->view('site/accueil', $data);
