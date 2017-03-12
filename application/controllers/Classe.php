@@ -14,8 +14,8 @@ class Classe extends CI_Controller {
     public function infos($id_classe=NULL){        
         $classe = $this->classe_model->read('libelle',array('id'=>$id_classe))->row();
         if ($classe){
-            $data['page_title'] = 'GoSciences - '.$classe->libelle;
-            $data['classe_libelle'] = $classe->libelle;
+            $data['tab_title'] = 'GoSciences - '.$classe->libelle;
+            $data['page_title'] = $classe->libelle;
             $data['matieres'] = $this->classe_model->get_matiere_from_class($id_classe)->result();
             $this->load->view('site/header', $data);
             $this->load->view('site/menu', $data);

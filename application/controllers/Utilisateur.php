@@ -22,7 +22,8 @@ class Utilisateur extends CI_Controller {
     }
     
     public function inscription() {
-        $data['page_title'] = 'GoSciences - Inscription';        
+        $data['tab_title'] = 'GoSciences - Inscription';
+        $data['page_title'] = 'Inscription';
         $this->load->view('site/header', $data);
         $this->load->view('site/menu', $data);
         $this->load->view('utilisateur/inscription', $data);
@@ -50,7 +51,8 @@ class Utilisateur extends CI_Controller {
     }
 
     public function connexion($msg=NULL,$mail_encode=NULL) {
-        $data['page_title'] = 'GoSciences - Connexion';
+        $data['tab_title'] = 'GoSciences - Connexion';
+        $data['page_title'] = 'Connexion';
         switch ($msg) { // Gestion des messages à afficher en page d'accueil
             case 'activation_succes':
                 $type='success';

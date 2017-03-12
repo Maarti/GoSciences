@@ -1,8 +1,7 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 <div class="row small-uncollapse">
     <div class="small-12 medium-8 columns">
-
-        <h1>Inscription</h1>
+        <? $this->load->view('include/pagetitle'); ?>
 
         <?= form_open('utilisateur/valid_inscription','data-abide'); ?>
 

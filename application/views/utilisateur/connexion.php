@@ -1,8 +1,8 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 <div class="row small-uncollapse">
     <div class="small-12 medium-8 columns">
-
-        <h1>Connexion</h1>
+        <? $this->load->view('include/pagetitle'); ?>
+        
         <? if (isset($msg)) echo $msg; ?>
         <?= form_open('utilisateur/valid_connexion','data-abide'); ?>
 

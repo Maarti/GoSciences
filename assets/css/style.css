@@ -12,3 +12,9 @@
     font-size: 12px;
     color:grey;
 }
+
+/* Ruban en haut de chaque page contenant le logo et le titre de la page */
+.page-title{
+    margin-top: 10px;
+    margin-bottom: 15px;
+}

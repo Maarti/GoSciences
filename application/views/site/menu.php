@@ -7,9 +7,9 @@ $classes = $this->classe_model->get_array();?>
       <li>
         <a href="<?= site_url('site/accueil')?>">GoSciences</a>
         <ul class="menu vertical">
-          <li><a href="<?= site_url('site/accueil')?>">Nos valeurs</a></li>         
-          <li><a href="<?= site_url('site/accueil')?>">L'&eacute;quipe</a></li>          
-          <li><a href="<?= site_url('site/contact')?>">Contact</a></li>
+          <li><a href="<?= site_url('site/accueil')?>">Nos Valeurs</a></li>         
+          <li><a href="<?= site_url('site/accueil')?>">Notre &eacute;quipe</a></li>          
+          <li><a href="<?= site_url('site/contact')?>">Nous Contacter</a></li>
         </ul>
       </li>
       <li>
@@ -35,7 +35,7 @@ $classes = $this->classe_model->get_array();?>
         <li class="active"><a href="<?= site_url('admin')?>">Administration</a></li>
       <? } ?>
       <li>
-        <a href="<?= site_url('utilisateur/connexion')?>">Espace Client</a>
+        <a href="<?= site_url('utilisateur/connexion')?>">Mon Espace</a>
         <ul class="menu vertical">
           <? if(isset($_SESSION['id'])){ ?>
             <li><a href="<?= site_url('utilisateur/mon_compte')?>">Mon compte</a></li>

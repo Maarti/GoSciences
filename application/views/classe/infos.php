@@ -1,7 +1,7 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 <div class="row small-uncollapse">
     <div class="small-12 medium-8 columns">
-        <h1><?=$classe_libelle?></h1>
+        <? $this->load->view('include/pagetitle'); ?>
   
         <ul class="accordion" data-accordion role="tablist">
         <? foreach ($matieres as $key=>$matiere) {?>

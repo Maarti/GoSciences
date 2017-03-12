@@ -13,8 +13,7 @@ class Site extends CI_Controller {
     }
 
     public function accueil(){            
-        $data['page_title'] = 'GoSciences - Accueil';
-
+        $data['tab_title'] = 'GoSciences - Accueil';
         $this->load->view('site/header', $data);
         $this->load->view('site/menu', $data);
         $this->load->view('site/accueil', $data);
@@ -24,7 +23,8 @@ class Site extends CI_Controller {
     public function contact($msg=NULL){
         $this->load->helper('form');
         $this->load->model('utilisateur_model');
-        $data['page_title'] = 'GoSciences - Contact';
+        $data['tab_title'] = 'GoSciences - Contact';
+        $data['page_title'] = 'Nous Contacter';
         if (isset($_SESSION['id'])){
             $data['mail'] = $this->utilisateur_model->read('mail',array('id'=>$_SESSION['id']))->row()->mail;
             $data['nom'] = $_SESSION['nom'];
