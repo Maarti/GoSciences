@@ -58,7 +58,7 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 <script src="<?= js_url('vendor/jquery.min') ?>"></script>
 <script src="<?= js_url('vendor/what-input.min') ?>"></script>
-<script src="<?= js_url('vendor/motion-ui.min') ?>"></script>
+<!--<script src="<?= js_url('vendor/motion-ui.min') ?>"></script>-->
 <script src="<?= js_url('foundation.min') ?>"></script>
 <script>
     $(document).foundation();

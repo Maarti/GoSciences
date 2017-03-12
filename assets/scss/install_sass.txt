@@ -1,0 +1,5 @@
+gem uninstall foundation
+npm install --global foundation-cli
+foundation new
+cd gosciences
+foundation watch
