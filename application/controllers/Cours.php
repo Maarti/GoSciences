@@ -12,13 +12,19 @@ class Cours extends CI_Controller {
         $this->tarifs();
     }
 
-    public function tarifs(){            
+    public function tarifs($id_prest = null){
         $data['tab_title'] = 'GoSciences - Tarifs';
-        $data['page_title'] = 'Tarifs';  
-        $this->load->view('site/header', $data);
-        $this->load->view('site/menu', $data);
-        $this->load->view('cours/tarifs', $data);
-        $this->load->view('site/footer');
+        $data['page_title'] = 'Tarifs';
+        $data['tarifs'] = $this->classe_model->get_tarifs($id_prest);
+        var_dump($data['tarifs']);
+        if (empty($data['tarifs']))
+            redirect('site/accueil', 'refresh');
+        else{
+            $this->load->view('site/header', $data);
+            $this->load->view('site/menu', $data);
+            $this->load->view('cours/tarifs', $data);
+            $this->load->view('site/footer');
+        }
     }
         
 }

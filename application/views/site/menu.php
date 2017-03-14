@@ -1,5 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); 
-$classes = $this->classe_model->get_array();?>
+$classes = $this->classe_model->get_array();
+$prestations = $this->classe_model->get_prestations();?>
 <div class="top-bar">
   <div class="top-bar-left">
     <ul class="dropdown menu" data-dropdown-menu data-close-on-click-inside="false">
@@ -26,7 +27,13 @@ $classes = $this->classe_model->get_array();?>
            <?}?>       
      </ul>
      </li>
-     <li><a href="<?= site_url('cours/tarifs')?>">Tarifs</a></li>          
+     <li><a href="<?= site_url('cours/tarifs')?>">Tarifs</a>
+        <ul class="menu vertical">
+           <? foreach ($prestations as $prest) {?>
+            <li><a href="<?= site_url('cours/tarifs/'.$prest['id'])?>"><?=$prest['libelle']?></a></li>
+           <?}?>
+        </ul>
+     </li>          
     </ul>
   </div>
   <div class="top-bar-right">
