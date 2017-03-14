@@ -37,9 +37,10 @@ class Classe_model extends MY_Model {
                 $this->table.'.libelle,'
                .$this->table_tarif.'.tarif_brut,'
                .$this->table_tarif.'.tarif_remise,'
+               .$this->table_tarif.'.unite_remise,'
                .$this->table_tarif.'.nb_seance,'
                .$this->table_tarif.'.duree_seance,'
-               .'GROUP_CONCAT('.$this->table_classe_disc.'.description) as description')
+               .'GROUP_CONCAT('.$this->table_classe_disc.'.description  SEPARATOR ", ") as description')
                ->from($this->table_tarif)
                ->join($this->table,$this->table.'.id = '.$this->table_tarif.'.classe_id')
                ->join($this->table_classe_disc,$this->table.'.id = '.$this->table_classe_disc.'.classe_id')
