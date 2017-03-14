@@ -18,3 +18,19 @@
     margin-top: 10px;
     margin-bottom: 15px;
 }
+
+/* Mots utilisé dans "Nos valeurs" */
+.hammer-word{
+    font-weight: bold;
+    color:#B2C835;
+    font-size: 120%;
+}
+
+.green-bullet{
+    list-style-type: square;
+    /* list-style-image: url('sqpurple.gif');*/
+}
+
+.green-bullet li {
+    margin-bottom: 15px;
+}

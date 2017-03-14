@@ -74,10 +74,29 @@ class Site extends CI_Controller {
 
      public function not_found(){
         $this->output->set_status_header('404');
+        $data['tab_title'] = 'GoSciences';
         $data['page_title'] = 'GoSciences - Not found';            
         $this->load->view('site/header', $data);
         $this->load->view('site/menu', $data);
         $this->load->view('site/error_404', $data);
+        $this->load->view('site/footer');
+    }
+    
+    /*public function equipe(){
+        $data['tab_title'] = 'GoSciences - Notre équipe';
+        $data['page_title'] = 'Notre équipe';            
+        $this->load->view('site/header', $data);
+        $this->load->view('site/menu', $data);
+        $this->load->view('site/equipe', $data);
+        $this->load->view('site/footer');
+    }*/
+    
+    public function valeurs(){
+        $data['tab_title'] = 'GoSciences - Nos Valeurs';
+        $data['page_title'] = 'Nos valeurs';            
+        $this->load->view('site/header', $data);
+        $this->load->view('site/menu', $data);
+        $this->load->view('site/nos_valeurs', $data);
         $this->load->view('site/footer');
     }
         

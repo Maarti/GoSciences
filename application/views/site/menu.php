@@ -8,8 +8,8 @@ $prestations = $this->classe_model->get_prestations();?>
       <li>
         <a href="<?= site_url('site/accueil')?>">GoSciences</a>
         <ul class="menu vertical">
-          <li><a href="<?= site_url('site/accueil')?>">Nos Valeurs</a></li>         
-          <li><a href="<?= site_url('site/accueil')?>">Notre &eacute;quipe</a></li>          
+          <li><a href="<?= site_url('site/valeurs')?>">Nos Valeurs</a></li>         
+          <li><a href="<?= site_url('site/equipe')?>">Notre &eacute;quipe</a></li>          
           <li><a href="<?= site_url('site/contact')?>">Nous Contacter</a></li>
         </ul>
       </li>
