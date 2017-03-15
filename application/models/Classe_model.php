@@ -34,7 +34,8 @@ class Classe_model extends MY_Model {
    // Retourne tous les tarifs d'une prestation et la description de leurs matières
    public function get_tarifs($id_prest){
        return $this->db->select(
-                $this->table.'.libelle,'
+               $this->table_tarif.'.classe_id,'
+               .$this->table.'.libelle,'
                .$this->table_tarif.'.tarif_brut,'
                .$this->table_tarif.'.tarif_remise,'
                .$this->table_tarif.'.unite_remise,'

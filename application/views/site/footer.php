@@ -1,3 +1,4 @@
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 
 <footer>
     <div class="row expanded callout secondary">
@@ -54,13 +55,15 @@
     </div>
 </footer>
 
-
-<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 <script src="<?= js_url('vendor/jquery.min') ?>"></script>
 <script src="<?= js_url('vendor/what-input.min') ?>"></script>
 <script src="<?= js_url('foundation.min') ?>"></script>
 <script>
     $(document).foundation();
 </script>
+<? // Permet l'ouverture automatique d'un modal au chargement de la page
+    if(isset($show_modal))
+        echo '<script>$(document).ready(function(){$(\'#'.$show_modal.'\').foundation(\'open\')});</script>'
+?>
 </body>
 </html>
