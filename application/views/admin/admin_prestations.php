@@ -10,11 +10,15 @@
               <li class="active text-center"><a href="#">Logs</a></li>
             </ul>
        <h1 class="text-center"><?=(isset($page_title))? htmlspecialchars($page_title) : 'GoSciences'?></h1>
-       
+
       <ul class="tabs" data-active-collapse="true" data-tabs id="collapsing-tabs">
-        <? foreach ($prestations as $key=>$p) {?>
-            <li class="tabs-title<?=($key==0)? ' is-active' : ''?>">
-                <a href="#onglet-<?=$p['id']?>"<?=($key==0)? ' aria-selected="true"' : ''?>>
+        <? foreach ($prestations as $key=>$p) {
+            $statut = '';
+            if ((!empty($id_prest) && $p['id']==$id_prest) || (empty($id_prest) && $key==0))
+                $statut = ' is-active';
+                $aria = ' aria-selected="true"'?>
+            <li class="tabs-title<?=$statut?>">
+                <a href="#onglet-<?=$p['id']?>"<?=$aria?>>
                     <?=$p['libelle']?>
                 </a>
             </li>

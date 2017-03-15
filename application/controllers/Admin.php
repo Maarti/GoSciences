@@ -32,7 +32,9 @@ class Admin extends CI_Controller {
         $this->load->model('utilisateur_model');
         $data['tab_title'] = 'GoSciences - Administration';
         $data['page_title'] = 'Prestations';
+        // Ouvre automatiquement le modal en erreur
         $data['show_modal'] = (!empty($id_prest) && !empty($id_class))? 'modal-'.$id_prest.'-'.$id_class : null;
+        $data['id_prest'] = $id_prest;
         $data['prestations'] = $this->classe_model->get_prestations();
         $tarifs = array();
         foreach ($data['prestations'] as $p)
@@ -48,7 +50,7 @@ class Admin extends CI_Controller {
     public function valid_prestations($id_prest=null,$id_class=null) {
         $this->form_validation->set_rules('tarif_brut', 'Tarif brut', 'required|numeric|greater_than_equal_to[0]|less_than_equal_to[9999]');
         $this->form_validation->set_rules('tarif_remise', 'Tarif remise', 'required|numeric|greater_than_equal_to[0]|less_than_equal_to[9999]');
-        $this->form_validation->set_rules('unite_remise', 'Unité', 'required|in_list[/h,/2h,/20h,/jour]');
+        $this->form_validation->set_rules('unite_remise', 'Unité', 'required|in_list[/h,/2h,/20h,/jour,/semaine]');
         $this->form_validation->set_rules('nb_seance', 'Nb séances', 'required|integer|greater_than_equal_to[0]');
         $this->form_validation->set_rules('duree_seance', 'Durée séance', 'required|numeric|greater_than_equal_to[0]|less_than_equal_to[24]');
         $this->form_validation->set_error_delimiters('<p class="help-text valid-error">', '</p>');
@@ -62,7 +64,7 @@ class Admin extends CI_Controller {
                             'nb_seance'     =>$this->input->post('nb_seance'),
                             'duree_seance'  =>$this->input->post('duree_seance')
                         ));
-            redirect('admin/prestations');
+            redirect('admin/prestations/'.$id_prest);
         }else
             $this->prestations($id_prest,$id_class);
     }
