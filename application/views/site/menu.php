@@ -9,12 +9,12 @@ $prestations = $this->classe_model->get_prestations();?>
         <a href="<?= site_url('site/accueil')?>">GoSciences</a>
         <ul class="menu vertical">
           <li><a href="<?= site_url('site/valeurs')?>">Nos Valeurs</a></li>         
-          <li><a href="<?= site_url('site/equipe')?>">Notre &eacute;quipe</a></li>          
+          <li><a href="<?= site_url('site/equipe')?>">Notre &Eacute;quipe</a></li>          
           <li><a href="<?= site_url('site/contact')?>">Nous Contacter</a></li>
         </ul>
       </li>
       <li>
-      <a href="#">Nos offres</a>
+      <a href="#">Nos Offres</a>
        <ul class="menu vertical">
            <? foreach ($classes as $etab) {?>
            <li>     

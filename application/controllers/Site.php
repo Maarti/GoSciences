@@ -84,7 +84,7 @@ class Site extends CI_Controller {
     
     /*public function equipe(){
         $data['tab_title'] = 'GoSciences - Notre équipe';
-        $data['page_title'] = 'Notre équipe';            
+        $data['page_title'] = 'Notre Équipe';            
         $this->load->view('site/header', $data);
         $this->load->view('site/menu', $data);
         $this->load->view('site/equipe', $data);
@@ -93,7 +93,7 @@ class Site extends CI_Controller {
     
     public function valeurs(){
         $data['tab_title'] = 'GoSciences - Nos Valeurs';
-        $data['page_title'] = 'Nos valeurs';            
+        $data['page_title'] = 'Nos Valeurs';            
         $this->load->view('site/header', $data);
         $this->load->view('site/menu', $data);
         $this->load->view('site/nos_valeurs', $data);

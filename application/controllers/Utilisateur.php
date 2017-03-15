@@ -84,10 +84,13 @@ class Utilisateur extends CI_Controller {
         // On alimente le champ email suite à une activation de compte
         $data['mail'] = ($mail_encode==NULL)? '' : urldecode($mail_encode);
         
-        $this->load->view('site/header', $data);
-        $this->load->view('site/menu', $data);
-        $this->load->view('utilisateur/connexion', $data);
-        $this->load->view('site/footer');
+        if (!isset($_SESSION['id'])){
+            $this->load->view('site/header', $data);
+            $this->load->view('site/menu', $data);
+            $this->load->view('utilisateur/connexion', $data);
+            $this->load->view('site/footer');
+        }else
+            redirect('utilisateur/mon_espace', 'refresh');
     }
     
     public function valid_connexion() {

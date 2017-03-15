@@ -4,7 +4,7 @@
         <? $this->load->view('include/pagetitle'); ?>
       
        <br/>
-      <table class="hover stack">
+      <!--<table class="hover stack">
         <thead>
           <tr>
             <th width="150" class="text-center">Classe</th>
@@ -24,7 +24,7 @@
       </table>
         
         
-       <br/><br/><br/>
+       <br/><br/><br/>-->
        <table class="hover stack">
         <thead>
           <tr>
