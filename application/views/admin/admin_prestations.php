@@ -28,7 +28,7 @@
     <div class="tabs-content" data-tabs-content="collapsing-tabs">
       <? foreach ($prestations as $key=>$p) {?>
       <div class="tabs-panel<?=($key==0)? ' is-active' : ''?>" id="onglet-<?=$p['id']?>">
-        <table class="hover stack">
+        <table class="hover">
         <thead>
           <tr>
             <th>Classe</th>
