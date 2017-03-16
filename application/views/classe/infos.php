@@ -7,13 +7,13 @@
         <? foreach ($matieres as $key=>$matiere) {?>
             <li class="accordion-item <?= ($key==0)? 'is-active' : ''?>"  data-accordion-item>
                 <a href="#<?=$matiere->id?>" role="tab" class="accordion-title" id="<?=$matiere->id?>-heading" aria-controls="<?=$matiere->id?>">
-                    <?=$matiere->libelle?>
+                    <h5><strong><?=$matiere->libelle?></strong></h5>
                 </a>
                 <div id="<?=$matiere->id?>" class="accordion-content" role="tabpanel" data-tab-content aria-labelledby="<?=$matiere->id?>-heading">
                     <?=$matiere->description?>
                 </div>
             </li>
-        <?}?>
+         <?}?>
         </ul>   
 
     </div>

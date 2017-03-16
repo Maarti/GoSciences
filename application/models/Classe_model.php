@@ -27,6 +27,7 @@ class Classe_model extends MY_Model {
                ->join($this->table_disc,$this->table_disc.'.id = '.$this->table_classe_disc.'.discipline_id')
                ->join($this->table,$this->table.'.id = '.$this->table_classe_disc.'.classe_id')
                ->where($this->table.'.id',$id_classe)
+               ->where($this->table_classe_disc.'.description !=','')
                ->order_by($this->table_disc.'.libelle ASC')
                ->get();
    }
@@ -46,6 +47,7 @@ class Classe_model extends MY_Model {
                ->join($this->table,$this->table.'.id = '.$this->table_tarif.'.classe_id')
                ->join($this->table_classe_disc,$this->table.'.id = '.$this->table_classe_disc.'.classe_id')
                ->where($this->table_tarif.'.prestation_id',$id_prest)
+               ->where($this->table_classe_disc.'.description !=','')
                ->group_by($this->table.'.id')
                ->order_by($this->table.'.ordre ASC')
                ->get()->result_array();
