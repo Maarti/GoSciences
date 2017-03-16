@@ -3,27 +3,34 @@
 <div class="small-12 medium-4 columns">
     <hr>
     <div class="row small-uncollapse">
-        <div class="small-12 columns">
+        <div class="small-12 columns text-90">
             <h4>Informations :</h4>
             <ul>
-            <li>Nihil est enitm virtute amabilius, nihil quod magis</li>
-            <li>Dum apud Persas, ut supra narravimus, perfidia</li>
-            <li>Pandente itaque viam fatorum sorte tristissima,</li>
-            <li>Haec igitur prima lex amicitiae sanciatur, ut ab</li>
-            <li>Nunc vero inanes flatus quorundam vile esse</li>
+                <li>1<sup>er</sup> cours d’évaluation <strong>offert</strong></li>
+                <li>Suivi pédagogique réalisé <strong>chaque mois</strong></li>
+                <li>Mise en place d’un <strong>programme scolaire personnalisé</strong></li>
+                <li>Enseignants scientifiques <strong>diplômés</strong> et <strong>qualifiés</strong></li>
+                <li><strong>Sans engagement</strong> sur la durée</li>
+                <li>Système de paiement <strong>souple</strong> et <strong>adaptable</strong></li>
             </ul>
         </div>
     </div>
     <hr>
     <div class="row small-uncollapse">
-        <div class="small-12 columns">
+        <div class="small-12 columns text-90">
             <h4>50% de notre tarif déductible de vos impots !</h4>
-            <p>Adolescebat autem obstinatum propositum erga haec et similia multa scrutanda, stimulos admovente regina, quae abrupte mariti fortunas trudebat in exitium praeceps, cum eum potius lenitate feminea ad veritatis humanitatisque viam reducere utilia suadendo deberet, ut in Gordianorum actibus factitasse Maximini truculenti illius imperatoris rettulimus coniugem.</p>
+            <p>Au titre de l'emploi d'un salarié à domicile, vous pouvez bénéficier* :</p>
+            <ul>
+                <li>Si vous êtes imposable : d'une <strong>réduction d'impôt de 50%</strong> sur les heures de cours et les <strong>frais d'inscription</strong></li>
+                <li>Si vous n'êtes pas soumis à l'impôt : d'un <strong>crédit d'impôt de 50%</strong> sur les heures de cours et les <strong>frais d'inscription</strong></li>
+            </ul>
+            <p>GoSciences vous adressera par voie postale une attestation fiscale à joindre à votre déclaration de revenus.</p>
+            <em class="text-80">*Selon les conditions posées par l’art. 199 sexdecies du CGI, sous réserve de modification de la législation.</em>
         </div>
     </div>  
     <hr>
     <div class="row small-uncollapse">
-        <div class="small-12 columns">
+        <div class="small-12 columns text-90">
             <h4>Témoignages</h4>            
             <p>Quam multo quod ea est.</p>
         </div>

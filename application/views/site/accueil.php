@@ -9,27 +9,17 @@
           <button class="orbit-previous"><span class="show-for-sr">Previous Slide</span>&#9664;&#xFE0E;</button>
           <button class="orbit-next"><span class="show-for-sr">Next Slide</span>&#9654;&#xFE0E;</button>
           <li class="is-active orbit-slide">
-            <img class="orbit-image" src="http://foundation.zurb.com/sites/docs/assets/img/orbit/01.jpg" alt="Space">
-            <figcaption class="orbit-caption">Space, the final frontier.</figcaption>
+            <img class="orbit-image" src="<?=img_url('image1.jpeg')?>" alt="Tableau">
+            <figcaption class="orbit-caption">L'art de la réussite consiste à savoir s'entourer des meilleurs</figcaption>
           </li>
           <li class="orbit-slide">
-            <img class="orbit-image" src="http://foundation.zurb.com/sites/docs/assets/img/orbit/02.jpg" alt="Space">
-            <figcaption class="orbit-caption">Lets Rocket!</figcaption>
-          </li>
-          <li class="orbit-slide">
-            <img class="orbit-image" src="http://foundation.zurb.com/sites/docs/assets/img/orbit/03.jpg" alt="Space">
-            <figcaption class="orbit-caption">Encapsulating</figcaption>
-          </li>
-          <li class="orbit-slide">
-            <img class="orbit-image" src="http://foundation.zurb.com/sites/docs/assets/img/orbit/04.jpg" alt="Space">
-            <figcaption class="orbit-caption">Outta This World</figcaption>
-          </li>
+            <img class="orbit-image" src="<?=img_url('image2.jpeg')?>" alt="Tableau">
+            <figcaption class="orbit-caption">Prix de la Fondation de l'Université d'Orléans niveau Master remis à Sulayman Benmerzoug</figcaption>
+          </li>          
         </ul>
         <nav class="orbit-bullets">
-          <button class="is-active" data-slide="0"><span class="show-for-sr">First slide details.</span><span class="show-for-sr">Current Slide</span></button>
-          <button data-slide="1"><span class="show-for-sr">Second slide details.</span></button>
-          <button data-slide="2"><span class="show-for-sr">Third slide details.</span></button>
-          <button data-slide="3"><span class="show-for-sr">Fourth slide details.</span></button>
+          <button class="is-active" data-slide="0"><span class="show-for-sr">L'art de la réussite consiste à savoir s'entourer des meilleurs</span><span class="show-for-sr">Current Slide</span></button>
+          <button data-slide="1"><span class="show-for-sr">Prix de la Fondation de l'Université d'Orléans niveau Master remis à Sulayman Benmerzoug</span></button>
         </nav>
       </div>
   

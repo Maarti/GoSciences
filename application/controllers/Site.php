@@ -82,14 +82,14 @@ class Site extends CI_Controller {
         $this->load->view('site/footer');
     }
     
-    /*public function equipe(){
+    public function equipe(){
         $data['tab_title'] = 'GoSciences - Notre équipe';
         $data['page_title'] = 'Notre Équipe';            
         $this->load->view('site/header', $data);
         $this->load->view('site/menu', $data);
         $this->load->view('site/equipe', $data);
         $this->load->view('site/footer');
-    }*/
+    }
     
     public function valeurs(){
         $data['tab_title'] = 'GoSciences - Nos Valeurs';
