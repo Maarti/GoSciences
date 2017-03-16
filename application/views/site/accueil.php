@@ -9,11 +9,11 @@
           <button class="orbit-previous"><span class="show-for-sr">Previous Slide</span>&#9664;&#xFE0E;</button>
           <button class="orbit-next"><span class="show-for-sr">Next Slide</span>&#9654;&#xFE0E;</button>
           <li class="is-active orbit-slide">
-            <img class="orbit-image" src="<?=img_url('image1.jpeg')?>" alt="Tableau">
+            <img class="orbit-image" src="<?=img_url('image1.jpeg')?>" alt="Eleve tableau">
             <figcaption class="orbit-caption">L'art de la réussite consiste à savoir s'entourer des meilleurs</figcaption>
           </li>
           <li class="orbit-slide">
-            <img class="orbit-image" src="<?=img_url('image2.jpeg')?>" alt="Tableau">
+            <img class="orbit-image" src="<?=img_url('image2.jpeg')?>" alt="Photo remise de prix">
             <figcaption class="orbit-caption">Prix de la Fondation de l'Université d'Orléans niveau Master remis à Sulayman Benmerzoug</figcaption>
           </li>          
         </ul>

@@ -31,4 +31,12 @@ if ( ! function_exists('img'))
         return '<img src="' . img_url($nom) . '" alt="' . $alt . '" />';
     }
 }
+
+if ( ! function_exists('favicon_folder'))
+{
+    function favicon_folder()
+    {
+        return base_url() . 'assets/fav' ;
+    }
+}
 ?>
