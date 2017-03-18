@@ -22,10 +22,22 @@
           <button data-slide="1"><span class="show-for-sr">Prix de la Fondation de l'Université d'Orléans niveau Master remis à Sulayman Benmerzoug</span></button>
         </nav>
       </div>
-  
-        <p class="lead">Hac ita persuasione reducti intra moenia bellatores obseratis undique portarum aditibus, propugnaculis insistebant et pinnis, congesta undique saxa telaque habentes in promptu, ut si quis se proripuisset interius, multitudine missilium sterneretur et lapidum.</p>
-        <p>Hacque adfabilitate confisus cum eadem postridie feceris, ut incognitus haerebis et repentinus, hortatore illo hesterno clientes numerando, qui sis vel unde venias diutius ambigente agnitus vero tandem et adscitus in amicitiam si te salutandi adsiduitati dederis triennio indiscretus et per tot dierum defueris tempus, reverteris ad paria perferenda, nec ubi esses interrogatus et quo tandem miser discesseris, aetatem omnem frustra in stipite conteres summittendo.</p>
+       
+      <div class="text-justify">
+        <p class="lead green-word"><strong>La vie scolaire d&rsquo;un &eacute;l&egrave;ve est compos&eacute;e de plusieurs &eacute;tapes cruciales&nbsp;:</strong></p>
+        <img src="<?=img_url('image3.jpeg')?>" alt="Collège" class="img-center">
+        <p><strong class="green-word">En 6<sup>&egrave;me&nbsp;</sup>:</strong> Vous rentrez au coll&egrave;ge et vous &ecirc;tes soumis &agrave; un changement d&rsquo;organisation scolaire. Vous devez &ecirc;tre encadr&eacute; pour r&eacute;ussir au mieux cette ann&eacute;e charni&egrave;re.</p>
+        <p><strong class="green-word">En 5<sup>&egrave;me&nbsp;</sup>:</strong> Vous entrez en cycle des approfondissements avec de nombreuses notions nouvelles. Vous devez acqu&eacute;rir les bonnes bases pour franchir au mieux ce palier.</p>
+        <p><strong class="green-word">En 4<sup>&egrave;me&nbsp;</sup>:</strong> Vous commencez &agrave; aborder les programmes susceptibles d&rsquo;&ecirc;tre &eacute;valu&eacute;s lors du Brevet des coll&egrave;ges. Une ma&icirc;trise de cette ann&eacute;e conditionnera la r&eacute;ussite &agrave; ce dipl&ocirc;me.</p>
+        <p><strong class="green-word">En 3<sup>&egrave;me&nbsp;</sup>:</strong> Vous r&eacute;coltez les fruits de votre travail r&eacute;gulier depuis la 6<sup>&egrave;me</sup>. Vous travaillerez sur de nouvelles notions et approfondirez celles d&eacute;j&agrave; vues en 4<sup>&egrave;me</sup>. Le Dipl&ocirc;me National du Brevet validera la premi&egrave;re &eacute;tape de votre vie scolaire.</p>
+        <br/>
+        <img src="<?=img_url('image4.jpeg')?>" alt="Lycée" class="img-center">
+        <p><strong class="green-word">En 2<sup>nde&nbsp;</sup>:</strong> Vous entamez une vie lyc&eacute;enne totalement diff&eacute;rente de votre ancienne vie coll&eacute;gienne. De nouveaux chapitres viendront compl&eacute;ter ceux d&eacute;j&agrave; &eacute;valu&eacute;s lors du Brevet des coll&egrave;ges. Votre dernier trimestre, apr&egrave;s &eacute;valuation du conseil de classe, vous permettra de valider votre future orientation scolaire (scientifique, litt&eacute;raire, &eacute;conomique et sociale...).</p>
+        <p><strong class="green-word">En 1<sup>&egrave;re&nbsp;</sup>:</strong> Vous d&eacute;butez votre sp&eacute;cialisation dans un domaine que vous appr&eacute;ciez tr&egrave;s particuli&egrave;rement. Cette ann&eacute;e est compos&eacute;e de chapitres susceptibles d&rsquo;&ecirc;tre &eacute;valu&eacute;s lors du Baccalaur&eacute;at et vous devez la pr&eacute;parer dans les meilleures conditions. Vous passerez &eacute;galement les &eacute;preuves anticip&eacute;es du BAC afin d&rsquo;obtenir des points d&rsquo;avance pour les &eacute;preuves de l&rsquo;examen final.</p>
+        <p><strong class="green-word">En Terminale&nbsp;:</strong> Une des ann&eacute;es les plus importantes de votre scolarit&eacute;. Vous travaillez r&eacute;guli&egrave;rement depuis la 6<sup>&egrave;me</sup> pour pr&eacute;parer cet examen qu&rsquo;est le baccalaur&eacute;at. De bonnes notes &agrave; cet examen et un tr&egrave;s bon dossier scolaire vous faciliteront l&rsquo;entr&eacute;e dans de prestigieuses &eacute;coles ou Universit&eacute;s. La derni&egrave;re ligne droite&nbsp;!</p>
 
+        <p class="lead text-center"><strong class="green-word">GoSciences vous aidera &agrave; franchir ces paliers</strong></p>
+      </div>
     </div>
     <? $this->load->view('include/sidebar'); ?>
 
