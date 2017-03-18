@@ -26,6 +26,10 @@
     font-size: 120%;
 }
 
+.green-word{
+    color:#B2C835;
+}
+
 .green-bullet{
     list-style-type: square;
     /* list-style-image: url('sqpurple.gif');*/

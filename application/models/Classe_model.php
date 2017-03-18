@@ -55,7 +55,7 @@ class Classe_model extends MY_Model {
    
    // Retourne toutes les prestations (utilisé pour le menu "Tarifs")
    public function get_prestations(){
-       return $this->db->select('id,libelle')->from($this->table_prest)->order_by('id ASC')->get()->result_array();
+       return $this->db->select('id,libelle')->from($this->table_prest)->order_by('ordre ASC')->get()->result_array();
    }
 
 }
