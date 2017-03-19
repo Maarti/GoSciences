@@ -28,3 +28,4 @@
     <link rel="stylesheet" href="<?= css_url('style')?>" />
   </head>
   <body>
+  <? $this->load->view('include/analyticstracking'); ?>
