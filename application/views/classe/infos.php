@@ -10,7 +10,7 @@
                     <h5><strong><?=$matiere->libelle?></strong></h5>
                 </a>
                 <div id="<?=$matiere->id?>" class="accordion-content" role="tabpanel" data-tab-content aria-labelledby="<?=$matiere->id?>-heading">
-                    <?=$matiere->description?>
+                    <?=$matiere->description_longue?>
                 </div>
             </li>
          <?}?>

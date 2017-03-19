@@ -2,14 +2,7 @@
 <div class="row small-uncollapse">
     <div class="small-12 medium-12 columns">
   
-            <ul class="menu expanded">
-              <li class="active text-center"><a href="<?=site_url('admin/utilisateurs')?>">Utilisateurs</a></li>
-              <li class="active text-center"><a href="#">Classes</a></li>
-              <li class="active text-center"><a href="<?=site_url('admin/prestations')?>">Prestations</a></li>
-              <li class="active text-center"><a href="#">Textes</a></li>
-              <li class="active text-center"><a href="#">Logs</a></li>
-            </ul>
-       <h1 class="text-center"><?=(isset($page_title))? htmlspecialchars($page_title) : 'GoSciences'?></h1>
+      <? $this->load->view('include/admin_menu'); ?>
 
       <ul class="tabs" data-active-collapse="true" data-tabs id="collapsing-tabs">
         <? foreach ($prestations as $key=>$p) {

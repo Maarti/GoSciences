@@ -29,7 +29,6 @@ class Admin extends CI_Controller {
     }
     
     public function prestations($id_prest=null,$id_class=null){
-        $this->load->model('utilisateur_model');
         $data['tab_title'] = 'GoSciences - Administration';
         $data['page_title'] = 'Prestations';
         // Ouvre automatiquement le modal en erreur
@@ -67,5 +66,39 @@ class Admin extends CI_Controller {
             redirect('admin/prestations/'.$id_prest);
         }else
             $this->prestations($id_prest,$id_class);
+    }
+    
+     public function classes($id_class=null){
+        $this->load->model('classe_model');
+        $data['tab_title'] = 'GoSciences - Administration';
+        $data['page_title'] = 'Classes';
+        $data['id_class'] = $id_class;
+        $data['classes'] =$this->classe_model->get_all_classe_disciplines();
+        
+        $this->load->view('site/header', $data);
+        $this->load->view('site/menu', $data);
+        $this->load->view('admin/admin_classes', $data);
+        $this->load->view('site/footer');
+    }
+    
+    public function valid_classes($id_class=null) {
+        $this->load->model('discipline_model');
+        $disc = $this->discipline_model->read('id')->result_array();
+        foreach ($disc as $d) {
+            $this->form_validation->set_rules('description_'.$d['id'], 'Description', 'max_length[500]');
+            $this->form_validation->set_rules('description_longue_'.$d['id'], 'Description longue', 'max_length[50000]');        
+        }
+        $this->form_validation->set_error_delimiters('<p class="help-text valid-error">', '</p>');
+
+        if ($this->form_validation->run()) {
+            $this->load->model('classe_discipline_model');
+            foreach ($disc as $d) {
+                $ret = $this->classe_discipline_model->update(array('discipline_id'=>$d['id'],'classe_id'=>$id_class),
+                    array(  'description'           =>$this->input->post('description_'.$d['id']),
+                            'description_longue'    =>$this->input->post('description_longue_'.$d['id'])));
+            }           
+            redirect('admin/classes/'.$id_class);
+        }else
+            $this->classes($id_class);
     }
 }

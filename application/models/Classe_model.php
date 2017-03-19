@@ -22,12 +22,12 @@ class Classe_model extends MY_Model {
    
    // Retourne toutes les matières d'une classe et leur description
    public function get_matiere_from_class($id_classe){
-       return $this->db->select($this->table_disc.'.id, '.$this->table_disc.'.libelle, '.$this->table_classe_disc.'.description')
+       return $this->db->select($this->table_disc.'.id, '.$this->table_disc.'.libelle, '.$this->table_classe_disc.'.description_longue')
                ->from($this->table_classe_disc)
                ->join($this->table_disc,$this->table_disc.'.id = '.$this->table_classe_disc.'.discipline_id')
                ->join($this->table,$this->table.'.id = '.$this->table_classe_disc.'.classe_id')
                ->where($this->table.'.id',$id_classe)
-               ->where($this->table_classe_disc.'.description !=','')
+               ->where($this->table_classe_disc.'.description_longue !=','')
                ->order_by($this->table_disc.'.libelle ASC')
                ->get();
    }
@@ -38,14 +38,14 @@ class Classe_model extends MY_Model {
        $this->db->query('SET GLOBAL group_concat_max_len=2048');
        
        return $this->db->select(
-               $this->table_tarif.'.classe_id,'
-               .$this->table.'.libelle,'
-               .$this->table_tarif.'.tarif_brut,'
-               .$this->table_tarif.'.tarif_remise,'
-               .$this->table_tarif.'.unite_remise,'
-               .$this->table_tarif.'.nb_seance,'
-               .$this->table_tarif.'.duree_seance,'
-               .'GROUP_CONCAT('.$this->table_classe_disc.'.description  SEPARATOR ", ") as description')
+                    $this->table_tarif.'.classe_id,'
+                    .$this->table.'.libelle,'
+                    .$this->table_tarif.'.tarif_brut,'
+                    .$this->table_tarif.'.tarif_remise,'
+                    .$this->table_tarif.'.unite_remise,'
+                    .$this->table_tarif.'.nb_seance,'
+                    .$this->table_tarif.'.duree_seance,'
+                    .'GROUP_CONCAT('.$this->table_classe_disc.'.description  SEPARATOR ", ") as description')
                ->from($this->table_tarif)
                ->join($this->table,$this->table.'.id = '.$this->table_tarif.'.classe_id')
                ->join($this->table_classe_disc,$this->table.'.id = '.$this->table_classe_disc.'.classe_id')
@@ -59,6 +59,24 @@ class Classe_model extends MY_Model {
    // Retourne toutes les prestations (utilisé pour le menu "Tarifs")
    public function get_prestations(){
        return $this->db->select('id,libelle')->from($this->table_prest)->order_by('ordre ASC')->get()->result_array();
+   }
+   
+   // Retourne les infos de chaque disciplines / classes
+   public function get_all_classe_disciplines(){
+       $classes = $this->classe_model->read('id,libelle',array(),null,null,'ordre ASC')->result_array();
+       foreach ($classes as $key => $c) {
+            $classe_disc_array = $this->db->select(
+                    $this->table_classe_disc.'.description,'
+                    .$this->table_classe_disc.'.description_longue,'
+                    .$this->table_disc.'.id,'
+                    .$this->table_disc.'.libelle')
+               ->from($this->table_classe_disc)
+               ->join($this->table_disc,$this->table_disc.'.id = '.$this->table_classe_disc.'.discipline_id')
+               ->where($this->table_classe_disc.'.classe_id',$c['id'])
+               ->get()->result_array();
+            $classes[$key]['disc'] = $classe_disc_array;
+        }
+        return $classes;          
    }
 
 }

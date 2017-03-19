@@ -38,49 +38,40 @@
 
         <p class="lead text-center"><strong>GoSciences vous aidera &agrave; franchir ces paliers</strong></p>
         
-        <ul>
-            <li><strong class="green-word">Notre zone g&eacute;ographique d&rsquo;intervention</strong></li>
-        </ul>
+        <ul><li><strong class="green-word">Notre zone g&eacute;ographique d&rsquo;intervention</strong></li></ul>
         <p>Tous nos cours individuels ont lieu au domicile de l&rsquo;&eacute;l&egrave;ve. GoSciences se d&eacute;place sur Orl&eacute;ans et ses environs&nbsp;: La Fert&eacute;-Saint-Aubin, La Chapelle-Saint-Mesmin, Saint-Jean-de-Braye, Saint-Jean-le-Blanc, Saint-Jean-de-la-Ruelle, Olivet, Saran, Lamotte-Beuvron, Vouzon, Marcilly-en-Villette, Menestreau-en-Villette, Saint-Cyr-en-Val, Ligny-le-Ribault, Jouy-le-Potier. Si vous ne faites pas partie de ces communes, n&rsquo;h&eacute;sitez pas &agrave; nous contacter et nous t&acirc;cherons de r&eacute;pondre favorablement &agrave; votre demande. Nos stages collectifs de pr&eacute;paration aux examens nationaux se d&eacute;rouleront &agrave; La Fert&eacute;-Saint-Aubin sous r&eacute;serve d&rsquo;un nombre suffisant d&rsquo;&eacute;l&egrave;ve.</p>
 
-        <ul>
-            <li><strong class="green-word">Nos cours individuels</strong></li>
-        </ul>
+        <ul><li><strong class="green-word">Nos cours individuels</strong></li></ul>
         <p>Au titre du service &agrave; la personne, vous b&eacute;n&eacute;ficiez de 50% de r&eacute;duction/cr&eacute;dit d&rsquo;imp&ocirc;t sur toutes vos d&eacute;penses*.</p>
         <p>Les frais de dossier sont d&rsquo;un montant de 49<sup>e</sup> (soit 24,5<sup>e</sup> TTC apr&egrave;s r&eacute;duction/cr&eacute;dit d&rsquo;imp&ocirc;t*) par famille et par ann&eacute;e scolaire.</p>
         <p>Nous nous engageons &agrave; vous offrir le 1<sup>er</sup> cours d&rsquo;&eacute;valuation (1 heure) de votre enfant o&ugrave; l&rsquo;enseignant prendra note de ses qualit&eacute;s et de ses points faibles afin d&rsquo;&eacute;tablir son programme scolaire personnalis&eacute;. GoSciences n&rsquo;exige aucun engagement de votre part (pas d&rsquo;heures &agrave; pr&eacute;financer) et vous propose de r&eacute;gler uniquement le nombre d&rsquo;heures effectu&eacute;es chaque mois.</p>
         <p>Tous nos enseignants sont des scientifiques de tr&egrave;s haut niveau sp&eacute;cialis&eacute;s dans un domaine pr&eacute;cis (Math&eacute;matiques, Physique, Chimie, Biologie, G&eacute;ologie&hellip;). Ils ont &eacute;t&eacute; recrut&eacute;s par nos soins apr&egrave;s consultation du C.V., mise en situation concr&egrave;te et entretien individuel. Nous exigeons par ailleurs un extrait de casier judiciaire vierge.</p>
         <p>Gosciences a mis en place une &eacute;valuation de l&rsquo;enseignant par les parents d&egrave;s le 1<sup>er</sup> cours d&rsquo;&eacute;valuation ainsi que chaque mois afin de s&rsquo;assurer de la bonne implication de son enseignant. A savoir que nous &eacute;changerons &agrave; propos de l&rsquo;&eacute;volution de l&rsquo;&eacute;l&egrave;ve lors de notre suivi p&eacute;dagogique mensuel.</p>
-        <ul>
-            <li><strong class="green-word">Nos stages</strong></li>
-        </ul>
+        
+        <ul><li><strong class="green-word">Nos stages</strong></li></ul>
         <p>Les frais de dossier sont d&rsquo;un montant de 49<sup>e</sup> par famille et par ann&eacute;e scolaire si vous n&rsquo;avez pas souscrit de cours individuels au sein de GoSciences.</p>
         <p>Nous proposons trois types de stages (8h/semaine)&nbsp;:</p>
-        <ol>
-        <li><u>Stages de remise &agrave; niveau</u></li>
-        </ol>
+        
+        <ol><li><u>Stages de remise &agrave; niveau</u></li></ol>
         <p>Ces stages ont g&eacute;n&eacute;ralement lieu durant les Grandes vacances scolaires de Juillet &agrave; Ao&ucirc;t &agrave; raison de 2 heures par jour pendant 4 jours. Il faut profiter de ce temps libre pour acqu&eacute;rir les bases et combler les lacunes accumul&eacute;es lors des classes pr&eacute;c&eacute;dentes. Ces stages ont pour but de d&eacute;marrer une nouvelle ann&eacute;e scolaire de la meilleure des mani&egrave;res.</p>
-        <ol start="2">
-        <li><u>Stages de perfectionnement</u></li>
-        </ol>
+        
+        <ol start="2"><li><u>Stages de perfectionnement</u></li></ol>
         <p>Ces stages ont lieu durant toute l&rsquo;ann&eacute;e &agrave; raison de 2 heures par jour pendant 4 jours. Ils ont &eacute;t&eacute; con&ccedil;us pour d&eacute;velopper et optimiser les capacit&eacute;s de raisonnement d&rsquo;&eacute;l&egrave;ves poss&eacute;dant bon niveau scientifique.</p>
-        <ol start="3">
-        <li><u>Stages de pr&eacute;paration aux examens nationaux</u></li>
-        </ol>
+        
+        <ol start="3"><li><u>Stages de pr&eacute;paration aux examens nationaux</u></li></ol>
         <p>En 3<sup>&egrave;me</sup> et en Terminale chaque &eacute;l&egrave;ve devra se pr&eacute;senter au Brevet des coll&egrave;ges et au Baccalaur&eacute;at. Les stages se d&eacute;rouleront durant les vacances scolaires (Toussaint, No&euml;l, F&eacute;vrier et P&acirc;ques) &agrave; raison de 2 heures par jour pendant 4 jours pour les &eacute;l&egrave;ves de 3<sup>&egrave;me</sup> et 4 heures par jour pendant 2 jours pour les &eacute;l&egrave;ves de&nbsp;Terminale pour pr&eacute;parer au mien leurs examens respectifs. Ils effectueront avec l&rsquo;enseignant uniquement des exercices de pr&eacute;c&eacute;dentes &eacute;ditions du Brevet des coll&egrave;ges et du Baccalaur&eacute;at. Il veillera attentivement &agrave; leurs raisonnements ainsi qu&rsquo;&agrave; leurs fautes d&rsquo;inattention.</p>
-        <ul>
-        <li><strong class="green-word">Paiement</strong></li>
-        </ul>
+        
+        <ul><li><strong class="green-word">Paiement</strong></li></ul>
         <p>GoSciences accepte les moyens de paiement suivant&nbsp;:</p>
         <ul>
-        <li>Ch&egrave;ques</li>
-        <li>Esp&egrave;ces</li>
-        <li>Ch&egrave;ques Emploi Service Universel</li>
-        <li>Virement bancaire</li>
+            <li>Ch&egrave;ques</li>
+            <li>Esp&egrave;ces</li>
+            <li>Ch&egrave;ques Emploi Service Universel</li>
+            <li>Virement bancaire</li>
         </ul>
         <p>Les ch&egrave;ques et les esp&egrave;ces seront directement libell&eacute;s &agrave; l&rsquo;adresse de notre si&egrave;ge social situ&eacute; &agrave; la Fert&eacute;-Saint-Aubin.</p>
         <br>
-        <p>*<em>Selon </em><em>&nbsp;les conditions pos&eacute;es par l&rsquo;art. 199 sexdecies du CGI, sous r&eacute;serve de modification de la l&eacute;gislation.</em></p>
+        <p>*<em class="text-80">Selon les conditions pos&eacute;es par l&rsquo;art. 199 sexdecies du CGI, sous r&eacute;serve de modification de la l&eacute;gislation.</em></p>
 
       </div>
     </div>
