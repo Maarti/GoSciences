@@ -28,7 +28,7 @@ class Utilisateur_model extends MY_Model {
         $this->load->library('format_string');
         $code_activation=random_string('alnum', 32);
         $prenomFormat = $this->format_string->format_firstname($prenom);
-        $nomFormat = $this->format_string->format_firstname($nom);
+        $nomFormat = $this->format_string->format_lastname($nom);
         $options_echappees = array(
             'mail'              => $mail,
             'nom'               => $nomFormat,

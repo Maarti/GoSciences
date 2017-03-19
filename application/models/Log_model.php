@@ -2,6 +2,7 @@
 class Log_model extends MY_Model 
 {
     protected $table = 'log';
+    protected $table_util = 'utilisateur';
 
     // Créer une entrée dans la tables des logs. $user = null OU utilisateur.id OU utilisateur.mail
     public function create_log($type,$libelle,$detail="",$user=null){            
@@ -35,4 +36,14 @@ class Log_model extends MY_Model
             log_message('error', 'Error in Log_model - Msg:'.$e->getMessage().' Trace:'.$e->getTraceAsString());
         }
     }
+    
+     public function get_last($where=array(),$limit=50,$offset=0){
+          return $this->db->select('date,ip,agent,platform,type,libelle,detail,mail,nom,prenom')
+               ->from($this->table)
+               ->join($this->table_util,$this->table_util.'.id = '.$this->table.'.utilisateur_id')
+               ->where($where)
+               ->order_by($this->table.'.date DESC')
+               ->limit($limit, $offset)
+               ->get();
+     }
 }

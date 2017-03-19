@@ -101,4 +101,15 @@ class Admin extends CI_Controller {
         }else
             $this->classes($id_class);
     }
+    
+    public function logs(){
+        $this->load->model('log_model');
+        $data['tab_title'] = 'GoSciences - Administration';
+        $data['page_title'] = 'Logs';
+        $data['logs'] =$this->log_model->get_last()->result();
+        $this->load->view('site/header', $data);
+        $this->load->view('site/menu', $data);
+        $this->load->view('admin/admin_logs', $data);
+        $this->load->view('site/footer');
+    }
 }
