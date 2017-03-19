@@ -28,11 +28,11 @@
             <em class="text-80">*Selon les conditions posées par l’art. 199 sexdecies du CGI, sous réserve de modification de la législation.</em>
         </div>
     </div>  
-    <hr>
+    <!--<hr>
     <div class="row small-uncollapse">
         <div class="small-12 columns text-90">
             <h4>Témoignages</h4>            
             <p>Quam multo quod ea est.</p>
         </div>
-    </div>  
+    </div>  -->
 </div>
