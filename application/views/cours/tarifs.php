@@ -9,6 +9,9 @@
           <tr>
             <th width="150" class="text-center">Classe</th>
             <th class="text-center">Programme</th>
+            <?if (isset($id_prest) && $id_prest=='s'){?>
+                <th class="text-center">Séances</th>
+            <?}?>
             <th width="200" class="text-center">Tarif</th>
           </tr>
         </thead>
@@ -17,9 +20,15 @@
           <tr>
             <td class="text-center"><b><?=$tarif['libelle']?></b></td>
             <td><?=$tarif['description']?></td>
+            <?if (isset($id_prest) && $id_prest=='s'){?>
+                <td><?=$tarif['nb_seance']?> x <?=intval($tarif['duree_seance'])?>h</td>
+                <td class="text-center"><span class="stat"><?=$tarif['tarif_brut']?>€</span><br>
+                </td>
+            <?}else{?>
             <td class="text-center"><span class="stat"><?=$tarif['tarif_remise']?>€<?=$tarif['unite_remise']?></span><br>
                 <span class="price_detail"><?=$tarif['tarif_brut']?>€<?=$tarif['unite_remise']?> avant déduction fiscale</span>
             </td>
+            <?}?>
           </tr>
         <? } ?>                
         </tbody>

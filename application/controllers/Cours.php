@@ -18,8 +18,9 @@ class Cours extends CI_Controller {
         $libelle_prest = $this->prestation_model->read('libelle',array('id'=>$id_prest))->row();
         if (empty($data['tarifs']) || empty($libelle_prest))
             redirect('site/accueil', 'refresh');
-        else{                   
+        else{
             $data['tab_title'] = 'GoSciences - Tarifs';
+            $data['id_prest'] = $id_prest;
             $data['page_title'] = 'Tarifs '.$libelle_prest->libelle;
             $this->load->view('site/header', $data);
             $this->load->view('site/menu', $data);

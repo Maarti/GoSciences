@@ -39,7 +39,7 @@ class Admin extends CI_Controller {
         foreach ($data['prestations'] as $p)
             $tarifs[$p['id']] = $this->classe_model->get_tarifs($p['id']);
         $data['tarifs'] = $tarifs;
-        $data['enum_unite_remise'] = array('/h', '/2h', '/20h', '/jour', '/semaine');
+        $data['enum_unite_remise'] = array(NULL, '/h', '/2h', '/20h', '/jour', '/semaine');
         $this->load->view('site/header', $data);
         $this->load->view('site/menu', $data);
         $this->load->view('admin/admin_prestations', $data);
@@ -47,11 +47,11 @@ class Admin extends CI_Controller {
     }
     
     public function valid_prestations($id_prest=null,$id_class=null) {
-        $this->form_validation->set_rules('tarif_brut', 'Tarif brut', 'required|numeric|greater_than_equal_to[0]|less_than_equal_to[9999]');
-        $this->form_validation->set_rules('tarif_remise', 'Tarif remise', 'required|numeric|greater_than_equal_to[0]|less_than_equal_to[9999]');
-        $this->form_validation->set_rules('unite_remise', 'Unité', 'required|in_list[/h,/2h,/20h,/jour,/semaine]');
-        $this->form_validation->set_rules('nb_seance', 'Nb séances', 'required|integer|greater_than_equal_to[0]');
-        $this->form_validation->set_rules('duree_seance', 'Durée séance', 'required|numeric|greater_than_equal_to[0]|less_than_equal_to[24]');
+        $this->form_validation->set_rules('tarif_brut', 'Tarif brut', 'numeric|greater_than_equal_to[0]|less_than_equal_to[9999]');
+        $this->form_validation->set_rules('tarif_remise', 'Tarif remise', 'numeric|greater_than_equal_to[0]|less_than_equal_to[9999]');
+        $this->form_validation->set_rules('unite_remise', 'Unité', 'in_list[/h,/2h,/20h,/jour,/semaine]');
+        $this->form_validation->set_rules('nb_seance', 'Nb séances', 'integer|greater_than_equal_to[0]');
+        $this->form_validation->set_rules('duree_seance', 'Durée séance', 'numeric|greater_than_equal_to[0]|less_than_equal_to[24]');
         $this->form_validation->set_error_delimiters('<p class="help-text valid-error">', '</p>');
 
         if ($this->form_validation->run()) {

@@ -59,12 +59,12 @@
             <p class="lead">Modification :</p>
             <?= form_open('admin/valid_prestations/'.$p['id'].'/'.$t['classe_id'],'data-abide'); ?>
             <label>Tarif brut
-            <input type="number" step="0.05" min="0" max="9999.99" name="tarif_brut" value="<?=set_value('tarif_brut',$t['tarif_brut']); ?>"  placeholder="100.00" autofocus required>
+            <input type="number" step="0.05" min="0" max="9999.99" name="tarif_brut" value="<?=set_value('tarif_brut',$t['tarif_brut']); ?>"  placeholder="100.00" autofocus>
             <?= form_error('tarif_brut'); ?>
             </label>
             
             <label>Tarif remise
-            <input type="number" step="0.05" min="0" max="9999.99" name="tarif_remise" value="<?=set_value('tarif_remise',$t['tarif_remise']); ?>"  placeholder="100.00" required>
+            <input type="number" step="0.05" min="0" max="9999.99" name="tarif_remise" value="<?=set_value('tarif_remise',$t['tarif_remise']); ?>"  placeholder="100.00">
             <?= form_error('tarif_remise'); ?>
             </label>
             
@@ -79,12 +79,12 @@
             </label>
             
             <label>Nb séances
-            <input type="number" step="1" min="0" max="999" name="nb_seance" value="<?=set_value('nb_seance',$t['nb_seance']); ?>"  placeholder="2" required>
+            <input type="number" step="1" min="0" max="999" name="nb_seance" value="<?=set_value('nb_seance',$t['nb_seance']); ?>"  placeholder="2">
             <?= form_error('nb_seance'); ?>
             </label>
             
             <label>Durée séance
-            <input type="number" step="0.25" min="0" max="24" name="duree_seance" value="<?=set_value('duree_seance',$t['duree_seance']); ?>"  placeholder="2.00" required>
+            <input type="number" step="0.25" min="0" max="24" name="duree_seance" value="<?=set_value('duree_seance',$t['duree_seance']); ?>"  placeholder="2.00">
             <?= form_error('duree_seance'); ?>
             </label>
         <div class="clearfix">
