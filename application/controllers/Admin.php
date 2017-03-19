@@ -112,4 +112,14 @@ class Admin extends CI_Controller {
         $this->load->view('admin/admin_logs', $data);
         $this->load->view('site/footer');
     }
+    
+    public function textes(){
+        $data['tab_title'] = 'GoSciences - Administration';
+        $data['page_title'] = 'Textes';
+        $data['tinymce'] = 'mytextarea';
+        $this->load->view('site/header', $data);
+        $this->load->view('site/menu', $data);
+        $this->load->view('admin/admin_textes', $data);
+        $this->load->view('site/footer');
+    }
 }
