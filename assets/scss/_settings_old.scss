@@ -51,12 +51,11 @@ $global-width: rem-calc(1200);
 $global-lineheight: 1.5;
 $foundation-palette: (
   primary: #0A0A0A, //#1779ba,
-  secondary: #B2C835,//#767676,
+  secondary: #767676,
   success: #3adb76,
   warning: #ffae00,
   alert: #cc4b37,
 );
-$light-green: #eaf0c7;	// perso
 $light-gray: #B2C835; //#e6e6e6;
 $medium-gray: #ADC330; //#cacaca;
 $dark-gray: #6F8500; //#8a8a8a;
@@ -541,7 +540,7 @@ $switch-paddle-transition: all 0.25s ease-out;
 // 32. Table
 // ---------
 
-$table-background: $light-green; //$white;
+$table-background: $white;
 $table-color-scale: 5%;
 $table-border: 1px solid smart-scale($table-background, $table-color-scale);
 $table-padding: rem-calc(8 10 10);
