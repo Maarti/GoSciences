@@ -66,7 +66,7 @@ class Site extends CI_Controller {
             $nom = $this->input->post('nom');
             $prenom = $this->input->post('prenom');
             $message = $this->input->post('message');
-            $this->utilisateur_model->sendMail('bryan.martinet@gmail.com', 'Contact depuis GoSciences', $message, $mail, $nom.' '.$prenom);
+            $this->utilisateur_model->sendMail('contact@gosciences.fr,contact@maarti.net', 'Contact depuis GoSciences', $message, $mail, $nom.' '.$prenom);
             redirect('site/contact/envoi_ok', 'refresh');
         }else
             $this->contact();
