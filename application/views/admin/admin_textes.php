@@ -4,8 +4,9 @@
   
        <? $this->load->view('include/admin_menu'); ?>
        
-        <form method="post">
-    <textarea id="mytextarea">Hello, World!</textarea>
+         <?= form_open('admin/valid_textes','data-abide')?>
+    <textarea id="mytextarea" name="mon_texte">Hello, World!</textarea>
+    <input type="submit" class="button" value="Valider">
   </form>
 
     </div>

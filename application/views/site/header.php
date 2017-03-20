@@ -34,7 +34,7 @@
         <?}?>
         <script type="text/javascript">
             tinymce.init({
-              selector: '#<?=$tinymce?>'
+              <?=$tinymce?>              
             });
         </script>
     <?}?>

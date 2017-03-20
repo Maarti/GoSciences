@@ -93,7 +93,7 @@ class Admin extends CI_Controller {
         if ($this->form_validation->run()) {
             $this->load->model('classe_discipline_model');
             foreach ($disc as $d) {
-                $ret = $this->classe_discipline_model->update(array('discipline_id'=>$d['id'],'classe_id'=>$id_class),
+                $this->classe_discipline_model->update(array('discipline_id'=>$d['id'],'classe_id'=>$id_class),
                     array(  'description'           =>$this->input->post('description_'.$d['id']),
                             'description_longue'    =>$this->input->post('description_longue_'.$d['id'])));
             }           
@@ -116,7 +116,23 @@ class Admin extends CI_Controller {
     public function textes(){
         $data['tab_title'] = 'GoSciences - Administration';
         $data['page_title'] = 'Textes';
-        $data['tinymce'] = 'mytextarea';
+        $data['tinymce'] = 
+            "selector: '#mytextarea',
+             style_formats: [
+                {title: 'Vert GoSciences', inline: 'span', classes: 'green-word'},
+                {title: 'Test', inline: 'span', classes: 'valid-error'}
+             ],
+             style_formats_merge: true,
+             content_css:'/assets/css/style.css'";
+            //content_style:'.green-word{color:#B2C835;}'
+        $this->load->view('site/header', $data);
+        $this->load->view('site/menu', $data);
+        $this->load->view('admin/admin_textes', $data);
+        $this->load->view('site/footer');
+    }
+    
+    public function valid_textes(){
+        $data['output'] = $this->input->post('mon_texte');
         $this->load->view('site/header', $data);
         $this->load->view('site/menu', $data);
         $this->load->view('admin/admin_textes', $data);
