@@ -26,12 +26,8 @@
     <title><?= (isset($tab_title))? $tab_title : 'GoSciences'?></title>
     <link rel="stylesheet" href="<?= css_url('app')?>" />
     <link rel="stylesheet" href="<?= css_url('style')?>" />
-    <?if(isset($tinymce)){
-        if(ENVIRONMENT == 'development'){?>
-        <script src='//cloud.tinymce.com/stable/tinymce.min.js'></script>
-        <?}else{?>
-            <script src='<?= js_url('vendor/tinymce/tinymce.min')?>'></script>
-        <?}?>
+    <?if(isset($tinymce)){?>
+        <script src="<?=(ENVIRONMENT == 'development')? '//cloud.tinymce.com/stable/tinymce.min.js' : js_url('vendor/tinymce/tinymce.min')?>"></script>
         <script type="text/javascript">
             tinymce.init({
               <?=$tinymce?>              

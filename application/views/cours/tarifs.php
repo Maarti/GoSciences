@@ -21,7 +21,7 @@
             <td class="text-center"><b><?=$tarif['libelle']?></b></td>
             <td><?=$tarif['description']?></td>
             <?if (isset($id_prest) && $id_prest=='s'){?>
-                <td><?=$tarif['nb_seance']?> x <?=intval($tarif['duree_seance'])?>h</td>
+                <td class="text-center"><?=$tarif['nb_seance']?> x <?=intval($tarif['duree_seance'])?>h</td>
                 <td class="text-center"><span class="stat"><?=$tarif['tarif_brut']?>€</span><br>
                 </td>
             <?}else{?>

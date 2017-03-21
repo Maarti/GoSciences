@@ -116,15 +116,24 @@ class Admin extends CI_Controller {
     public function textes(){
         $data['tab_title'] = 'GoSciences - Administration';
         $data['page_title'] = 'Textes';
+        $base_url = (ENVIRONMENT=='development')? 'https://gosciences.fr/' : base_url();
         $data['tinymce'] = 
-            "selector: '#mytextarea',
-             style_formats: [
-                {title: 'Vert GoSciences', inline: 'span', classes: 'green-word'},
-                {title: 'Test', inline: 'span', classes: 'valid-error'}
-             ],
-             style_formats_merge: true,
-             content_css:'/assets/css/style.css'";
-            //content_style:'.green-word{color:#B2C835;}'
+           "selector: 'textarea#corps',
+            style_formats: [
+               {title: 'Vert GoSciences', inline: 'span', classes: 'green-word'},
+               {title: 'Nos Valeurs', inline: 'span', classes: 'hammer-word'},
+               {title: 'Stat', inline: 'span', classes: 'stat'}
+            ],
+            style_formats_merge: true,
+            document_base_url : '".$base_url."',
+            content_css:'/assets/css/style.css,/assets/css/app.css',
+            height : 500,
+            plugins: 'lists advlist code hr image textcolor link',
+            toolbar: 'undo redo | fontsizeselect styleselect forecolor | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | bullist numlist | hr image link',
+            browser_spellcheck: true,            
+            contextmenu: false,
+            schema: 'html5',
+            language: 'fr_FR'";
         $this->load->view('site/header', $data);
         $this->load->view('site/menu', $data);
         $this->load->view('admin/admin_textes', $data);
