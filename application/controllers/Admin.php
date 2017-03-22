@@ -113,9 +113,13 @@ class Admin extends CI_Controller {
         $this->load->view('site/footer');
     }
     
-    public function textes(){
+    public function textes($id_texte=1){
+        $this->load->model('texte_model');
         $data['tab_title'] = 'GoSciences - Administration';
         $data['page_title'] = 'Textes';
+        $data['textes'] = $this->texte_model->read('*')->result();
+        $data['texte'] = $this->texte_model->read('*',array('id'=>$id_texte))->row();
+        
         $base_url = (ENVIRONMENT=='development')? 'https://gosciences.fr/' : base_url();
         $data['tinymce'] = 
            "selector: 'textarea#corps',
@@ -140,11 +144,35 @@ class Admin extends CI_Controller {
         $this->load->view('site/footer');
     }
     
-    public function valid_textes(){
-        $data['output'] = $this->input->post('mon_texte');
-        $this->load->view('site/header', $data);
-        $this->load->view('site/menu', $data);
-        $this->load->view('admin/admin_textes', $data);
-        $this->load->view('site/footer');
+    public function valid_textes($id_texte=null){
+        $this->load->model('texte_model');        
+        $this->form_validation->set_error_delimiters('<p class="help-text valid-error">', '</p>');
+        
+        // Si on a sélectionné un texte dans la liste déroulante
+        if ($this->input->post('form') == 'texte_id'){
+            $this->form_validation->set_rules('id', 'Texte à modifier', 'in_list[1,2,3]');
+            if ($this->form_validation->run())
+                redirect('admin/textes/'.$this->input->post('id'));
+            else
+                $this->textes();
+        }
+        
+        // Si on a modifié un texte
+        else{
+            $this->form_validation->set_rules('corps', 'Corps du texte', 'max_length[65535]');
+            if ($this->form_validation->run()) {
+                // On purifie le HTML écrit par l'utilisateur
+                $html_purifier_path = APPPATH.'/third_party/htmlpurifier-4.9.2-lite/';
+                require_once $html_purifier_path.'HTMLPurifier.auto.php';
+                $config = HTMLPurifier_Config::createDefault();
+                $purifier = new HTMLPurifier($config);
+                $corps = $this->input->post('corps');
+                $clean_corps = $purifier->purify($corps);
+
+                $this->texte_model->update(array('id'=>$id_texte),array('corps'=>$clean_corps));
+                redirect('admin/textes/'.$id_texte);
+            }else
+                $this->textes($id_texte);
+        }
     }
 }

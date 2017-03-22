@@ -5,26 +5,31 @@
         <? $this->load->view('include/admin_menu'); ?>
        
         <?= form_open('admin/valid_textes','data-abide')?>
-        <label>Texte  modifier :
-            <select name="id">
-              <option value="info" <?=set_select('motif', 'info', TRUE)?>>Demande d'information</option>
-              <option value="postulation" <?=set_select('motif', 'postulation')?>>Postulation pour être professeur</option>
-              <option value="bug" <?=set_select('motif', 'bug')?>>Rapport de bug</option>
-              <option value="autre" <?=set_select('motif', 'autre')?>>Autre</option>
+        <label>Texte à modifier :
+            <select name="id" onchange="this.form.submit()">
+              <? foreach ($textes as $txt) {
+                    $actif = ($texte->id == $txt->id);?>
+                    <option value="<?=$txt->id?>" <?=set_select('id', $txt->id, $actif)?>><?=$txt->libelle?></option>
+              <?}?>
             </select>
             <?= form_error('id'); ?>
         </label>
+        <input type="hidden" name="form" value="texte_id">
         </form>
         
-        <?= form_open('admin/valid_textes','data-abide')?>
-        <textarea id="corps" name="mon_texte">Hello, World!</textarea>
-        <div class="clearfix">
-            <div class="float-right">
-                 <input type="submit" class="large button" value="Valider">
+        
+        <?if(!empty($texte)){
+            echo form_open('admin/valid_textes/'.$texte->id,'data-abide')?>
+            <textarea id="corps" name="corps"><?=$texte->corps?></textarea>
+            <div class="clearfix">
+                <div class="float-right">
+                     <input type="submit" class="large button" value="Valider">
+                </div>
             </div>
-        </div>
-        </form>
-        <br>
+            <input type="hidden" name="form" value="texte_corps">
+            </form>
+        <?}?>
+    <br>
     </div>
     
 
