@@ -9,7 +9,7 @@
             <select name="id" onchange="this.form.submit()">
               <? foreach ($textes as $txt) {
                     $actif = ($texte->id == $txt->id);?>
-                    <option value="<?=$txt->id?>" <?=set_select('id', $txt->id, $actif)?>><?=$txt->libelle?></option>
+                    <option value="<?=$txt->id?>"<?=set_select('id', $txt->id, $actif)?>><?=$txt->libelle?></option>
               <?}?>
             </select>
             <?= form_error('id'); ?>

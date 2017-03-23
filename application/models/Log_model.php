@@ -20,7 +20,10 @@ class Log_model extends MY_Model
                 $user_obj = $CI->utilisateur_model->read('id',array('mail'=>$user))->row();
                 $user = (is_null($user_obj))? null : $user_obj->id;
             }
-
+            
+            // Recup les infos de l'adresse IP
+            //$details = json_decode(file_get_contents("http://ipinfo.io/{$ip}/json"));
+            
             $options_echappees = array(
                 'ip'            => $ip,
                 'agent'         => $agent,

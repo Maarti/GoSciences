@@ -23,6 +23,8 @@
         </nav>
       </div>
        
+        <?=display('accueil');?>
+        <!--
       <div class="text-justify">
         <p class="lead"><strong>La vie scolaire d&rsquo;un &eacute;l&egrave;ve est compos&eacute;e de plusieurs &eacute;tapes cruciales</strong></p>
         <img src="<?=img_url('college.png')?>" alt="Collège" class="img-center">
@@ -74,7 +76,7 @@
         <br>
         <p>*<em class="text-80">Selon les conditions pos&eacute;es par l&rsquo;art. 199 sexdecies du CGI, sous r&eacute;serve de modification de la l&eacute;gislation.</em></p>
 
-      </div>
+      </div>-->
     </div>
     <? $this->load->view('include/sidebar'); ?>
 

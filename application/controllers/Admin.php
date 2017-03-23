@@ -4,7 +4,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Admin extends CI_Controller {
 
     public function __construct(){
-        parent::__construct();        
+        parent::__construct();
+        $this->data['tab_title'] = 'GoSciences - Administration';
         $this->load->library('form_validation');
         if(!isset($_SESSION['id']) || !in_array(90, $_SESSION['roles']))
                 redirect('site/accueil', 'refresh');
@@ -17,32 +18,30 @@ class Admin extends CI_Controller {
     
     public function utilisateurs(){
         $this->load->model('utilisateur_model');
-        $data['tab_title'] = 'GoSciences - Administration';
-        $data['page_title'] = 'Utilisateurs';
+        $this->data['page_title'] = 'Utilisateurs';
         
-        $data['utilisateurs'] = $this->utilisateur_model->
+        $this->data['utilisateurs'] = $this->utilisateur_model->
                 read('id,mail,nom,prenom,tel,date_naissance,date_inscription,date_connexion,etat',array(),null,null,'nom,prenom ASC')->result();
-        $this->load->view('site/header', $data);
-        $this->load->view('site/menu', $data);
-        $this->load->view('admin/admin_utilisateurs', $data);
+        $this->load->view('site/header', $this->data);
+        $this->load->view('site/menu', $this->data);
+        $this->load->view('admin/admin_utilisateurs', $this->data);
         $this->load->view('site/footer');
     }
     
     public function prestations($id_prest=null,$id_class=null){
-        $data['tab_title'] = 'GoSciences - Administration';
-        $data['page_title'] = 'Prestations';
+        $this->data['page_title'] = 'Prestations';
         // Ouvre automatiquement le modal en erreur
-        $data['show_modal'] = (!empty($id_prest) && !empty($id_class))? 'modal-'.$id_prest.'-'.$id_class : null;
-        $data['id_prest'] = $id_prest;
-        $data['prestations'] = $this->classe_model->get_prestations();
+        $this->data['show_modal'] = (!empty($id_prest) && !empty($id_class))? 'modal-'.$id_prest.'-'.$id_class : null;
+        $this->data['id_prest'] = $id_prest;
+        $this->data['prestations'] = $this->classe_model->get_prestations();
         $tarifs = array();
-        foreach ($data['prestations'] as $p)
+        foreach ($this->data['prestations'] as $p)
             $tarifs[$p['id']] = $this->classe_model->get_tarifs($p['id']);
-        $data['tarifs'] = $tarifs;
-        $data['enum_unite_remise'] = array(NULL, '/h', '/2h', '/20h', '/jour', '/semaine');
-        $this->load->view('site/header', $data);
-        $this->load->view('site/menu', $data);
-        $this->load->view('admin/admin_prestations', $data);
+        $this->data['tarifs'] = $tarifs;
+        $this->data['enum_unite_remise'] = array(NULL, '/h', '/2h', '/20h', '/jour', '/semaine');
+        $this->load->view('site/header', $this->data);
+        $this->load->view('site/menu', $this->data);
+        $this->load->view('admin/admin_prestations', $this->data);
         $this->load->view('site/footer');
     }
     
@@ -70,14 +69,13 @@ class Admin extends CI_Controller {
     
      public function classes($id_class=null){
         $this->load->model('classe_model');
-        $data['tab_title'] = 'GoSciences - Administration';
-        $data['page_title'] = 'Classes';
-        $data['id_class'] = $id_class;
-        $data['classes'] =$this->classe_model->get_all_classe_disciplines();
+        $this->data['page_title'] = 'Classes';
+        $this->data['id_class'] = $id_class;
+        $this->data['classes'] =$this->classe_model->get_all_classe_disciplines();
         
-        $this->load->view('site/header', $data);
-        $this->load->view('site/menu', $data);
-        $this->load->view('admin/admin_classes', $data);
+        $this->load->view('site/header', $this->data);
+        $this->load->view('site/menu', $this->data);
+        $this->load->view('admin/admin_classes', $this->data);
         $this->load->view('site/footer');
     }
     
@@ -104,24 +102,21 @@ class Admin extends CI_Controller {
     
     public function logs(){
         $this->load->model('log_model');
-        $data['tab_title'] = 'GoSciences - Administration';
-        $data['page_title'] = 'Logs';
-        $data['logs'] =$this->log_model->get_last()->result();
-        $this->load->view('site/header', $data);
-        $this->load->view('site/menu', $data);
-        $this->load->view('admin/admin_logs', $data);
+        $this->data['page_title'] = 'Logs';
+        $this->data['logs'] =$this->log_model->get_last()->result();
+        $this->load->view('site/header', $this->data);
+        $this->load->view('site/menu', $this->data);
+        $this->load->view('admin/admin_logs', $this->data);
         $this->load->view('site/footer');
     }
     
-    public function textes($id_texte=1){
-        $this->load->model('texte_model');
-        $data['tab_title'] = 'GoSciences - Administration';
-        $data['page_title'] = 'Textes';
-        $data['textes'] = $this->texte_model->read('*')->result();
-        $data['texte'] = $this->texte_model->read('*',array('id'=>$id_texte))->row();
+    public function textes($id_texte='sidebar_info'){
+        $this->data['page_title'] = 'Textes';
+        $this->data['textes'] = $this->texte_model->read('*')->result();
+        $this->data['texte'] = $this->texte_model->read('*',array('id'=>$id_texte))->row();
         
         $base_url = (ENVIRONMENT=='development')? 'https://gosciences.fr/' : base_url();
-        $data['tinymce'] = 
+        $this->data['tinymce'] = 
            "selector: 'textarea#corps',
             style_formats: [
                {title: 'Vert GoSciences', inline: 'span', classes: 'green-word'},
@@ -138,23 +133,22 @@ class Admin extends CI_Controller {
             contextmenu: false,
             schema: 'html5',
             language: 'fr_FR'";
-        $this->load->view('site/header', $data);
-        $this->load->view('site/menu', $data);
-        $this->load->view('admin/admin_textes', $data);
+        $this->load->view('site/header', $this->data);
+        $this->load->view('site/menu', $this->data);
+        $this->load->view('admin/admin_textes', $this->data);
         $this->load->view('site/footer');
     }
     
     public function valid_textes($id_texte=null){
-        $this->load->model('texte_model');        
         $this->form_validation->set_error_delimiters('<p class="help-text valid-error">', '</p>');
         
         // Si on a sélectionné un texte dans la liste déroulante
         if ($this->input->post('form') == 'texte_id'){
-            $this->form_validation->set_rules('id', 'Texte à modifier', 'in_list[1,2,3]');
-            if ($this->form_validation->run())
+            //$this->form_validation->set_rules('id', 'Texte à modifier', 'in_list[1,2,3]');
+            //if ($this->form_validation->run())
                 redirect('admin/textes/'.$this->input->post('id'));
-            else
-                $this->textes();
+            //else
+            //    $this->textes();
         }
         
         // Si on a modifié un texte
