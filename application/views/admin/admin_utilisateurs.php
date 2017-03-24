@@ -29,7 +29,7 @@
               <td><?=$u->date_inscription?></td>
               <td><?=$u->date_connexion?></td>
               <td><?=$u->etat?></td>
-              <td><a href="#<?=$u->id?>" class="button">Modifier</a></td>
+              <td><a href="#<?=$u->id?>" class="button"><i class="fi-page-edit"></i></a></td>
             </tr>
             <? } ?>
         </tbody>

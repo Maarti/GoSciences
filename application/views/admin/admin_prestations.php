@@ -42,7 +42,7 @@
             <td><?=$t['unite_remise']?></td>
             <td><?=$t['nb_seance']?></td>
             <td><?=$t['duree_seance']?></td>
-            <td><a data-open="modal-<?=$p['id'].'-'.$t['classe_id']?>" class="button">Modifier</a></td>
+            <td><a data-open="modal-<?=$p['id'].'-'.$t['classe_id']?>" class="button"><i class="fi-page-edit"></i></a></td>
           </tr>
         <?}?>
         </tbody>
