@@ -3,39 +3,33 @@
 <footer>
     <div class="row expanded callout secondary">
         <div class="small-6 large-3 columns">
-            <p class="lead">Offices</p>
+            <p class="lead">Site</p>
             <ul class="menu vertical">
-                <li><a href="#">One</a></li>
-                <li><a href="#">Two</a></li>
-                <li><a href="#">Three</a></li>
-                <li><a href="#">Four</a></li>
+                <li><a href="<?=site_url('site/accueil')?>">Accueil</a></li>
+                <li><a href="<?=site_url('site/valeurs')?>">Nos Valeurs</a></li>
+                <li><a href="<?=site_url('site/equipe')?>">Notre Équipe</a></li>
+                <li><a href="<?=site_url('classe/infos')?>">Offres</a></li>
+                <li><a href="<?=site_url('cours/tarifs')?>">Tarifs</a></li>                
             </ul>
         </div>
         <div class="small-6 large-3 columns">
-            <p class="lead">Partenaires</p>
+            <p class="lead">Professeurs</p>
             <ul class="menu vertical">
-                <li><a href="#">One</a></li>
-                <li><a href="#">Two</a></li>
-                <li><a href="#">Three</a></li>
-                <li><a href="#">Four</a></li>
+                <li><a href="#">Recrutement</a></li>
             </ul>
         </div>
         <div class="small-6 large-3 columns">
             <p class="lead">Contact</p>
             <ul class="menu vertical">
+                <li><a href="<?=site_url('site/contact')?>">Formulaire</a></li>
+                <li><a href="https://www.facebook.com/soutienscolairedexcellence/" target="_blank"><i class="fi-social-facebook"></i> Facebook</a></li>
                 <li><a href="#"><i class="fi-social-twitter"></i> Twitter</a></li>
-                <li><a href="#"><i class="fi-social-facebook"></i> Facebook</a></li>
-                <li><a href="#"><i class="fi-social-instagram"></i> Instagram</a></li>
-                <li><a href="#"><i class="fi-social-pinterest"></i> Pinterest</a></li>
             </ul>
         </div>
         <div class="small-6 large-3 columns">
-            <p class="lead">Offices</p>
+            <p class="lead">Légal</p>
             <ul class="menu vertical">
-                <li><a href="#">One</a></li>
-                <li><a href="#">Two</a></li>
-                <li><a href="#">Three</a></li>
-                <li><a href="#">Four</a></li>
+                <li><a href="#">Mentions Légales</a></li>
             </ul>
         </div>
     </div>
