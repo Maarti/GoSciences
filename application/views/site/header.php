@@ -26,6 +26,7 @@
     <title><?= (isset($tab_title))? $tab_title : 'GoSciences'?></title>
     <link rel="stylesheet" href="<?= css_url('app')?>" />
     <link rel="stylesheet" href="<?= css_url('style')?>" />
+    <link rel="stylesheet" href="<?= css_url('foundation-icons')?>" />
     <?if(isset($tinymce)){?>
         <script src="<?=(ENVIRONMENT == 'development')? '//cloud.tinymce.com/stable/tinymce.min.js' : js_url('vendor/tinymce/tinymce.min')?>"></script>
         <script type="text/javascript">
