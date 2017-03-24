@@ -23,18 +23,20 @@
         </nav>
       </div>
        
-        <?=display('accueil');?>
-        <!--
+ 
       <div class="text-justify">
         <p class="lead"><strong>La vie scolaire d&rsquo;un &eacute;l&egrave;ve est compos&eacute;e de plusieurs &eacute;tapes cruciales</strong></p>
         <img src="<?=img_url('college.png')?>" alt="Collège" class="img-center">
         <br>
+        <?=display('accueil');?>
+        <!--
         <p><strong class="green-word">En 6<sup>&egrave;me&nbsp;</sup>:</strong> Vous rentrez au coll&egrave;ge et vous &ecirc;tes soumis &agrave; un <strong>changement d&rsquo;organisation scolaire</strong>. Vous devez &ecirc;tre encadr&eacute; pour r&eacute;ussir au mieux cette ann&eacute;e charni&egrave;re.</p>
         <p><strong class="green-word">En 5<sup>&egrave;me&nbsp;</sup>:</strong> Vous entrez en cycle des approfondissements avec de <strong>nombreuses notions nouvelles</strong>. Vous devez acqu&eacute;rir les <strong>bonnes bases</strong> pour franchir au mieux ce palier.</p>
         <p><strong class="green-word">En 4<sup>&egrave;me&nbsp;</sup>:</strong> Vous commencez &agrave; aborder les programmes susceptibles d&rsquo;&ecirc;tre &eacute;valu&eacute;s lors du <strong>Brevet des coll&egrave;ges</strong>. Une ma&icirc;trise de cette ann&eacute;e conditionnera la <strong>r&eacute;ussite</strong> &agrave; ce dipl&ocirc;me.</p>
         <p><strong class="green-word">En 3<sup>&egrave;me&nbsp;</sup>:</strong> Vous r&eacute;coltez les fruits de <strong>votre travail r&eacute;gulier</strong> depuis la 6<sup>&egrave;me</sup>. Vous travaillerez sur de <strong>nouvelles notions</strong> et <strong>approfondirez</strong> celles d&eacute;j&agrave; vues en <strong>4<sup>&egrave;me</sup></strong>. <strong>Le Dipl&ocirc;me National du Brevet</strong> validera la premi&egrave;re &eacute;tape de votre vie scolaire.</p>
-        <br/>
+        <br/>-->
         <img src="<?=img_url('image4.jpeg')?>" alt="Lycée" width="180px" class="img-center">
+        <?=display('accueil_2');?><!--
         <p><strong class="green-word">En 2<sup>nde&nbsp;</sup>:</strong> Vous entamez une <strong>vie lyc&eacute;enne</strong> totalement diff&eacute;rente de votre ancienne vie coll&eacute;gienne. De <strong>nouveaux chapitres</strong> viendront compl&eacute;ter ceux d&eacute;j&agrave; &eacute;valu&eacute;s lors du Brevet des coll&egrave;ges. Votre dernier trimestre, apr&egrave;s &eacute;valuation du conseil de classe, vous permettra de <strong>valider votre future orientation scolaire</strong> (scientifique, litt&eacute;raire, &eacute;conomique et sociale...).</p>
         <p><strong class="green-word">En 1<sup>&egrave;re&nbsp;</sup>:</strong> Vous d&eacute;butez votre <strong>sp&eacute;cialisation</strong> dans un domaine que vous appr&eacute;ciez tr&egrave;s particuli&egrave;rement. Cette ann&eacute;e est compos&eacute;e de <strong>chapitres susceptibles d&rsquo;&ecirc;tre &eacute;valu&eacute;s lors du Baccalaur&eacute;at</strong> et vous devez la pr&eacute;parer dans les <strong>meilleures conditions</strong>. Vous passerez &eacute;galement les <strong>&eacute;preuves anticip&eacute;es du BAC</strong> afin d&rsquo;obtenir des <strong>points d&rsquo;avance</strong> pour les &eacute;preuves de l&rsquo;examen final.</p>
         <p><strong class="green-word">En Terminale&nbsp;:</strong> Une des ann&eacute;es les plus <strong>importantes</strong> de votre scolarit&eacute;. Vous travaillez r&eacute;guli&egrave;rement depuis la 6<sup>&egrave;me</sup> pour pr&eacute;parer cet examen qu&rsquo;est le <strong>baccalaur&eacute;at</strong>. De <strong>bonnes notes</strong> &agrave; cet examen et un <strong>tr&egrave;s bon dossier scolaire</strong> vous faciliteront l&rsquo;entr&eacute;e dans de <strong>prestigieuses &eacute;coles</strong> ou <strong>Universit&eacute;s</strong>. La derni&egrave;re ligne droite&nbsp;!</p>
@@ -75,8 +77,8 @@
         <p>Les ch&egrave;ques et les esp&egrave;ces seront directement libell&eacute;s &agrave; l&rsquo;adresse de notre si&egrave;ge social situ&eacute; &agrave; la Fert&eacute;-Saint-Aubin.</p>
         <br>
         <p>*<em class="text-80">Selon les conditions pos&eacute;es par l&rsquo;art. 199 sexdecies du CGI, sous r&eacute;serve de modification de la l&eacute;gislation.</em></p>
-
-      </div>-->
+-->
+      </div>
     </div>
     <? $this->load->view('include/sidebar'); ?>
 
