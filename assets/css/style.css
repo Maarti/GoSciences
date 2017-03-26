@@ -66,5 +66,9 @@ em{
 
 footer #author{
     color:#828282;
-    font-size: 75%;
+    font-size: 0.75em;
+}
+
+.tile{
+    margin-bottom: 40px;
 }

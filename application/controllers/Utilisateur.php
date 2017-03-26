@@ -9,7 +9,15 @@ class Utilisateur extends CI_Controller {
         $this->load->helper('form');
         $this->load->library('form_validation');
         $this->load->model('utilisateur_model');
+        $this->data['tab_title'] = 'GoSciences - Utilisateur';
         //$this->output->enable_profiler(true);
+    }
+    
+    public function index() {
+        if(isset($_SESSION['id']))
+            return redirect ('utilisateur/mon_espace', 'refresh');
+        else
+            return redirect ('utilisateur/inscription', 'refresh');
     }
     
     public function activation($mail_encode=null,$code_encode=null){
@@ -22,11 +30,11 @@ class Utilisateur extends CI_Controller {
     }
     
     public function inscription() {
-        $data['tab_title'] = 'GoSciences - Inscription';
-        $data['page_title'] = 'Inscription';
-        $this->load->view('site/header', $data);
-        $this->load->view('site/menu', $data);
-        $this->load->view('utilisateur/inscription', $data);
+        $this->data['tab_title'] = 'GoSciences - Inscription';
+        $this->data['page_title'] = 'Inscription';
+        $this->load->view('site/header', $this->data);
+        $this->load->view('site/menu', $this->data);
+        $this->load->view('utilisateur/inscription', $this->data);
         $this->load->view('site/footer');
     }
 
@@ -51,8 +59,8 @@ class Utilisateur extends CI_Controller {
     }
 
     public function connexion($msg=NULL,$mail_encode=NULL) {
-        $data['tab_title'] = 'GoSciences - Connexion';
-        $data['page_title'] = 'Connexion';
+        $this->data['tab_title'] = 'GoSciences - Connexion';
+        $this->data['page_title'] = 'Connexion';
         switch ($msg) { // Gestion des messages à afficher en page d'accueil
             case 'activation_succes':
                 $type='success';
@@ -79,15 +87,15 @@ class Utilisateur extends CI_Controller {
                 $message=NULL;
         } 
         if(!is_null($type)&&!is_null($message))
-            $data['msg']= '<div class="callout '.$type.'" data-closable>'.$message.'<button class="close-button" aria-label="Fermer" type="button" data-close><span aria-hidden="true">&times;</span></button></div>';
+            $this->data['msg']= '<div class="callout '.$type.'" data-closable>'.$message.'<button class="close-button" aria-label="Fermer" type="button" data-close><span aria-hidden="true">&times;</span></button></div>';
         
         // On alimente le champ email suite à une activation de compte
-        $data['mail'] = ($mail_encode==NULL)? '' : urldecode($mail_encode);
+        $this->data['mail'] = ($mail_encode==NULL)? '' : urldecode($mail_encode);
         
         if (!isset($_SESSION['id'])){
-            $this->load->view('site/header', $data);
-            $this->load->view('site/menu', $data);
-            $this->load->view('utilisateur/connexion', $data);
+            $this->load->view('site/header', $this->data);
+            $this->load->view('site/menu', $this->data);
+            $this->load->view('utilisateur/connexion', $this->data);
             $this->load->view('site/footer');
         }else
             redirect('utilisateur/mon_espace', 'refresh');
@@ -108,7 +116,7 @@ class Utilisateur extends CI_Controller {
             $session_data = $this->utilisateur_model->get_session_data($mail);
             $this->session->set_userdata($session_data);
             
-            redirect('site/accueil', 'refresh');
+            redirect('utilisateur/mon_espace', 'refresh');
         }else{
             $this->log_model->create_log('connexion','Tentative de connexion échouée','Mail: '.$mail,$mail);
             $this->connexion();
@@ -157,6 +165,18 @@ class Utilisateur extends CI_Controller {
             $this->form_validation->set_message('verify_password', '%s incorrect.');
             return FALSE;
         }
+    }
+    
+    function mon_espace(){
+        if(!isset($_SESSION['id']))
+            return redirect ('utilisateur/connexion/connexion_requise', 'refresh');
+        
+        $this->data['tab_title'] = 'GoSciences - Mon Espace';
+        $this->data['page_title'] = 'Mon Espace';
+        $this->load->view('site/header', $this->data);
+        $this->load->view('site/menu', $this->data);
+        $this->load->view('utilisateur/mon_espace', $this->data);
+        $this->load->view('site/footer');
     }
 
 }

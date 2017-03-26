@@ -39,13 +39,15 @@ $prestations = $this->classe_model->get_prestations();?>
   <div class="top-bar-right">
     <ul class="dropdown menu" data-dropdown-menu data-close-on-click-inside="false">
       <? if(isset($_SESSION['id']) && in_array(90, $_SESSION['roles'])){?>
-        <li class="active"><a href="<?= site_url('admin')?>">Administration</a></li>
+        <li class="active"><a href="<?= site_url('admin')?>">Admin</a></li>
       <? } ?>
       <li>
-        <a href="<?= site_url('utilisateur/connexion')?>">Mon Espace</a>
+        <a href="<?= site_url('utilisateur')?>">Mon Espace</a>
         <ul class="menu vertical">
           <? if(isset($_SESSION['id'])){ ?>
-            <li><a href="<?= site_url('utilisateur/mon_compte')?>">Mon compte</a></li>
+            <li><a href="<?= site_url('utilisateur/mon_espace')?>">Mon compte</a></li>
+            <li><a href="<?= site_url('')?>">Mes cours</a></li>
+            <li><a href="<?= site_url('')?>">Prestations</a></li>
             <li><a href="<?= site_url('utilisateur/deconnexion')?>">Déconnexion</a></li>
           <? }else{ ?>
             <li><a href="<?= site_url('utilisateur/inscription')?>">Inscription</a></li>         
