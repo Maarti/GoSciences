@@ -60,5 +60,8 @@
     if(isset($show_modal))
         echo '<script>$(document).ready(function(){$(\'#'.$show_modal.'\').foundation(\'open\')});</script>'
 ?>
+
+<? if(isset($add_jquery))
+    echo $add_jquery?>    
 </body>
 </html>

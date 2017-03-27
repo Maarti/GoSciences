@@ -45,7 +45,7 @@ $prestations = $this->classe_model->get_prestations();?>
         <a href="<?= site_url('utilisateur')?>">Mon Espace</a>
         <ul class="menu vertical">
           <? if(isset($_SESSION['id'])){ ?>
-            <li><a href="<?= site_url('utilisateur/mon_espace')?>"><i class="fi-torso"></i> Mon compte</a></li>
+            <li><a href="<?= site_url('utilisateur/infos')?>"><i class="fi-torso"></i> Mon compte</a></li>
             <li><a href="<?= site_url('')?>"><i class="fi-clipboard-notes"></i> Mes cours</a></li>
             <li><a href="<?= site_url('')?>"><i class="fi-clipboard-pencil"></i> Prestations</a></li>
             <li><a href="<?= site_url('utilisateur/deconnexion')?>"><i class="fi-x"></i> Déconnexion</a></li>

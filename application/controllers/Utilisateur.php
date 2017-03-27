@@ -136,7 +136,40 @@ class Utilisateur extends CI_Controller {
             redirect('utilisateur/connexion/'.$codeRetour, 'refresh');
         }
     }
-
+    
+    function mon_espace(){
+        if(!isset($_SESSION['id']))
+            return redirect ('utilisateur/connexion/connexion_requise', 'refresh');
+        
+        $this->data['tab_title'] = 'GoSciences - Mon Espace';
+        $this->data['page_title'] = 'Mon Espace';
+        $this->load->view('site/header', $this->data);
+        $this->load->view('site/menu', $this->data);
+        $this->load->view('utilisateur/mon_espace', $this->data);
+        $this->load->view('site/footer');
+    }
+    
+    function infos(){
+        if(!isset($_SESSION['id']))
+            return redirect ('utilisateur/connexion/connexion_requise', 'refresh');
+        
+        $this->data['tab_title'] = 'GoSciences - Mon Compte';
+        $this->data['page_title'] = 'Mon Compte';
+        $this->data['user'] = $this->utilisateur_model->read('mail,nom,prenom,tel,civilite,date_naissance',array('id'=>$_SESSION['id']))->row();
+        $this->data['add_jquery'] = '<script type="text/javascript">
+            $("#newpass").keyup(function(){
+                if($(this).val()) {$("#newpassconf").show();
+                }else{
+                    $("#newpassconf").hide();}
+            });
+        </script>';
+        
+        $this->load->view('site/header', $this->data);
+        $this->load->view('site/menu', $this->data);
+        $this->load->view('utilisateur/infos', $this->data);
+        $this->load->view('site/footer');
+    }
+    
     function verify_email(){   // fonction utilisée à la connexion pour vérifier si le compte existe et est actif
         $mail = $this->input->post('mail');
         if ($mail != NULL) $etat_obj = $this->utilisateur_model->read('etat', array('mail'=>$mail))->row();
@@ -166,17 +199,4 @@ class Utilisateur extends CI_Controller {
             return FALSE;
         }
     }
-    
-    function mon_espace(){
-        if(!isset($_SESSION['id']))
-            return redirect ('utilisateur/connexion/connexion_requise', 'refresh');
-        
-        $this->data['tab_title'] = 'GoSciences - Mon Espace';
-        $this->data['page_title'] = 'Mon Espace';
-        $this->load->view('site/header', $this->data);
-        $this->load->view('site/menu', $this->data);
-        $this->load->view('utilisateur/mon_espace', $this->data);
-        $this->load->view('site/footer');
-    }
-
 }
