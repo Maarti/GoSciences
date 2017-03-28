@@ -186,7 +186,7 @@ class Utilisateur extends CI_Controller {
         $this->form_validation->set_error_delimiters('<p class="help-text valid-error">', '</p>');
 
         if ($this->form_validation->run()) {
-            $this->load->library('format_string');            
+            $this->load->library('format_string');
             $updated_fields = array(
                 'civilite' => $this->input->post('civilite'),
                 'nom' => $this->format_string->format_lastname($this->input->post('nom')),
@@ -196,8 +196,8 @@ class Utilisateur extends CI_Controller {
             );
             $newpass = $this->input->post('newpass');
             if(!empty($newpass))
-                $updated_fields['pass'] = password_hash($newpass, PASSWORD_DEFAULT);            
-            $this->utilisateur_model->update(intval($_SESSION['id']),$updated_fields);            
+                $updated_fields['pass'] = password_hash($newpass, PASSWORD_DEFAULT);
+            $this->utilisateur_model->update(array('id'=>$_SESSION['id']),$updated_fields);
             redirect('utilisateur/mon_espace', 'refresh');
         }else
             $this->infos();
