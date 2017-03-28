@@ -40,6 +40,7 @@ class Utilisateur extends CI_Controller {
 
     public function valid_inscription() {
         $this->form_validation->set_rules('mail', 'E-mail', 'required|valid_email|max_length[254]|is_unique[utilisateur.mail]', array('is_unique' => 'Cet %s est déjà utilisé sur le site.'));
+        $this->form_validation->set_rules('civilite', 'Civilité', 'required|in_list[Mme,M.]');
         $this->form_validation->set_rules('nom', 'Nom', 'required|min_length[2]|max_length[50]|regex_match[/^([-a-z_éèàêâùïüë ])+$/i]');
         $this->form_validation->set_rules('prenom', 'Prénom', 'required|min_length[2]|max_length[50]|regex_match[/^([-a-z_éèàêâùïüë ])+$/i]');
         $this->form_validation->set_rules('pass', 'Mot de passe', 'required|min_length[3]|max_length[50]');
@@ -50,9 +51,10 @@ class Utilisateur extends CI_Controller {
             $mail = $this->input->post('mail');
             $nom = $this->input->post('nom');
             $prenom = $this->input->post('prenom');
+            $civ = $this->input->post('civilite');
             $hashed_pass = password_hash($this->input->post('pass'), PASSWORD_DEFAULT);
             
-            $this->utilisateur_model->create_utilisateur($mail, $nom, $prenom, $hashed_pass);
+            $this->utilisateur_model->create_utilisateur($mail, $nom, $prenom, $hashed_pass, $civ);
             redirect('utilisateur/connexion/inscription_ok', 'refresh');
         }else
             $this->inscription();
@@ -170,6 +172,37 @@ class Utilisateur extends CI_Controller {
         $this->load->view('site/footer');
     }
     
+    public function valid_infos() {
+        if(!isset($_SESSION['id']))
+            return redirect ('utilisateur/connexion/connexion_requise', 'refresh');
+        
+        $this->form_validation->set_rules('civilite', 'Civilité', 'required|in_list[Mme,M.]');
+        $this->form_validation->set_rules('nom', 'Nom', 'required|min_length[2]|max_length[50]|regex_match[/^([-a-z_éèàêâùïüë ])+$/i]');
+        $this->form_validation->set_rules('prenom', 'Prénom', 'required|min_length[2]|max_length[50]|regex_match[/^([-a-z_éèàêâùïüë ])+$/i]');
+        $this->form_validation->set_rules('newpass', 'Nouveau mot de passe', 'max_length[50]');
+        $this->form_validation->set_rules('newpassconf', 'Confirmation', 'callback_verify_confpassword');
+        $this->form_validation->set_rules('date_naissance', 'Date de naissance', 'max_length[10]');
+        $this->form_validation->set_rules('tel', 'Téléphone', 'integer|exact_length[10]');
+        $this->form_validation->set_error_delimiters('<p class="help-text valid-error">', '</p>');
+
+        if ($this->form_validation->run()) {
+            $this->load->library('format_string');            
+            $updated_fields = array(
+                'civilite' => $this->input->post('civilite'),
+                'nom' => $this->format_string->format_lastname($this->input->post('nom')),
+                'prenom' => $this->format_string->format_firstname($this->input->post('prenom')),
+                'tel' => $this->input->post('tel'),
+                'date_naissance' => $this->input->post('date_naissance')
+            );
+            $newpass = $this->input->post('newpass');
+            if(!empty($newpass))
+                $updated_fields['pass'] = password_hash($newpass, PASSWORD_DEFAULT);            
+            $this->utilisateur_model->update(intval($_SESSION['id']),$updated_fields);            
+            redirect('utilisateur/mon_espace', 'refresh');
+        }else
+            $this->infos();
+    }
+    
     function verify_email(){   // fonction utilisée à la connexion pour vérifier si le compte existe et est actif
         $mail = $this->input->post('mail');
         if ($mail != NULL) $etat_obj = $this->utilisateur_model->read('etat', array('mail'=>$mail))->row();
@@ -196,6 +229,16 @@ class Utilisateur extends CI_Controller {
             return TRUE;
         else{
             $this->form_validation->set_message('verify_password', '%s incorrect.');
+            return FALSE;
+        }
+    }
+    
+    function verify_confpassword($confpass){ 
+        $newpass = $this->input->post('newpass');
+        if (empty($newpass) || $newpass==$confpass)
+            return TRUE;
+        else{
+            $this->form_validation->set_message('verify_confpassword', '%s doit être identique au Mot de passe.');
             return FALSE;
         }
     }

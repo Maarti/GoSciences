@@ -3,7 +3,7 @@
     <div class="small-12 medium-8 columns">
         <? $this->load->view('include/pagetitle'); ?>
 
-        <?= form_open('utilisateur/valid_inscription','data-abide'); ?>
+        <?= form_open('utilisateur/valid_infos','data-abide'); ?>
 
         <label>E-mail
             <input type="email" name="mail" value="<?=$user->mail?>" maxlength="254" placeholder="exemple@domaine.fr" readonly>
@@ -15,15 +15,16 @@
         </label>
 
         <label id="newpassconf" hidden>Confirmation
-            <input type="password" name="newpassconf" value="" maxlength="50" autocomplete="off">
-            <?= form_error('newpassconf'); ?>
+            <input type="password" name="newpassconf" value="" maxlength="50" autocomplete="off">            
         </label>
+        <?= form_error('newpassconf'); ?>
         
         <fieldset>
             <legend>Civilité</legend>
             <input type="radio" name="civilite" value="Mme" id="Mme" <?=set_radio('civilite', 'Mme', $user->civilite=='Mme')?>><label for="Mme">Mme</label>
             <input type="radio" name="civilite" value="M." id="M" <?=set_radio('civilite', 'M.', $user->civilite=='M.')?>><label for="M">M.</label>
         </fieldset>
+        <?= form_error('civilite'); ?>
 
         <label>Nom
             <input type="text" name="nom" value="<?=set_value('nom',$user->nom)?>" maxlength="50" placeholder="Nom" required>
@@ -48,7 +49,7 @@
 
         <div class="clearfix">
             <div class="float-right">
-                <!--<input type="submit" class="button" value="Valider">-->
+                <input type="submit" class="button" value="Valider">
             </div>
         </div>
         </form>        

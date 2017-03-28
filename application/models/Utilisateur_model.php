@@ -21,7 +21,7 @@ class Utilisateur_model extends MY_Model {
             return FALSE;
     }
     
-    public function create_utilisateur($mail,$nom,$prenom,$hashed_pass){
+    public function create_utilisateur($mail,$nom,$prenom,$hashed_pass,$civ){
         $CI =& get_instance();
         $CI->load->model('log_model');
         $this->load->helper('string');
@@ -33,6 +33,7 @@ class Utilisateur_model extends MY_Model {
             'mail'              => $mail,
             'nom'               => $nomFormat,
             'prenom'            => $prenomFormat,
+            'civilite'          => $civ,
             'pass'              => $hashed_pass,
             'code_activation'   => $code_activation,
             'etat'              => 'validation'

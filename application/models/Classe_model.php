@@ -35,7 +35,7 @@ class Classe_model extends MY_Model {
    // Retourne tous les tarifs d'une prestation et la description de leurs matières
    public function get_tarifs($id_prest){
        // Nécessaire pour augmenter la taille de la concatenation sql
-       $this->db->query('SET GLOBAL group_concat_max_len=2048');
+       $this->db->query('SET SESSION group_concat_max_len=2048');
        
        return $this->db->select(
                     $this->table_tarif.'.classe_id,'
