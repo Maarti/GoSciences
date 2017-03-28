@@ -13,13 +13,13 @@
             </div>
             <div class="small-12 medium-6 large-4 columns">
                 <div class="tile" data-equalizer-watch>
-                    <a href="<?=site_url('')?>" class="button large expanded gosciences-green">Mes cours</a>
+                    <a href="<?=site_url('')?>" class="button large expanded gosciences-green disabled">Mes cours</a>
                     <p>Consultez les cours particuliers, aides aux devoirs et stages auxquels vous êtes inscrit.</p>
                 </div>
             </div>
             <div class="small-12 medium-6 large-4 columns">
                 <div class="tile" data-equalizer-watch>
-                    <a href="<?=site_url('')?>" class="button large expanded gosciences-green">S'inscrire à une prestation</a>
+                    <a href="<?=site_url('')?>" class="button large expanded gosciences-green disabled">S'inscrire à une prestation</a>
                     <p>Réserver dès maintenant votre prochaine prestation. Consultez les horaires possibles, proposez vos créneaux de disponibilité.</p>
                 </div>
             </div>
@@ -31,7 +31,7 @@
             </div>
             <div class="small-12 medium-6 large-4 columns">
                 <div class="tile" data-equalizer-watch>
-                    <a href="<?=site_url('site/postuler')?>" class="button large expanded gosciences-green">Devenir professeur</a>
+                    <a href="<?=site_url('site/postuler')?>" class="button large expanded gosciences-green disabled">Devenir professeur</a>
                     <p>Vous souhaitez intégrer GoSciences en tant que professeur particulier ? Vous pouvez postuler via notre formulaire pour un premier contact.</p>
                 </div>
             </div>
