@@ -43,7 +43,7 @@ class Log_model extends MY_Model
      public function get_last($where=array(),$limit=50,$offset=0){
           return $this->db->select('date,ip,agent,platform,type,libelle,detail,mail,nom,prenom')
                ->from($this->table)
-               ->join($this->table_util,$this->table_util.'.id = '.$this->table.'.utilisateur_id')
+               ->join($this->table_util,$this->table_util.'.id = '.$this->table.'.utilisateur_id','left outer')
                ->where($where)
                ->order_by($this->table.'.date DESC')
                ->limit($limit, $offset)
