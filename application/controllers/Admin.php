@@ -8,7 +8,7 @@ class Admin extends CI_Controller {
         $this->data['tab_title'] = 'GoSciences - Administration';
         $this->load->library('form_validation');
         if(!isset($_SESSION['id']) || !in_array(90, $_SESSION['roles']))
-                redirect('site/accueil', 'refresh');
+                return redirect ('utilisateur/connexion/connexion_requise', 'refresh');
         //$this->output->enable_profiler(true);
     }
     

@@ -78,7 +78,7 @@ class Utilisateur extends CI_Controller {
                 break;
             case 'connexion_requise':
                 $type='warning';
-                $message='<p>Vous devez d\'abord vous connecter pour faire cela.</p>';
+                $message='<h5>Connexion requise.</h5><p>Vous devez d\'abord vous connecter pour faire cela.</p>';
                 break;
             case 'erreur_intervalle':
                 $type='warning';
