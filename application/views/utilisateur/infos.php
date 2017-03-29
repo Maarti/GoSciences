@@ -10,12 +10,12 @@
         </label>
         
          <label>Nouveau mot de passe <em>(laissez vide si vous ne souhaitez pas le changer)</em>
-            <input type="password" id="newpass" name="newpass" value="" maxlength="50" autocomplete="off">
+            <input type="password" id="newpass" name="newpass" value="" maxlength="50" autocomplete="new-password">
             <?= form_error('newpass'); ?>
         </label>
 
-        <label id="newpassconf" hidden>Confirmation
-            <input type="password" name="newpassconf" value="" maxlength="50" autocomplete="off">            
+        <label id="newpassconf" hidden>Confirmation du nouveau mot de passe
+            <input type="password" name="newpassconf" value="" maxlength="50" autocomplete="new-password">            
         </label>
         <?= form_error('newpassconf'); ?>
         

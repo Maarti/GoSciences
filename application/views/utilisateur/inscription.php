@@ -6,7 +6,7 @@
         <?= form_open('utilisateur/valid_inscription','data-abide'); ?>
 
         <label>E-mail
-            <input type="email" name="mail" value="<?php echo set_value('mail'); ?>" maxlength="254" placeholder="exemple@domaine.fr" autofocus required>
+            <input type="email" name="mail" value="<?php echo set_value('mail'); ?>" maxlength="254" placeholder="exemple@domaine.fr" autocomplete="email" autofocus required>
             <?= form_error('mail'); ?>
         </label>
         
@@ -28,12 +28,12 @@
         <?= form_error('civilite'); ?>
 
         <label>Nom
-            <input type="text" name="nom" value="<?php echo set_value('nom'); ?>" maxlength="50" placeholder="Nom" required>
+            <input type="text" name="nom" value="<?php echo set_value('nom'); ?>" maxlength="50" placeholder="Nom" autocomplete="family-name" required>
             <?= form_error('nom'); ?>
         </label>   
 
         <label>Prénom
-            <input type="text" name="prenom" value="<?php echo set_value('prenom'); ?>" maxlength="50" placeholder="Prénom" required>
+            <input type="text" name="prenom" value="<?php echo set_value('prenom'); ?>" maxlength="50" placeholder="Prénom" autocomplete="given-name" required>
             <?= form_error('prenom'); ?>
         </label>
 
