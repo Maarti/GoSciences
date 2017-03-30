@@ -158,13 +158,7 @@ class Utilisateur extends CI_Controller {
         $this->data['tab_title'] = 'GoSciences - Mon Compte';
         $this->data['page_title'] = 'Mon Compte';
         $this->data['user'] = $this->utilisateur_model->read('mail,nom,prenom,tel,civilite,date_naissance',array('id'=>$_SESSION['id']))->row();
-        $this->data['add_jquery'] = '<script type="text/javascript">
-            $("#newpass").keyup(function(){
-                if($(this).val()) {$("#newpassconf").show();
-                }else{
-                    $("#newpassconf").hide();}
-            });
-        </script>';
+        $this->data['add_jquery'] = '<script src="'.js_url('scripts/confpassword').'"></script>';
         
         $this->load->view('site/header', $this->data);
         $this->load->view('site/menu', $this->data);
