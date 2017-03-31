@@ -23,6 +23,18 @@
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
+    <meta property="og:type" content="business.business">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="GoSciences">
+    <meta property="og:url" content="<?=site_url()?>">
+    <meta property="og:image" content="<?=img_url('gosciences-logo-opti.png')?>">
+    <meta property="business:contact_data:street_address" content="undefined">
+    <meta property="business:contact_data:locality" content="La Ferté Saint Aubin">
+    <meta property="business:contact_data:region" content="France">
+    <meta property="business:contact_data:postal_code" content="45240">
+    <meta property="business:contact_data:country_name" content="France">
+    
     <meta name="description" content="<?= (isset($meta_desc))? $meta_desc : 'GoSciences propose de l\'aide scolaire en Région Centre dans les matières scientifiques.'?>" />
     <title><?= (isset($tab_title))? $tab_title : 'GoSciences - Cours particuliers en Région Centre'?></title>
     <link rel="stylesheet" href="<?= css_url('app')?>" />
