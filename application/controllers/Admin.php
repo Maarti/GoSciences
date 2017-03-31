@@ -6,7 +6,8 @@ class Admin extends CI_Controller {
     public function __construct(){
         parent::__construct();
         $this->data['tab_title'] = 'GoSciences - Aide scolaire à Orléans et ses environs | Administration';
-        $this->data['meta_desc'] = 'GoSciences propose de l\'aide scolaire de qualité dans les matières scientifiques à Orléans, La Ferté-Saint-Aubin, La Chapelle-Saint-Mesmin, Saint-Jean-de-Braye, Saint-Jean-le-Blanc, Saint-Jean-de-la-Ruelle, Olivet, Saran, Lamotte-Beuvron, Vouzon, Marcilly-en-Villette, Menestreau-en-Villette, Saint-Cyr-en-Val, Ligny-le-Ribault, Jouy-le-Potier.';        
+        $this->data['meta_desc'] = 'GoSciences propose de l\'aide scolaire de qualité dans les matières scientifiques à Orléans, La Ferté-Saint-Aubin, La Chapelle-Saint-Mesmin, Saint-Jean-de-Braye, Saint-Jean-le-Blanc, Saint-Jean-de-la-Ruelle, Olivet, Saran, Lamotte-Beuvron, Vouzon, Marcilly-en-Villette, Menestreau-en-Villette, Saint-Cyr-en-Val, Ligny-le-Ribault, Jouy-le-Potier.';
+        $this->data['meta_robots'] = 'noindex, nofollow';
         $this->load->library('form_validation');
         if(!isset($_SESSION['id']) || !in_array(90, $_SESSION['roles']))
                 return redirect ('utilisateur/connexion/connexion_requise', 'refresh');

@@ -37,6 +37,8 @@
     
     <meta name="description" content="<?= (isset($meta_desc))? $meta_desc : 'GoSciences propose de l\'aide scolaire en Région Centre dans les matières scientifiques.'?>" />
     <meta name="keywords" content="soutien scolaire domicile cours particuliers sciences maths mathématique physique chimie lycee college terminale permiere scientifique stage loiret cher loir centre Orleans Ferte Saint Aubin Chapelle Mesmin Jean Braye Blanc Ruelle Olivet Saran Lamotte Beuvron Vouzon Marcilly Villette Menestreau Villette Cyr Val Ligny Ribault Jouy Potier">
+    <meta name="robots" content="<?= (isset($meta_robots))? $meta_robots : 'index, follow'?>">
+    
     <title><?= (isset($tab_title))? $tab_title : 'GoSciences - Cours particuliers en Région Centre'?></title>
     <link rel="stylesheet" href="<?= css_url('app')?>" />
     <link rel="stylesheet" href="<?= css_url('style')?>" />
