@@ -9,7 +9,8 @@ class Utilisateur extends CI_Controller {
         $this->load->helper('form');
         $this->load->library('form_validation');
         $this->load->model('utilisateur_model');
-        $this->data['tab_title'] = 'GoSciences - Utilisateur';
+        $this->data['tab_title'] = 'GoSciences - Aide scolaire à Orléans et ses environs | Utilisateur';
+        $this->data['meta_desc'] = 'GoSciences propose de l\'aide scolaire de qualité dans les matières scientifiques à Orléans, La Ferté-Saint-Aubin, La Chapelle-Saint-Mesmin, Saint-Jean-de-Braye, Saint-Jean-le-Blanc, Saint-Jean-de-la-Ruelle, Olivet, Saran, Lamotte-Beuvron, Vouzon, Marcilly-en-Villette, Menestreau-en-Villette, Saint-Cyr-en-Val, Ligny-le-Ribault, Jouy-le-Potier.';
         //$this->output->enable_profiler(true);
     }
     
@@ -30,7 +31,8 @@ class Utilisateur extends CI_Controller {
     }
     
     public function inscription() {
-        $this->data['tab_title'] = 'GoSciences - Inscription';
+        $this->data['tab_title'] = 'GoSciences - Aide scolaire à Orléans et ses environs | Inscription';
+        $this->data['meta_desc'] = 'Inscrivez-vous au site GoSciences pour bénéficier de suivis pour les cours particuliers de votre enfant.';
         $this->data['page_title'] = 'Inscription';
         $this->load->view('site/header', $this->data);
         $this->load->view('site/menu', $this->data);
@@ -61,7 +63,8 @@ class Utilisateur extends CI_Controller {
     }
 
     public function connexion($msg=NULL,$mail_encode=NULL) {
-        $this->data['tab_title'] = 'GoSciences - Connexion';
+        $this->data['tab_title'] = 'GoSciences - Aide scolaire à Orléans et ses environs | Connexion';
+        $this->data['meta_desc'] = 'Connectez-vous à GoSciences et définissez vos disponibilités pour pouvoir disposer de soutien scolaire aux horaires qui vous conviennent.';
         $this->data['page_title'] = 'Connexion';
         switch ($msg) { // Gestion des messages à afficher en page d'accueil
             case 'activation_succes':
@@ -143,7 +146,8 @@ class Utilisateur extends CI_Controller {
         if(!isset($_SESSION['id']))
             return redirect ('utilisateur/connexion/connexion_requise', 'refresh');
         
-        $this->data['tab_title'] = 'GoSciences - Mon Espace';
+        $this->data['tab_title'] = 'GoSciences - Aide scolaire à Orléans et ses environs | Mon espace';
+        $this->data['meta_desc'] = 'Depuis votre espace : accédez aux suivis de votre enfant, porposez vos disponibilités pour les prochains cours ou réservez une prestation.';        
         $this->data['page_title'] = 'Mon Espace';
         $this->load->view('site/header', $this->data);
         $this->load->view('site/menu', $this->data);
@@ -155,7 +159,8 @@ class Utilisateur extends CI_Controller {
         if(!isset($_SESSION['id']))
             return redirect ('utilisateur/connexion/connexion_requise', 'refresh');
         
-        $this->data['tab_title'] = 'GoSciences - Mon Compte';
+        $this->data['tab_title'] = 'GoSciences - Aide scolaire à Orléans et ses environs | Mon compte';
+        $this->data['meta_desc'] = 'Modifiez les informations de votre compte GoSciences, celles-ci sont strictement confidentielles.';
         $this->data['page_title'] = 'Mon Compte';
         $this->data['user'] = $this->utilisateur_model->read('mail,nom,prenom,tel,civilite,date_naissance',array('id'=>$_SESSION['id']))->row();
         $this->data['add_jquery'] = '<script src="'.js_url('scripts/confpassword').'"></script>';
