@@ -23,7 +23,8 @@
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
-    <title><?= (isset($tab_title))? $tab_title : 'GoSciences'?></title>
+    <meta name="description" content="<?= (isset($meta_desc))? $meta_desc : 'GoSciences propose de l\'aide scolaire en Région Centre dans les matières scientifiques.'?>" />
+    <title><?= (isset($tab_title))? $tab_title : 'GoSciences - Cours particuliers en Région Centre'?></title>
     <link rel="stylesheet" href="<?= css_url('app')?>" />
     <link rel="stylesheet" href="<?= css_url('style')?>" />
     <link rel="stylesheet" href="<?= css_url('foundation-icons')?>" />
