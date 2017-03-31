@@ -23,9 +23,9 @@
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
-    <meta property="og:type" content="business.business">
     
     <!-- Open Graph -->
+    <meta property="og:type" content="business.business">
     <meta property="og:title" content="GoSciences">
     <meta property="og:url" content="<?=site_url()?>">
     <meta property="og:image" content="<?=img_url('gosciences-logo-opti.png')?>">
@@ -36,6 +36,7 @@
     <meta property="business:contact_data:country_name" content="France">
     
     <meta name="description" content="<?= (isset($meta_desc))? $meta_desc : 'GoSciences propose de l\'aide scolaire en Région Centre dans les matières scientifiques.'?>" />
+    <meta name="keywords" content="soutien scolaire domicile cours particuliers sciences maths mathématique physique chimie lycee college terminale permiere scientifique stage loiret cher loir centre Orleans Ferte Saint Aubin Chapelle Mesmin Jean Braye Blanc Ruelle Olivet Saran Lamotte Beuvron Vouzon Marcilly Villette Menestreau Villette Cyr Val Ligny Ribault Jouy Potier">
     <title><?= (isset($tab_title))? $tab_title : 'GoSciences - Cours particuliers en Région Centre'?></title>
     <link rel="stylesheet" href="<?= css_url('app')?>" />
     <link rel="stylesheet" href="<?= css_url('style')?>" />
