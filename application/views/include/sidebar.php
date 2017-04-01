@@ -20,4 +20,15 @@
             <p>Quam multo quod ea est.</p>
         </div>
     </div>  -->
+    <hr>
+    <div class="row small-uncollapse">        
+        <div class="fb-like" 
+             data-href="https://www.facebook.com/soutienscolairedexcellence/"
+             data-layout="standard" 
+             data-action="like" 
+             data-size="small" 
+             data-show-faces="true" 
+             data-share="true">            
+        </div>
+    </div>
 </div>

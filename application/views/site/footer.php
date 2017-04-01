@@ -24,7 +24,7 @@
                 <li><a href="<?=site_url('site/contact?contact=telephone')?>"><i class="fi-telephone"></i> Téléphone</a></li>
                 <li><a href="<?=site_url('site/contact?contact=email&motif=info')?>"><i class="fi-mail"></i> E-mail</a></li>
                 <li><a href="https://www.facebook.com/soutienscolairedexcellence/" target="_blank"><i class="fi-social-facebook"></i> Facebook</a></li>
-                <li><a href="#"><i class="fi-social-twitter"></i> Twitter</a></li>
+                <!--<li><a href="#"><i class="fi-social-twitter"></i> Twitter</a></li>-->
             </ul>
         </div>
         <div class="small-6 large-3 columns">
@@ -37,11 +37,6 @@
     <div class="row">
         <div class="medium-6 columns" id="author">
             Développé par <a href="http://bryan.maarti.net/?lang=fr" target="_blank">Bryan MARTINET</a>
-            <!--<ul class="menu">
-                <li><a href="#">Mentions Légales</a></li>
-                <li><a href="#">Partenaires</a></li>
-                <li><a href="<?= site_url('site/contact') ?>">Contact</a></li>
-            </ul>-->
         </div>
         <div class="medium-6 columns">
             <ul class="menu float-right">
@@ -50,7 +45,8 @@
         </div>
     </div>
 </footer>
-
+<div id="fb-root"></div>
+<script src="<?= js_url('scripts/facebook') ?>"></script>
 <script src="<?= js_url('vendor/jquery.min') ?>"></script>
 <script src="<?= js_url('vendor/what-input.min') ?>"></script>
 <script src="<?= js_url('foundation.min') ?>"></script>
