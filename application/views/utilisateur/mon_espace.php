@@ -31,7 +31,7 @@
             </div>
             <div class="small-12 medium-6 large-4 columns">
                 <div class="tile" data-equalizer-watch>
-                    <a href="<?=site_url('site/contact?contact=email&motif=postuler')?>" class="button large expanded gosciences-green disabled">Devenir professeur</a>
+                    <a href="<?=site_url('site/contact?contact=email&motif=postuler')?>" class="button large expanded gosciences-green">Devenir professeur</a>
                     <p>Vous souhaitez intégrer GoSciences en tant que professeur particulier ? Vous pouvez postuler via notre formulaire pour un premier contact.</p>
                 </div>
             </div>

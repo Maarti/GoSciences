@@ -18,7 +18,7 @@
               <a href="#" class="accordion-title">E-mail</a>
               <div class="accordion-content" data-tab-content>
                   <?= //form_open('site/valid_contact','data-abide');
-                    form_open_multipart('site/valid_contact','data-abide')?>
+                    form_open_multipart('site/valid_contact','data-abide id="contact-form"')?>
                     <label>Nom
                         <input type="text" name="nom" value="<?php echo set_value('nom',$nom); ?>" maxlength="50" placeholder="Nom" required>
                         <?= form_error('nom'); ?>
@@ -56,8 +56,13 @@
                     <div id="cv-container">
                         <label for="cv" class="button"><i class="fi-upload"></i> Joindre votre CV</label>
                         <input type="file" id="cv" name="cv" class="show-for-sr"  accept=".pdf,.doc,.docx,.odt"> (2Mo maximum)
+                        <em id="filename"></em>
                         <?=(isset($upload_error))? $upload_error : ''?>
                     </div>
+                  
+                  <div id="loading" class="text-center" hidden>
+                      <img src="<?=img_url('loading.gif')?>" alt="Loading">
+                  </div>
 
                     <div class="clearfix">
                         <div class="float-right">
