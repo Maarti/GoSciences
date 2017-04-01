@@ -82,7 +82,7 @@ class Utilisateur_model extends MY_Model {
     }
     
     // Envoie un mail
-    public function sendMail($to, $subject, $message, $fromMail = 'no-reply@gosciences.net', $fromName = 'GoSciences.fr'){
+    public function sendMail($to, $subject, $message, $fromMail = 'no-reply@gosciences.fr', $fromName = 'GoSciences.fr', $attachement=null){
         $CI =& get_instance();
         $CI->load->library('email');
         $CI->load->model('log_model');
@@ -91,7 +91,8 @@ class Utilisateur_model extends MY_Model {
         $this->email->to($to);
         $this->email->subject($subject);
         $this->email->message($message);
-        $log_user = ($fromMail=='no-reply@gosciences.net')? $to : $fromMail;
+        $this->email->attach($attachement);
+        $log_user = ($fromMail=='no-reply@gosciences.fr')? $to : $fromMail;
         $CI->log_model->create_log('mail','Envoi de mail',
 'To: '.$to.' 
 Subject: '.$subject.'

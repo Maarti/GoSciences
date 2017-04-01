@@ -23,7 +23,7 @@ class Site extends CI_Controller {
         $this->load->view('site/footer');
     }
 
-    public function contact($msg=NULL){
+    public function contact($msg=NULL,$contact=NULL,$motif=NULL){
         $this->load->helper('form');
         $this->load->library('format_string');
         $this->load->model('utilisateur_model');
@@ -31,6 +31,9 @@ class Site extends CI_Controller {
         $this->data['meta_desc'] = 'Contacter GoSciences pour bénéficier de cours particuliers de qualité dans les matières scientifiques ou postuler en tant que professeur dans le Loiret.';
         $this->data['page_title'] = 'Nous Contacter';
         $this->data['contact_user'] = $this->utilisateur_model->read('nom,prenom,tel',array('mail'=>'gosciences@outlook.fr'))->row();
+        $this->data['add_jquery'] = '<script src="'.js_url('scripts/postuler').'"></script>';
+        if(!empty($contact))    $_GET['contact']=$contact;
+        if(!empty($motif))      $_GET['motif']=$motif;
         if (isset($_SESSION['id'])){
             $this->data['mail'] = $this->utilisateur_model->read('mail',array('id'=>$_SESSION['id']))->row()->mail;
             $this->data['nom'] = $_SESSION['nom'];
@@ -72,10 +75,27 @@ class Site extends CI_Controller {
             $nom = $this->input->post('nom');
             $prenom = $this->input->post('prenom');
             $message = $this->input->post('message');
-            $this->utilisateur_model->sendMail('contact@gosciences.fr,contact@maarti.net', 'Contact depuis GoSciences', $message, $mail, $nom.' '.$prenom);
-            redirect('site/contact/envoi_ok', 'refresh');
+            
+            // Si il y a upload de ficher
+            if($this->input->post('motif')=='postuler'){
+                $config['upload_path']          = './uploads/';
+                $config['allowed_types']        = 'doc|docx|pdf|odt';
+                $config['max_size']             = 2048; // 2048KB = 2MO
+                $this->load->library('upload', $config);
+                if ($this->upload->do_upload('cv')){
+                    //$upload_data = $this->upload->data();
+                    $this->utilisateur_model->sendMail('contact@gosciences.fr,contact@maarti.net', 'Contact depuis GoSciences', $message, $mail, $nom.' '.$prenom,$this->upload->data('full_path'));
+                    redirect('site/contact/envoi_ok', 'refresh');
+                }else{
+                    $this->data['upload_error'] = $this->upload->display_errors('<p class="help-text valid-error">','</p>');
+                    $this->contact(NULL,'email');
+                }
+            }else{                
+                $this->utilisateur_model->sendMail('contact@gosciences.fr,contact@maarti.net', 'Contact depuis GoSciences', $message, $mail, $nom.' '.$prenom);
+                redirect('site/contact/envoi_ok', 'refresh');
+            }
         }else
-            $this->contact();
+            $this->contact(NULL,'email');
      }
 
      public function not_found(){

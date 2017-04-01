@@ -17,7 +17,8 @@
             <li class="accordion-item<?=(isset($_GET['contact']) && $_GET['contact']=='email')? ' is-active' : ''?>" data-accordion-item>
               <a href="#" class="accordion-title">E-mail</a>
               <div class="accordion-content" data-tab-content>
-                  <?= form_open('site/valid_contact','data-abide'); ?>      
+                  <?= //form_open('site/valid_contact','data-abide');
+                    form_open_multipart('site/valid_contact','data-abide')?>
                     <label>Nom
                         <input type="text" name="nom" value="<?php echo set_value('nom',$nom); ?>" maxlength="50" placeholder="Nom" required>
                         <?= form_error('nom'); ?>
@@ -34,7 +35,7 @@
                     </label>
 
                     <label>Motif
-                        <select name="motif">
+                        <select name="motif" id="motif">
                           <option value="info" <?=set_select('motif', 'info', (isset($_GET['motif']) && $_GET['motif']=='info'))?>>Demande d'information</option>
                           <option value="postuler" <?=set_select('motif', 'postuler',(isset($_GET['motif']) && $_GET['motif']=='postuler'))?>>Postuler</option>
                           <option value="bug" <?=set_select('motif', 'bug',(isset($_GET['motif']) && $_GET['motif']=='bug'))?>>Rapporter un bug</option>
@@ -43,10 +44,20 @@
                         <?= form_error('motif'); ?>
                     </label>
 
+                    <div id="recrutement-msg" class="callout primary">
+                        <?=display('contact_recrutement')?>
+                    </div>
+                  
                     <label>Message
                         <textarea name="message" placeholder="Votre message" rows="10" maxlength="2000" autofocus required><?= set_value('message') ?></textarea>
                         <?= form_error('message'); ?>
                     </label>
+                  
+                    <div id="cv-container">
+                        <label for="cv" class="button"><i class="fi-upload"></i> Joindre votre CV</label>
+                        <input type="file" id="cv" name="cv" class="show-for-sr"  accept=".pdf,.doc,.docx,.odt"> (2Mo maximum)
+                        <?=(isset($upload_error))? $upload_error : ''?>
+                    </div>
 
                     <div class="clearfix">
                         <div class="float-right">

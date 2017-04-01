@@ -21,14 +21,17 @@
         </div>
     </div>  -->
     <hr>
-    <div class="row small-uncollapse">        
-        <div class="fb-like" 
-             data-href="https://www.facebook.com/soutienscolairedexcellence/"
-             data-layout="standard" 
-             data-action="like" 
-             data-size="small" 
-             data-show-faces="true" 
-             data-share="true">            
+    <div class="row small-uncollapse">
+        <div class="small-12 columns text-90">
+            <div class="fb-like" 
+                 data-href="https://www.facebook.com/soutienscolairedexcellence/"
+                 data-layout="standard" 
+                 data-action="like" 
+                 data-size="small" 
+                 data-show-faces="true" 
+                 data-share="true">            
+            </div>
         </div>
     </div>
+    <br/>
 </div>
