@@ -84,7 +84,8 @@ class Site extends CI_Controller {
                 $this->load->library('upload', $config);
                 if ($this->upload->do_upload('cv')){
                     //$upload_data = $this->upload->data();
-                    $this->utilisateur_model->sendMail('contact@gosciences.fr,contact@maarti.net', 'Contact depuis GoSciences', $message, $mail, $nom.' '.$prenom,$this->upload->data('full_path'));
+                    $this->utilisateur_model->sendMail(/*'contact@gosciences.fr,*/'contact@maarti.net', 'Contact depuis GoSciences', $message, $mail, $nom.' '.$prenom,$this->upload->data('full_path'));
+                    unlink($this->upload->data('full_path'));
                     redirect('site/contact/envoi_ok', 'refresh');
                 }else{
                     $this->data['upload_error'] = $this->upload->display_errors('<p class="help-text valid-error">','</p>');
