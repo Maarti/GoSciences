@@ -22,6 +22,11 @@ class Format_string {
         $formatted_string=$first_letter_upper.$else_string_lower;
         return $formatted_string;
     }
+    
+    function format_tel($tel){
+        $splitted_tel = str_split($tel, 2);
+        return implode('.', $splitted_tel);
+    }
 }
 
 ?>

@@ -25,10 +25,12 @@ class Site extends CI_Controller {
 
     public function contact($msg=NULL){
         $this->load->helper('form');
+        $this->load->library('format_string');
         $this->load->model('utilisateur_model');
         $this->data['tab_title'] = 'GoSciences - Aide scolaire à Orléans et ses environs | Nous contacter';
         $this->data['meta_desc'] = 'Contacter GoSciences pour bénéficier de cours particuliers de qualité dans les matières scientifiques ou postuler en tant que professeur dans le Loiret.';
         $this->data['page_title'] = 'Nous Contacter';
+        $this->data['contact_user'] = $this->utilisateur_model->read('nom,prenom,tel',array('mail'=>'gosciences@outlook.fr'))->row();
         if (isset($_SESSION['id'])){
             $this->data['mail'] = $this->utilisateur_model->read('mail',array('id'=>$_SESSION['id']))->row()->mail;
             $this->data['nom'] = $_SESSION['nom'];
@@ -61,7 +63,7 @@ class Site extends CI_Controller {
         $this->form_validation->set_rules('nom', 'Nom', 'required|min_length[2]|max_length[50]|regex_match[/^([-a-z_éèàêâùïüë ])+$/i]');
         $this->form_validation->set_rules('prenom', 'Prénom', 'required|min_length[2]|max_length[50]|regex_match[/^([-a-z_éèàêâùïüë ])+$/i]');
         $this->form_validation->set_rules('mail', 'E-mail', 'required|valid_email|max_length[254]');
-        $this->form_validation->set_rules('motif', 'Motif', 'required|in_list[info,postulation,bug,autre]');
+        $this->form_validation->set_rules('motif', 'Motif', 'required|in_list[info,postuler,bug,autre]');
         $this->form_validation->set_rules('message', 'Message', 'required|min_length[10]|max_length[2000]');
         $this->form_validation->set_error_delimiters('<p class="help-text valid-error">', '</p>');
 

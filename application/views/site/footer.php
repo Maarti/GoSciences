@@ -15,13 +15,14 @@
         <div class="small-6 large-3 columns">
             <p class="lead">Professeurs</p>
             <ul class="menu vertical">
-                <li><a href="#"><i class="fi-megaphone"></i> Recrutement</a></li>
+                <li><a href="<?=site_url('site/contact?contact=email&motif=postuler')?>"><i class="fi-megaphone"></i> Recrutement</a></li>
             </ul>
         </div>
         <div class="small-6 large-3 columns">
             <p class="lead">Contact</p>
             <ul class="menu vertical">
-                <li><a href="<?=site_url('site/contact')?>"><i class="fi-mail"></i> E-mail</a></li>
+                <li><a href="<?=site_url('site/contact?contact=telephone')?>"><i class="fi-telephone"></i> Téléphone</a></li>
+                <li><a href="<?=site_url('site/contact?contact=email&motif=info')?>"><i class="fi-mail"></i> E-mail</a></li>
                 <li><a href="https://www.facebook.com/soutienscolairedexcellence/" target="_blank"><i class="fi-social-facebook"></i> Facebook</a></li>
                 <li><a href="#"><i class="fi-social-twitter"></i> Twitter</a></li>
             </ul>
