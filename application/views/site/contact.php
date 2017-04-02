@@ -60,6 +60,11 @@
                         <?=(isset($upload_error))? $upload_error : ''?>
                     </div>
                   
+                  <?if(!isset($_SESSION['id'])){?>
+                    <div class="g-recaptcha" data-sitekey="<?=$public_recaptcha?>"></div><br/>
+                    <?= form_error('g-recaptcha-response'); ?>
+                  <?}?>
+                  
                   <div id="loading" class="text-center" hidden>
                       <img src="<?=img_url('loading.gif')?>" alt="Loading">
                   </div>

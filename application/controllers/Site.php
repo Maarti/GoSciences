@@ -31,7 +31,10 @@ class Site extends CI_Controller {
         $this->data['meta_desc'] = 'Contacter GoSciences pour bénéficier de cours particuliers de qualité dans les matières scientifiques ou postuler en tant que professeur dans le Loiret.';
         $this->data['page_title'] = 'Nous Contacter';
         $this->data['contact_user'] = $this->utilisateur_model->read('nom,prenom,tel',array('mail'=>'gosciences@outlook.fr'))->row();
+        $this->data['public_recaptcha'] = $this->config->item('public_recaptcha');
+        $this->data['header_include'][0] = '<script src="https://www.google.com/recaptcha/api.js"></script>';
         $this->data['footer_include'][0] = '<script src="'.js_url('scripts/postuler').'"></script>';
+        
         if(!empty($contact))    $_GET['contact']=$contact;
         if(!empty($motif))      $_GET['motif']=$motif;
         if (isset($_SESSION['id'])){
@@ -68,8 +71,9 @@ class Site extends CI_Controller {
         $this->form_validation->set_rules('mail', 'E-mail', 'required|valid_email|max_length[254]');
         $this->form_validation->set_rules('motif', 'Motif', 'required|in_list[info,postuler,bug,autre]');
         $this->form_validation->set_rules('message', 'Message', 'required|min_length[10]|max_length[2000]');
+        if(!isset($_SESSION['id']))
+            $this->form_validation->set_rules('g-recaptcha-response','Captcha','callback_recaptcha'); 
         $this->form_validation->set_error_delimiters('<p class="help-text valid-error">', '</p>');
-
         if ($this->form_validation->run()) {
             $mail = $this->input->post('mail');
             $nom = $this->input->post('nom');
@@ -127,5 +131,24 @@ class Site extends CI_Controller {
         $this->load->view('site/nos_valeurs', $this->data);
         $this->load->view('site/footer');
     }
-        
+    
+    public function recaptcha($str='') {
+        $google_url="https://www.google.com/recaptcha/api/siteverify";
+        $ip=$_SERVER['REMOTE_ADDR'];
+        $url=$google_url."?secret=".$this->config->item('private_recaptcha')."&response=".$str."&remoteip=".$ip;
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($curl, CURLOPT_TIMEOUT, 10);
+        curl_setopt($curl, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.2.16) Gecko/20110319 Firefox/3.6.16");
+        $res_exec = curl_exec($curl);
+        curl_close($curl);
+        $res= json_decode($res_exec, true);
+        if($res['success'])
+          return TRUE;
+        else {
+          $this->form_validation->set_message('recaptcha', 'Le captcha vous a détecté comme étant un robot.');
+          return FALSE;
+        }
+    }
 }
