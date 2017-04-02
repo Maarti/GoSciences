@@ -35,14 +35,13 @@ class Admin extends CI_Controller {
         // Ouvre automatiquement le modal en erreur
         if(!empty($id_prest) && !empty($id_class))
             $this->data['footer_include'][0] = '<script>$(document).ready(function(){$(\'#modal-'.$id_prest.'-'.$id_class.'\').foundation(\'open\')});</script>';
-        //$this->data['show_modal'] = (!empty($id_prest) && !empty($id_class))? 'modal-'.$id_prest.'-'.$id_class : null;
-        $this->data['id_prest'] = $id_prest;
+         $this->data['id_prest'] = $id_prest;
         $this->data['prestations'] = $this->classe_model->get_prestations();
         $tarifs = array();
         foreach ($this->data['prestations'] as $p)
             $tarifs[$p['id']] = $this->classe_model->get_tarifs($p['id']);
         $this->data['tarifs'] = $tarifs;
-        $this->data['enum_unite_remise'] = array(NULL, '/hm', '/2h', '/20h', '/jour', '/semaine');
+        $this->data['enum_unite_remise'] = array(NULL, '/h', '/2h', '/20h', '/jour', '/semaine');
         $this->load->view('site/header', $this->data);
         $this->load->view('site/menu', $this->data);
         $this->load->view('admin/admin_prestations', $this->data);

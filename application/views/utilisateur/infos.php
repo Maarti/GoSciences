@@ -70,13 +70,13 @@
             <h1>Ajouter un(e) élève</h1>            
             <?= form_open('utilisateur/ajouter_eleve','data-abide'); ?>
             <label>Nom
-                <input type="text" name="nom" value="<?=set_value('nom',$user->nom)?>" maxlength="50" placeholder="Nom de l'élève" required>
-                <?= form_error('nom'); ?>
+                <input type="text" name="nom-eleve" value="<?=set_value('nom-eleve',$user->nom)?>" maxlength="50" placeholder="Nom de l'élève" required>
+                <?= form_error('nom-eleve'); ?>
             </label>   
 
             <label>Prénom
-                <input type="text" name="prenom" value="<?=set_value('prenom')?>" maxlength="50" placeholder="Prénom de l'élève" required>
-                <?= form_error('prenom'); ?>
+                <input type="text" name="prenom-eleve" value="<?=set_value('prenom-eleve')?>" maxlength="50" placeholder="Prénom de l'élève" required>
+                <?= form_error('prenom-eleve'); ?>
             </label>
             
             <label>Classe

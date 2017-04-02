@@ -158,7 +158,7 @@ class Utilisateur extends CI_Controller {
         $this->load->view('site/footer');
     }
     
-    function infos(){
+    function infos($code=null){
         if(!isset($_SESSION['id']))
             return redirect ('utilisateur/connexion/connexion_requise', 'refresh');
         
@@ -168,6 +168,8 @@ class Utilisateur extends CI_Controller {
         $this->data['page_title'] = 'Mon Compte';
         $this->data['user'] = $this->utilisateur_model->read('mail,nom,prenom,tel,civilite,date_naissance',array('id'=>$_SESSION['id']))->row();
         $this->data['footer_include'][0] = '<script src="'.js_url('scripts/confpassword').'"></script>';
+        if($code=='ajouter-eleve')
+            $this->data['footer_include'][1] = '<script>$(document).ready(function(){$(\'#modal-create\').foundation(\'open\')});</script>';
         $this->data['classes'] = $this->classe_model->read('id,libelle',array(),null,null,'ordre ASC')->result();
         $this->data['eleves'] = $this->eleve_model->read('id,nom,prenom,classe',array('parent'=>$_SESSION['id']))->result();
         
@@ -214,14 +216,14 @@ class Utilisateur extends CI_Controller {
         
         $this->load->model('eleve_model');
         $this->load->library('format_string');
-        $this->form_validation->set_rules('nom', 'Nom', 'required|min_length[2]|max_length[50]|regex_match[/^([-a-z_éèàêâùïüëÉÈÀÊÙÏÜË ])+$/i]');
-        $this->form_validation->set_rules('prenom', 'Prénom', 'required|min_length[2]|max_length[50]|regex_match[/^([-a-z_éèàêâùïüëÉÈÀÊÙÏÜË ])+$/i]');
+        $this->form_validation->set_rules('nom-eleve', 'Nom', 'required|min_length[2]|max_length[50]|regex_match[/^([-a-z_éèàêâùïüëÉÈÀÊÙÏÜË ])+$/i]');
+        $this->form_validation->set_rules('prenom-eleve', 'Prénom', 'required|min_length[2]|max_length[50]|regex_match[/^([-a-z_éèàêâùïüëÉÈÀÊÙÏÜË ])+$/i]');
         $this->form_validation->set_rules('classe', 'Classe', 'required');
         $this->form_validation->set_error_delimiters('<p class="help-text valid-error">', '</p>');
 
         if ($this->form_validation->run()) {
-            $nom = $this->format_string->format_lastname($this->input->post('nom'));
-            $prenom = $this->format_string->format_firstname($this->input->post('prenom'));
+            $nom = $this->format_string->format_lastname($this->input->post('nom-eleve'));
+            $prenom = $this->format_string->format_firstname($this->input->post('prenom-eleve'));
             $this->eleve_model->create(array(
                 'nom'       => $nom,
                 'prenom'    => $prenom,
@@ -230,7 +232,7 @@ class Utilisateur extends CI_Controller {
             ));
             redirect('utilisateur/infos', 'refresh');
         }else
-            $this->infos();
+            $this->infos('ajouter-eleve');
     }
     
         public function modifier_eleve() {
