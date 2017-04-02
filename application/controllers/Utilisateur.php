@@ -159,12 +159,14 @@ class Utilisateur extends CI_Controller {
         if(!isset($_SESSION['id']))
             return redirect ('utilisateur/connexion/connexion_requise', 'refresh');
         
+        $this->load->model('eleve_model');
         $this->data['tab_title'] = 'GoSciences - Aide scolaire à Orléans et ses environs | Mon compte';
         $this->data['meta_desc'] = 'Modifiez les informations de votre compte GoSciences, celles-ci sont strictement confidentielles.';
         $this->data['page_title'] = 'Mon Compte';
         $this->data['user'] = $this->utilisateur_model->read('mail,nom,prenom,tel,civilite,date_naissance',array('id'=>$_SESSION['id']))->row();
         $this->data['add_jquery'] = '<script src="'.js_url('scripts/confpassword').'"></script>';
         $this->data['classes'] = $this->classe_model->read('id,libelle',array(),null,null,'ordre ASC')->result();
+        $this->data['eleves'] = $this->eleve_model->read('id,nom,prenom,classe',array('parent'=>$_SESSION['id']))->result();
         
         $this->load->view('site/header', $this->data);
         $this->load->view('site/menu', $this->data);
@@ -215,17 +217,33 @@ class Utilisateur extends CI_Controller {
         $this->form_validation->set_error_delimiters('<p class="help-text valid-error">', '</p>');
 
         if ($this->form_validation->run()) {
-            echo 'BEFORE : '.$this->input->post('prenom');
             $nom = $this->format_string->format_lastname($this->input->post('nom'));
             $prenom = $this->format_string->format_firstname($this->input->post('prenom'));
-            echo ' AFTER : '.$prenom;
             $this->eleve_model->create(array(
                 'nom'       => $nom,
                 'prenom'    => $prenom,
                 'classe'    => $this->input->post('classe'),
                 'parent'    => $_SESSION['id']
             ));
-            //redirect('utilisateur/infos', 'refresh');
+            redirect('utilisateur/infos', 'refresh');
+        }else
+            $this->infos();
+    }
+    
+        public function modifier_eleve() {
+        if(!isset($_SESSION['id']))
+            return redirect ('utilisateur/connexion/connexion_requise', 'refresh');
+        
+        $this->load->model('eleve_model');
+        $this->form_validation->set_rules('classe', 'Classe', 'required');
+        $this->form_validation->set_error_delimiters('<p class="help-text valid-error">', '</p>');
+
+        if ($this->form_validation->run()) {
+            $this->eleve_model->update(array(
+                'id'        => $this->input->post('id'),                
+                'parent'    => $_SESSION['id']
+            ),array('classe' => $this->input->post('classe')));
+            redirect('utilisateur/infos', 'refresh');
         }else
             $this->infos();
     }

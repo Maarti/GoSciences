@@ -48,7 +48,14 @@
         
         <fieldset class="fieldset">
             <legend>Élèves :</legend>
-            <a data-open="modal-create" class="button"><i class="fi-torso"></i> Ajouter un(e) élève</a>
+            <? foreach ($eleves as $e) {?>
+                <a data-open="modal-update-<?=$e->id?>"><i class="fi-page-edit"></i> <?=$e->nom?> <?=$e->prenom?></a><br/>
+            <?}?>
+            <?if(empty($eleves)){?>
+                <em>Aucun élève pour le moment</em>
+            <?}?>
+            <br>
+            <a data-open="modal-create" class="button"><i class="fi-torsos-female-male"></i> Ajouter un(e) élève</a>
         </fieldset>
 
 
@@ -76,7 +83,7 @@
             <label>Classe
             <select name="classe">  
                 <? foreach ($classes as $c) {?>
-                <option value="<?=$c->id?>"><?=$c->libelle?></option>
+                <option value="<?=$c->id?>" <?=set_select('classe', $c->id)?>><?=$c->libelle?></option>
                 <?}?>
             </select>
             <?= form_error('classe'); ?>
@@ -93,6 +100,33 @@
               <span aria-hidden="true">&times;</span>
             </button>
         </div>
+        
+        <? foreach ($eleves as $e) {?>
+        <div class="reveal" id="modal-update-<?=$e->id?>" data-reveal>
+            <h1><?=$e->nom?> <?=$e->prenom?></h1>            
+            <?= form_open('utilisateur/modifier_eleve','data-abide'); ?>
+            <input type="hidden" name="id" value="<?=$e->id?>">
+            <label>Classe
+            <select name="classe">  
+                <? foreach ($classes as $c) {?>
+                <option value="<?=$c->id?>" <?=set_select('classe', $c->id, $c->id==$e->classe)?>><?=$c->libelle?></option>
+                <?}?>
+            </select>
+            <?= form_error('classe'); ?>
+            </label>
+            
+        <div class="clearfix">
+            <div class="float-right">
+                 <input type="submit" class="button" value="Valider">
+            </div>
+        </div>
+
+        </form>
+            <button class="close-button" data-close aria-label="Fermer" type="button">
+              <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <?}?>
 
     </div>
     <? $this->load->view('include/sidebar'); ?>
