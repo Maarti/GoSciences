@@ -25,7 +25,7 @@
             </div>
             <div class="small-12 medium-6 large-4 columns">
                 <div class="tile" data-equalizer-watch>
-                    <a href="<?=site_url('site/contact')?>" class="button large expanded gosciences-green">Demande d'information</a>
+                    <a href="<?=site_url('site/contact?contact=email&motif=info')?>" class="button large expanded gosciences-green">Demande d'information</a>
                     <p>Une interrogation ? Une demande spécifique ? N'hésitez pas à nous contacter !</p>
                 </div>
             </div>

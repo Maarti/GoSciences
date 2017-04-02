@@ -164,6 +164,7 @@ class Utilisateur extends CI_Controller {
         $this->data['page_title'] = 'Mon Compte';
         $this->data['user'] = $this->utilisateur_model->read('mail,nom,prenom,tel,civilite,date_naissance',array('id'=>$_SESSION['id']))->row();
         $this->data['add_jquery'] = '<script src="'.js_url('scripts/confpassword').'"></script>';
+        $this->data['classes'] = $this->classe_model->read('id,libelle',array(),null,null,'ordre ASC')->result();
         
         $this->load->view('site/header', $this->data);
         $this->load->view('site/menu', $this->data);
@@ -198,6 +199,33 @@ class Utilisateur extends CI_Controller {
                 $updated_fields['pass'] = password_hash($newpass, PASSWORD_DEFAULT);
             $this->utilisateur_model->update(array('id'=>$_SESSION['id']),$updated_fields);
             redirect('utilisateur/mon_espace', 'refresh');
+        }else
+            $this->infos();
+    }
+    
+    public function ajouter_eleve() {
+        if(!isset($_SESSION['id']))
+            return redirect ('utilisateur/connexion/connexion_requise', 'refresh');
+        
+        $this->load->model('eleve_model');
+        $this->load->library('format_string');
+        $this->form_validation->set_rules('nom', 'Nom', 'required|min_length[2]|max_length[50]|regex_match[/^([-a-z_éèàêâùïüë ])+$/i]');
+        $this->form_validation->set_rules('prenom', 'Prénom', 'required|min_length[2]|max_length[50]|regex_match[/^([-a-z_éèàêâùïüë ])+$/i]');
+        $this->form_validation->set_rules('classe', 'Classe', 'required');
+        $this->form_validation->set_error_delimiters('<p class="help-text valid-error">', '</p>');
+
+        if ($this->form_validation->run()) {
+            echo 'BEFORE : '.$this->input->post('prenom');
+            $nom = $this->format_string->format_lastname($this->input->post('nom'));
+            $prenom = $this->format_string->format_firstname($this->input->post('prenom'));
+            echo ' AFTER : '.$prenom;
+            $this->eleve_model->create(array(
+                'nom'       => $nom,
+                'prenom'    => $prenom,
+                'classe'    => $this->input->post('classe'),
+                'parent'    => $_SESSION['id']
+            ));
+            //redirect('utilisateur/infos', 'refresh');
         }else
             $this->infos();
     }
