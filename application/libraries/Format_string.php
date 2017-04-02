@@ -7,10 +7,9 @@ class Format_string {
     }
         
     function format_firstname($firstname){
-        $first_letter_upper=mb_strtoupper(substr($firstname,0,1), 'UTF-8');
-        $else_string_lower=mb_strtolower(substr($firstname,1), 'UTF-8');
-        $formatted_string=$first_letter_upper.$else_string_lower;
-        return $formatted_string;
+        $first_letter_upper=mb_strtoupper(mb_substr($firstname,0,1,'UTF-8'),'UTF-8');
+        $else_string_lower=mb_strtolower(mb_substr($firstname,1,mb_strlen($firstname),'UTF-8'),'UTF-8');
+        return $first_letter_upper.$else_string_lower;
     }
     
     function format_tel($tel){
