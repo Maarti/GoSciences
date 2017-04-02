@@ -58,7 +58,6 @@
             <a data-open="modal-create" class="button"><i class="fi-torsos-female-male"></i> Ajouter un(e) élève</a>
         </fieldset>
 
-
         <div class="clearfix">
             <div class="float-right">
                 <input type="submit" class="button" value="Valider">

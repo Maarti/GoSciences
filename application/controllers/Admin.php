@@ -117,24 +117,33 @@ class Admin extends CI_Controller {
         $this->data['textes'] = $this->texte_model->read('*')->result();
         $this->data['texte'] = $this->texte_model->read('*',array('id'=>$id_texte))->row();
         
-        $base_url = (ENVIRONMENT=='development')? 'https://gosciences.fr/' : base_url();
-        $this->data['tinymce'] = 
-           "selector: 'textarea#corps',
-            style_formats: [
-               {title: 'Vert GoSciences', inline: 'span', classes: 'green-word'},
-               {title: 'Nos Valeurs', inline: 'span', classes: 'hammer-word'},
-               {title: 'Stat', inline: 'span', classes: 'stat'}
-            ],
-            style_formats_merge: true,
-            document_base_url : '".$base_url."',
-            content_css:'/assets/css/style.css,/assets/css/app.css',
-            height : 500,
-            plugins: 'lists advlist code hr image textcolor link',
-            toolbar: 'undo redo | fontsizeselect styleselect forecolor | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | bullist numlist | hr image link',
-            browser_spellcheck: true,            
-            contextmenu: false,
-            schema: 'html5',
-            language: 'fr_FR'";
+        $base_url = (ENVIRONMENT=='development')? 'https://gosciences.fr/' : base_url();        
+        if (ENVIRONMENT == 'development')
+            $this->data['header_include'][0] = '<script src="//cloud.tinymce.com/stable/tinymce.min.js"></script>';
+        else
+            $this->data['header_include'][0] = '<script src="'.js_url('vendor/tinymce/tinymce.min').'"></script>';
+            
+        $this->data['header_include'][1] =
+           "<script type=\"text/javascript\">
+            tinymce.init({
+                selector: 'textarea#corps',
+                style_formats: [
+                   {title: 'Vert GoSciences', inline: 'span', classes: 'green-word'},
+                   {title: 'Nos Valeurs', inline: 'span', classes: 'hammer-word'},
+                   {title: 'Stat', inline: 'span', classes: 'stat'}
+                ],
+                style_formats_merge: true,
+                document_base_url : '".$base_url."',
+                content_css:'/assets/css/style.css,/assets/css/app.css',
+                height : 500,
+                plugins: 'lists advlist code hr image textcolor link',
+                toolbar: 'undo redo | fontsizeselect styleselect forecolor | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | bullist numlist | hr image link',
+                browser_spellcheck: true,            
+                contextmenu: false,
+                schema: 'html5',
+                language: 'fr_FR'
+            });
+            </script>";
         $this->load->view('site/header', $this->data);
         $this->load->view('site/menu', $this->data);
         $this->load->view('admin/admin_textes', $this->data);

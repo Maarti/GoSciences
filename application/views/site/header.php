@@ -43,14 +43,14 @@
     <link rel="stylesheet" href="<?= css_url('app')?>" />
     <link rel="stylesheet" href="<?= css_url('style')?>" />
     <link rel="stylesheet" href="<?= css_url('foundation-icons')?>" />
-    <?if(isset($tinymce)){?>
-        <script src="<?=(ENVIRONMENT == 'development')? '//cloud.tinymce.com/stable/tinymce.min.js' : js_url('vendor/tinymce/tinymce.min')?>"></script>
-        <script type="text/javascript">
-            tinymce.init({
-              <?=$tinymce?>              
-            });
-        </script>
-    <?}?>
+    
+    <?if(isset($header_include)){
+        foreach ($header_include as $script) {?>
+            <?=$script?>
+    
+        <?}
+    }?>
+        
   </head>
   <body>
   <? $this->load->view('include/analyticstracking'); ?>
