@@ -164,7 +164,7 @@ class Utilisateur extends CI_Controller {
         $this->data['meta_desc'] = 'Modifiez les informations de votre compte GoSciences, celles-ci sont strictement confidentielles.';
         $this->data['page_title'] = 'Mon Compte';
         $this->data['user'] = $this->utilisateur_model->read('mail,nom,prenom,tel,civilite,date_naissance',array('id'=>$_SESSION['id']))->row();
-        $this->data['add_jquery'] = '<script src="'.js_url('scripts/confpassword').'"></script>';
+        $this->data['footer_include'][0] = '<script src="'.js_url('scripts/confpassword').'"></script>';
         $this->data['classes'] = $this->classe_model->read('id,libelle',array(),null,null,'ordre ASC')->result();
         $this->data['eleves'] = $this->eleve_model->read('id,nom,prenom,classe',array('parent'=>$_SESSION['id']))->result();
         

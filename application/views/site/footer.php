@@ -58,7 +58,10 @@
         echo '<script>$(document).ready(function(){$(\'#'.$show_modal.'\').foundation(\'open\')});</script>'
 ?>
 
-<? if(isset($add_jquery))
-    echo $add_jquery?>    
+<? if(isset($footer_include))
+     foreach ($footer_include as $script) {?>
+        <?=$script?>
+
+     <?}?>
 </body>
 </html>

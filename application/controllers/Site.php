@@ -31,7 +31,7 @@ class Site extends CI_Controller {
         $this->data['meta_desc'] = 'Contacter GoSciences pour bénéficier de cours particuliers de qualité dans les matières scientifiques ou postuler en tant que professeur dans le Loiret.';
         $this->data['page_title'] = 'Nous Contacter';
         $this->data['contact_user'] = $this->utilisateur_model->read('nom,prenom,tel',array('mail'=>'gosciences@outlook.fr'))->row();
-        $this->data['add_jquery'] = '<script src="'.js_url('scripts/postuler').'"></script>';
+        $this->data['footer_include'][0] = '<script src="'.js_url('scripts/postuler').'"></script>';
         if(!empty($contact))    $_GET['contact']=$contact;
         if(!empty($motif))      $_GET['motif']=$motif;
         if (isset($_SESSION['id'])){

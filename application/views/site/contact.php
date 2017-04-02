@@ -75,8 +75,6 @@
             </li>
         </ul>
         
-      
-        
     </div>
     <? $this->load->view('include/sidebar'); ?>
 
