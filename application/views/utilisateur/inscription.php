@@ -36,6 +36,9 @@
             <input type="text" name="prenom" value="<?php echo set_value('prenom'); ?>" maxlength="50" placeholder="Prénom" autocomplete="given-name" required>
             <?= form_error('prenom'); ?>
         </label>
+        
+        <div class="g-recaptcha" data-sitekey="<?=$public_recaptcha?>"></div><br/>
+        <?= form_error('g-recaptcha-response'); ?>
 
         <div class="clearfix">
             <div class="float-right">

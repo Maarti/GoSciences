@@ -66,13 +66,13 @@ class Site extends CI_Controller {
      public function valid_contact(){
         $this->load->model('utilisateur_model');
         $this->load->library('form_validation');
-        $this->form_validation->set_rules('nom', 'Nom', 'required|min_length[2]|max_length[50]|regex_match[/^([-a-z_éèàêâùïüë ])+$/i]');
-        $this->form_validation->set_rules('prenom', 'Prénom', 'required|min_length[2]|max_length[50]|regex_match[/^([-a-z_éèàêâùïüë ])+$/i]');
+        $this->form_validation->set_rules('nom', 'Nom', 'required|min_length[2]|max_length[50]|regex_match[/^([-a-z_éèàêâùïüëÉÈÀÊÙÏÜË ])+$/i]');
+        $this->form_validation->set_rules('prenom', 'Prénom', 'required|min_length[2]|max_length[50]|regex_match[/^([-a-z_éèàêâùïüëÉÈÀÊÙÏÜË ])+$/i]');
         $this->form_validation->set_rules('mail', 'E-mail', 'required|valid_email|max_length[254]');
         $this->form_validation->set_rules('motif', 'Motif', 'required|in_list[info,postuler,bug,autre]');
         $this->form_validation->set_rules('message', 'Message', 'required|min_length[10]|max_length[2000]');
         if(!isset($_SESSION['id']))
-            $this->form_validation->set_rules('g-recaptcha-response','Captcha','callback_recaptcha'); 
+            $this->form_validation->set_rules('g-recaptcha-response','Captcha','callback_recaptcha');
         $this->form_validation->set_error_delimiters('<p class="help-text valid-error">', '</p>');
         if ($this->form_validation->run()) {
             $mail = $this->input->post('mail');

@@ -34,6 +34,8 @@ class Utilisateur extends CI_Controller {
         $this->data['tab_title'] = 'GoSciences - Aide scolaire à Orléans et ses environs | Inscription';
         $this->data['meta_desc'] = 'Inscrivez-vous au site GoSciences pour bénéficier de suivis pour les cours particuliers de votre enfant.';
         $this->data['page_title'] = 'Inscription';
+        $this->data['public_recaptcha'] = $this->config->item('public_recaptcha');
+        $this->data['header_include'][0] = '<script src="https://www.google.com/recaptcha/api.js"></script>';
         $this->load->view('site/header', $this->data);
         $this->load->view('site/menu', $this->data);
         $this->load->view('utilisateur/inscription', $this->data);
@@ -43,10 +45,11 @@ class Utilisateur extends CI_Controller {
     public function valid_inscription() {
         $this->form_validation->set_rules('mail', 'E-mail', 'required|valid_email|max_length[254]|is_unique[utilisateur.mail]', array('is_unique' => 'Cet %s est déjà utilisé sur le site.'));
         $this->form_validation->set_rules('civilite', 'Civilité', 'required|in_list[Mme,M.]');
-        $this->form_validation->set_rules('nom', 'Nom', 'required|min_length[2]|max_length[50]|regex_match[/^([-a-z_éèàêâùïüë ])+$/i]');
-        $this->form_validation->set_rules('prenom', 'Prénom', 'required|min_length[2]|max_length[50]|regex_match[/^([-a-z_éèàêâùïüë ])+$/i]');
+        $this->form_validation->set_rules('nom', 'Nom', 'required|min_length[2]|max_length[50]|regex_match[/^([-a-z_éèàêâùïüëÉÈÀÊÙÏÜË ])+$/i]');
+        $this->form_validation->set_rules('prenom', 'Prénom', 'required|min_length[2]|max_length[50]|regex_match[/^([-a-z_éèàêâùïüëÉÈÀÊÙÏÜË ])+$/i]');
         $this->form_validation->set_rules('pass', 'Mot de passe', 'required|min_length[3]|max_length[50]');
         $this->form_validation->set_rules('passconf', 'Confirmation', 'required|matches[pass]');
+        $this->form_validation->set_rules('g-recaptcha-response','Captcha','callback_recaptcha');
         $this->form_validation->set_error_delimiters('<p class="help-text valid-error">', '</p>');
 
         if ($this->form_validation->run()) {
@@ -211,8 +214,8 @@ class Utilisateur extends CI_Controller {
         
         $this->load->model('eleve_model');
         $this->load->library('format_string');
-        $this->form_validation->set_rules('nom', 'Nom', 'required|min_length[2]|max_length[50]|regex_match[/^([-a-z_éèàêâùïüë ])+$/i]');
-        $this->form_validation->set_rules('prenom', 'Prénom', 'required|min_length[2]|max_length[50]|regex_match[/^([-a-z_éèàêâùïüë ])+$/i]');
+        $this->form_validation->set_rules('nom', 'Nom', 'required|min_length[2]|max_length[50]|regex_match[/^([-a-z_éèàêâùïüëÉÈÀÊÙÏÜË ])+$/i]');
+        $this->form_validation->set_rules('prenom', 'Prénom', 'required|min_length[2]|max_length[50]|regex_match[/^([-a-z_éèàêâùïüëÉÈÀÊÙÏÜË ])+$/i]');
         $this->form_validation->set_rules('classe', 'Classe', 'required');
         $this->form_validation->set_error_delimiters('<p class="help-text valid-error">', '</p>');
 
@@ -285,6 +288,26 @@ class Utilisateur extends CI_Controller {
         else{
             $this->form_validation->set_message('verify_confpassword', '%s doit être identique au Mot de passe.');
             return FALSE;
+        }
+    }
+    
+    public function recaptcha($str='') {
+        $google_url="https://www.google.com/recaptcha/api/siteverify";
+        $ip=$_SERVER['REMOTE_ADDR'];
+        $url=$google_url."?secret=".$this->config->item('private_recaptcha')."&response=".$str."&remoteip=".$ip;
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($curl, CURLOPT_TIMEOUT, 10);
+        curl_setopt($curl, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.2.16) Gecko/20110319 Firefox/3.6.16");
+        $res_exec = curl_exec($curl);
+        curl_close($curl);
+        $res= json_decode($res_exec, true);
+        if($res['success'])
+          return TRUE;
+        else {
+          $this->form_validation->set_message('recaptcha', 'Le captcha vous a détecté comme étant un robot.');
+          return FALSE;
         }
     }
 }
