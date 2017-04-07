@@ -15,7 +15,8 @@ class Cours extends CI_Controller {
     }
 
     public function tarifs($id_prest = null){
-        $this->load->model('prestation_model'); 
+        $this->load->library('format_string');
+        $this->load->model('prestation_model');
         $this->data['tarifs'] = $this->classe_model->get_tarifs($id_prest);
         $libelle_prest = $this->prestation_model->read('libelle',array('id'=>$id_prest))->row();
         if (empty($this->data['tarifs']) || empty($libelle_prest))
