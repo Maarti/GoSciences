@@ -6,7 +6,7 @@ class Classe_model extends MY_Model {
    protected $table_etab = 'etablissement';
    protected $table_disc = 'discipline';
    protected $table_classe_disc = 'classe_discipline';
-   protected $table_prest = 'prestation';
+   protected $table_prest = 'type_prestation';
    protected $table_tarif = 'tarif';
       
    // Retourne toutes les classes et établissments (utilisé pour le menu "Nos offres")
