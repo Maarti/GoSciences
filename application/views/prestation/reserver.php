@@ -18,9 +18,9 @@
         <?= form_open('prestation/valid_reserver','data-abide'); ?>
         <label>Élève concerné(e) :
         <?if(!empty($eleves)){?>
-            <select name="eleve">
+            <select name="eleve" id="eleve">
             <? foreach ($eleves as $e) {?>
-                <option value="<?=$e->id?>" <?=set_select('eleve', $e->id)?>><?=$e->nom?> <?=$e->prenom?></option>                 
+                <option value="<?=$e->id?>" <?=set_select('eleve', $e->id)?> data-eleve-classe="<?=$e->classe?>"><?=$e->nom?> <?=$e->prenom?></option>                 
             <?}?>
             </select>
             <?= form_error('eleve'); ?>            
@@ -30,7 +30,7 @@
         </label>
         <a data-open="modal-create" class="button"><i class="fi-torsos-female-male"></i> Enregistrer un(e) nouvel(le) élève</a><br/><br/>
         
-        <label>Type de prestation 
+        <label>Type de prestation :
         <select name="type_prestation">
         <? foreach ($types_prest as $p) {?>
             <option value="<?=$p->id?>" <?=set_select('type_prestation', $p->id)?>><?=$p->libelle?></option>
@@ -38,6 +38,22 @@
         </select>
         <?= form_error('type_prestation'); ?>
         </label>
+        
+        <label>Classe :
+        <select name="classe_prestation" id="classe_prestation">  
+            <? foreach ($classes as $c) {?>
+            <option value="<?=$c->id?>" <?=set_select('classe_prestation', $c->id)?>><?=$c->libelle?></option>
+            <?}?>
+        </select>
+        <?= form_error('classe_prestation'); ?>
+        </label>
+        
+        <fieldset class="fieldset">
+            <legend>Discipline(s) :</legend>
+            <input id="checkbox1" type="checkbox"><label for="checkbox1">Checkbox 1</label>
+            <input id="checkbox2" type="checkbox"><label for="checkbox2">Checkbox 2</label>
+            <input id="checkbox3" type="checkbox"><label for="checkbox3">Checkbox 3</label>
+        </fieldset>
         
         <div class="clearfix">
             <div class="float-right">
