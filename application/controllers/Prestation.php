@@ -22,11 +22,13 @@ class Prestation extends CI_Controller {
         
         $this->load->model('eleve_model');
         $this->load->model('type_prestation_model');
+        $this->load->model('discipline_model');
         $this->data['tab_title'] = 'GoSciences - Aide scolaire à Orléans et ses environs | Réserver une prestation';
         $this->data['meta_desc'] = 'Réservez une prestation GoSciences en Mathématiques, SVT, Physique et Chimie niveau collège et lycée à Orléans, La Ferté-Saint-Aubin, La Chapelle-Saint-Mesmin, Saint-Jean-de-Braye, Saint-Jean-le-Blanc, Saint-Jean-de-la-Ruelle, Olivet, Saran, Lamotte-Beuvron, Vouzon, Marcilly-en-Villette, Menestreau-en-Villette, Saint-Cyr-en-Val, Ligny-le-Ribault, Jouy-le-Potier.';
         $this->data['page_title'] = 'Définir la prestation';
         $this->data['classes'] = $this->classe_model->read('id,libelle',array(),null,null,'ordre ASC')->result();
         $this->data['eleves'] = $this->eleve_model->read('id,nom,prenom,classe',array('parent'=>$_SESSION['id']))->result();
+        $this->data['disciplines'] = $this->discipline_model->read('id,libelle')->result();
         // on propose tous les types de prestation sauf les stages
         $this->data['types_prest'] = $this->type_prestation_model->read('id,libelle',array('id !=' => 's'),null,null,'ordre ASC')->result();        
         $this->data['footer_include'][0] = '<script src="'.js_url('scripts/prestation_reserver').'"></script>';
@@ -34,5 +36,18 @@ class Prestation extends CI_Controller {
         $this->load->view('site/menu', $this->data);
         $this->load->view('prestation/reserver', $this->data);
         $this->load->view('site/footer');
+    }
+    
+    public function valid_reserver(){
+        var_dump($this->input->post('disciplines[]'));
+        $this->form_validation->set_rules('disciplines[]', 'Disciplines', 'required');
+        $this->form_validation->set_message('required','Vous devez sélectionner au moins une discipline.');
+        $this->form_validation->set_error_delimiters('<p class="help-text valid-error">', '</p>');
+
+        if ($this->form_validation->run()) {
+            
+        }else{
+            $this->reserver();
+        }
     }
 }

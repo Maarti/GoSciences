@@ -50,9 +50,10 @@
         
         <fieldset class="fieldset">
             <legend>Discipline(s) :</legend>
-            <input id="checkbox1" type="checkbox"><label for="checkbox1">Checkbox 1</label>
-            <input id="checkbox2" type="checkbox"><label for="checkbox2">Checkbox 2</label>
-            <input id="checkbox3" type="checkbox"><label for="checkbox3">Checkbox 3</label>
+             <? foreach ($disciplines as $d) {?>
+            <input id="<?=$d->id?>" type="checkbox" name="disciplines[]" value="<?=$d->id?>"  <?=set_checkbox('disciplines[]', $d->id); ?>><label for="<?=$d->id?>"><?=$d->libelle?></label>
+            <?}?>
+        <?= form_error('disciplines[]'); ?>
         </fieldset>
         
         <div class="clearfix">
