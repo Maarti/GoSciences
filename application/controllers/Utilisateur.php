@@ -230,9 +230,15 @@ class Utilisateur extends CI_Controller {
                 'classe'    => $this->input->post('classe'),
                 'parent'    => $_SESSION['id']
             ));
-            redirect('utilisateur/infos', 'refresh');
+            if(isset($_GET['from']) && $_GET['from']=='prestation')
+                redirect('prestation/reserver', 'refresh');
+            else
+                redirect('utilisateur/infos', 'refresh');
         }else
-            $this->infos('ajouter-eleve');
+            if(isset($_GET['from']) && $_GET['from']=='prestation')
+                redirect('prestation/reserver');
+            else
+                $this->infos('ajouter-eleve');
     }
     
         public function modifier_eleve() {

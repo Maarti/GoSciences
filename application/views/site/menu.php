@@ -47,7 +47,7 @@ $prestations = $this->classe_model->get_prestations();?>
           <? if(isset($_SESSION['id'])){ ?>
             <li><a href="<?= site_url('utilisateur/infos')?>"><i class="fi-torso"></i> Mon compte</a></li>
             <li><a href="<?= site_url('')?>"><i class="fi-clipboard-notes"></i> Mes cours</a></li>
-            <li><a href="<?= site_url('')?>"><i class="fi-clipboard-pencil"></i> Réserver</a></li>
+            <li><a href="<?= site_url('prestation/reserver')?>"><i class="fi-clipboard-pencil"></i> Réserver</a></li>
             <li><a href="<?= site_url('utilisateur/deconnexion')?>"><i class="fi-x"></i> Déconnexion</a></li>
           <? }else{ ?>
             <li><a href="<?= site_url('utilisateur/inscription')?>"><i class="fi-clipboard-pencil"></i> Inscription</a></li>         

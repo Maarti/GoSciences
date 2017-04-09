@@ -19,7 +19,7 @@
             </div>
             <div class="small-12 medium-6 large-4 columns">
                 <div class="tile" data-equalizer-watch>
-                    <a href="<?=site_url('')?>" class="button large expanded gosciences-green disabled">S'inscrire à une prestation</a>
+                    <a href="<?=site_url('prestation/reserver')?>" class="button large expanded gosciences-green">S'inscrire à une prestation</a>
                     <p>Réserver dès maintenant votre prochaine prestation. Consultez les horaires possibles, proposez vos créneaux de disponibilité.</p>
                 </div>
             </div>
