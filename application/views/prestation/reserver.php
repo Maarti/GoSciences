@@ -6,7 +6,7 @@
         <nav aria-label="Vous êtes ici :" role="navigation">
           <ul class="breadcrumbs">
             <li>
-                <span class="show-for-sr">Actuellement : </span><strong>Définir la prestation</strong>
+                <span class="show-for-sr">Actuellement : </span><strong class="green-word">Définir la prestation</strong>
             </li>
             <li>Définir vos disponibilités</li>
             <li>Proposition de cours</li>
@@ -22,11 +22,11 @@
             <? foreach ($eleves as $e) {?>
                 <option value="<?=$e->id?>" <?=set_select('eleve', $e->id)?> data-eleve-classe="<?=$e->classe?>"><?=$e->nom?> <?=$e->prenom?></option>                 
             <?}?>
-            </select>
-            <?= form_error('eleve'); ?>            
+            </select>                        
         <?}else{?>
             <br/><i class="fi-info valid-error"></i> <em class="valid-error">Vous devez d'abord enregistrer au moins un(e) élève</em><br/>
         <?}?>
+            <?= form_error('eleve'); ?>
         </label>
         <a data-open="modal-create" class="button"><i class="fi-torsos-female-male"></i> Enregistrer un(e) nouvel(le) élève</a><br/><br/>
         
