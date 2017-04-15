@@ -38,8 +38,8 @@ class Prestation extends CI_Controller {
         $this->load->view('site/footer');
     }
     
-    public function valid_reserver(){        
-        $this->form_validation->set_rules('eleve', 'Élève', 'required');
+    public function valid_reserver(){
+        $this->form_validation->set_rules('eleve', 'Élève', 'required|callback_belong_to_user');
         $this->form_validation->set_rules('type_prestation', 'Type de prestation', 'required');
         $this->form_validation->set_rules('classe_prestation', 'Classe', 'required');
         $this->form_validation->set_rules('disciplines[]', 'Disciplines', 'required',array('required'=>'Vous devez sélectionner au moins une discipline.'));
@@ -82,5 +82,17 @@ class Prestation extends CI_Controller {
         $this->load->view('site/menu', $this->data);
         $this->load->view('prestation/disponibilites', $this->data);
         $this->load->view('site/footer');
+    }
+    
+    // Vérifie si l'id d'élève appartient au compte connecté
+    public function belong_to_user($eleve_id) {
+        $this->load->model('eleve_model');
+        $eleve = $this->eleve_model->read('parent',array('id'=>$eleve_id))->row();
+        if(!empty($eleve) && $eleve->parent == $_SESSION['id'])
+          return TRUE;
+        else {
+          $this->form_validation->set_message('belong_to_user', 'L\'élève ne correspond pas à votre compte.');
+          return FALSE;
+        }
     }
 }
