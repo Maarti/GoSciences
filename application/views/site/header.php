@@ -46,8 +46,7 @@
     
     <?if(isset($header_include)){
         foreach ($header_include as $script) {?>
-            <?=$script?>
-    
+            <?=$script?>    
         <?}
     }?>
         

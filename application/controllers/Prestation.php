@@ -45,17 +45,15 @@ class Prestation extends CI_Controller {
         $this->form_validation->set_rules('disciplines[]', 'Disciplines', 'required',array('required'=>'Vous devez sélectionner au moins une discipline.'));
         $this->form_validation->set_error_delimiters('<p class="help-text valid-error">', '</p>');
 
-        if ($this->form_validation->run()) {            
-            $disc = serialize($this->input->post('disciplines[]'));
-            var_dump(unserialize($disc));
-            var_dump($disc);
-            $prest = $this->prestation_model->create(array(
+        if ($this->form_validation->run()) {
+            $this->prestation_model->create(array(
                     'etat'                  =>  'propose',
                     'disciplines'           =>  serialize($this->input->post('disciplines[]')),
                     'type_prestation_id'    =>  $this->input->post('type_prestation'),
                     'eleve_id'              =>  $this->input->post('eleve'),
-                    'classe_id'             =>  $this->input->post('classe_prestation')
-                    ));
+                    'classe_id'             =>  $this->input->post('classe_prestation')),
+              array('date_deb'              =>  'CURDATE()')
+            );
             // Retourne l'id de la dernière insertion
             $id_prest = $this->db->insert_id();
             $this->definir_disponibilites($id_prest);
@@ -67,16 +65,19 @@ class Prestation extends CI_Controller {
      public function definir_disponibilites($id_prest=null){
         if(!isset($_SESSION['id']))
             return redirect ('utilisateur/connexion/connexion_requise', 'refresh');
-        if(empty($id_prest))
+        $prest = $this->prestation_model->read('*',array('id'=>$id_prest))->row();
+        if(empty($prest) || !$this->belong_to_user($prest->eleve_id))
             return redirect ('site/accueil', 'refresh');
         
-        $this->load->model('prestation_model');
+        var_dump($prest);
         $this->data['tab_title'] = 'GoSciences - Aide scolaire à Orléans et ses environs | Définir vos disponibilités';
         $this->data['meta_desc'] = 'Réservez une prestation GoSciences et définissez vos disponibilités, nous vous proposerons des crénneaux horaires en conséquences. Nous nous déplaçons à Orléans, La Ferté-Saint-Aubin, La Chapelle-Saint-Mesmin, Saint-Jean-de-Braye, Saint-Jean-le-Blanc, Saint-Jean-de-la-Ruelle, Olivet, Saran, Lamotte-Beuvron, Vouzon, Marcilly-en-Villette, Menestreau-en-Villette, Saint-Cyr-en-Val, Ligny-le-Ribault et Jouy-le-Potier.';
         $this->data['page_title'] = 'Définir vos disponibilités';
 
-        // eleve.parent == $_SESSION['id']
-        $this->data['prestation'] = $this->prestation_model->read('*',array('id' => $id_prest))->result();        
+        $this->data['prestation'] = $prest;
+        $this->data['header_include'][0] = '<link href="http://cdn.jtsage.com/jtsage-datebox/4.1.1/jtsage-datebox-4.1.1.jqueryui.min.css" rel="stylesheet" type="text/css">';
+        $this->data['header_include'][1] = '<script src="http://cdn.jtsage.com/jtsage-datebox/4.1.1/jtsage-datebox-4.1.1.jqueryui.min.js" type="text/javascript"></script>';
+        //$this->data['header_include'][2] = '<script src="http://cdn.jtsage.com/jtsage-datebox/i18n/jquery.mobile.datebox.i18n.fr_FR.utf8.js" type="text/javascript" ></script>';
         //$this->data['footer_include'][0] = '<script src="'.js_url('scripts/prestation_disponibilites').'"></script>';
         $this->load->view('site/header', $this->data);
         $this->load->view('site/menu', $this->data);
@@ -87,8 +88,7 @@ class Prestation extends CI_Controller {
     // Vérifie si l'id d'élève appartient au compte connecté
     public function belong_to_user($eleve_id) {
         $this->load->model('eleve_model');
-        $eleve = $this->eleve_model->read('parent',array('id'=>$eleve_id))->row();
-        if(!empty($eleve) && $eleve->parent == $_SESSION['id'])
+        if ($this->eleve_model->belong_to_user($eleve_id))
           return TRUE;
         else {
           $this->form_validation->set_message('belong_to_user', 'L\'élève ne correspond pas à votre compte.');

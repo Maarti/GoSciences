@@ -16,6 +16,24 @@
         
         <?= form_open('prestation/valid_reserver','data-abide'); ?>
         
+        <div class="row">
+          <div class="small-4 columns">
+            <label>Date :
+              <input type="date">
+            </label>
+          </div>
+          <div class="small-4 columns">
+            <label>Heure début :
+              <input type="time" placeholder="18:30">
+            </label>
+          </div>
+            <div class="small-4 columns">
+            <label>Heure fin :
+              <input type="time">
+            </label>
+          </div>
+        </div>
+        <button class="button">Ajouter un créneau</button>
         
         </form>
         
