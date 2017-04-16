@@ -20,7 +20,7 @@
             <p>Nous vous proposerons ensuite des prestations parmi les tranches horaires sélectionnées.</p>
         </div>
         
-        <?= form_open('prestation/valid_disponibilites','data-abide'); ?>
+        <?= form_open('prestation/valid_disponibilites/'.$prestation->id,'data-abide'); ?>
         <!--
         <div id="dispo-container">
             <div class="row">
@@ -42,15 +42,25 @@
             </div>
         </div>
         <button class="button" type="button" id="new-creneau">Ajouter un créneau</button>
-        --><div id='calendar'></div>
-        <input type="hidden" id="disponibilite" name="disponibilite" value="{}">
+        -->
+        <?= form_error('disponibilite'); ?>
+        <div id='calendar'></div>
+        <input type="hidden" id="disponibilite" name="disponibilite" value='{"events":[]}'>
+        <br/>
+        
+        <label>Commentaire (optionnel)
+            <textarea name="commentaire" placeholder="Faites-nous part de vos remarques concernant vos disponibilités" rows="3" maxlength="512"><?= set_value('commentaire')?></textarea>
+            <?= form_error('commentaire'); ?>
+        </label>
+        
+        <br/>
         <div class="clearfix">
             <div class="float-right">
-                <input type="submit" class="button large" id="valid-dispo" value="Étape suivante">
+                <input type="submit" class="button large" id="valid-dispo" value="Proposer ces horaires">
             </div>
         </div>
         </form>
-        
+        <br/><br/>
     </div>
  
 <script>

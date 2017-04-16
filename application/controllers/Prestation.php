@@ -69,7 +69,6 @@ class Prestation extends CI_Controller {
         if(empty($prest) || !$this->belong_to_user($prest->eleve_id))
             return redirect ('site/accueil', 'refresh');
         
-        var_dump($prest);
         $this->data['tab_title'] = 'GoSciences - Aide scolaire à Orléans et ses environs | Définir vos disponibilités';
         $this->data['meta_desc'] = 'Réservez une prestation GoSciences et définissez vos disponibilités, nous vous proposerons des crénneaux horaires en conséquences. Nous nous déplaçons à Orléans, La Ferté-Saint-Aubin, La Chapelle-Saint-Mesmin, Saint-Jean-de-Braye, Saint-Jean-le-Blanc, Saint-Jean-de-la-Ruelle, Olivet, Saran, Lamotte-Beuvron, Vouzon, Marcilly-en-Villette, Menestreau-en-Villette, Saint-Cyr-en-Val, Ligny-le-Ribault et Jouy-le-Potier.';
         $this->data['page_title'] = 'Définir vos disponibilités';
@@ -79,14 +78,15 @@ class Prestation extends CI_Controller {
         $this->data['footer_include'][0] = '<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>';
         $this->data['footer_include'][1] = '<script src="'.js_url('scripts/init_timepicker').'"></script>';
         $this->data['footer_include'][2] = '<script src="'.js_url('scripts/definir_disponibilites').'"></script>';*/
-        
+        $eventData = (empty($prest->disponibilite))? '{events : []}' : $prest->disponibilite;
         $this->data['header_include'][0] = '<link rel="stylesheet" type="text/css" href="'.css_url('week-calendar/jquery-ui-1.8.11.custom').'" />';
         $this->data['header_include'][1] = '<link rel="stylesheet" type="text/css" href="'.css_url('week-calendar/jquery.weekcalendar').'" />';
         $this->data['footer_include'][2] = '<script src="'.js_url('vendor/week-calendar/jquery-1.4.4.min').'"></script>';
         $this->data['footer_include'][3] = '<script src="'.js_url('vendor/week-calendar/jquery-ui-1.8.11.custom.min').'"></script>';
         $this->data['footer_include'][4] = '<script src="'.js_url('vendor/week-calendar/date').'"></script>';
         $this->data['footer_include'][5] = '<script src="'.js_url('vendor/week-calendar/jquery.weekcalendar').'"></script>';
-        $this->data['footer_include'][6] = '<script src="'.js_url('vendor/week-calendar/init-week-calendar').'"></script>';
+        $this->data['footer_include'][6] = '<script type="text/javascript">var eventData = '.$eventData.'</script>';
+        $this->data['footer_include'][7] = '<script src="'.js_url('vendor/week-calendar/init-week-calendar').'"></script>';
         
         $this->load->view('site/header', $this->data);
         $this->load->view('site/menu', $this->data);
@@ -94,8 +94,26 @@ class Prestation extends CI_Controller {
         $this->load->view('site/footer');
     }
     
-     public function valid_disponibilites(){
-         echo $this->input->post('disponibilite');
+     public function valid_disponibilites($id_prest=null){
+         if(!isset($_SESSION['id']))
+            return redirect ('utilisateur/connexion/connexion_requise', 'refresh');
+        $prest = $this->prestation_model->read('*',array('id'=>$id_prest))->row();
+        if(empty($prest) || !$this->belong_to_user($prest->eleve_id))
+            return redirect ('site/accueil', 'refresh');
+        
+        $this->form_validation->set_rules('disponibilite', 'Disponibilités', 'callback_valid_json');        
+        $this->form_validation->set_rules('commentaire', 'Commentaire', 'max_length[512]');
+        $this->form_validation->set_error_delimiters('<p class="help-text valid-error">', '</p>');
+
+        if ($this->form_validation->run()) {
+            $this->prestation_model->update(array('id'=>$id_prest),array(
+                'disponibilite' => $this->input->post('disponibilite'),
+                'etat'          => 'propose',
+                'commentaire'   => $this->input->post('commentaire')
+                ));
+        }else{
+            $this->definir_disponibilites($id_prest);
+        }
     }
     
     // Vérifie si l'id d'élève appartient au compte connecté
@@ -108,4 +126,20 @@ class Prestation extends CI_Controller {
           return FALSE;
         }
     }
+
+
+    public function valid_json($string=null) {
+        json_decode($string);
+        if ($string == '{"events":[]}')
+            return TRUE;    // Tableau vide
+        elseif((json_last_error() == JSON_ERROR_NONE))
+            // TODO Tester les valeurs présentent dans le json (sanitize)
+            return TRUE;
+        else{
+            $this->form_validation->set_message('valid_json', 'Format des disponibilités incorrect.');         
+            return FALSE;
+        }
+            
+    }
+
 }
