@@ -75,14 +75,27 @@ class Prestation extends CI_Controller {
         $this->data['page_title'] = 'Définir vos disponibilités';
 
         $this->data['prestation'] = $prest;
-        $this->data['header_include'][0] = '<link href="http://cdn.jtsage.com/jtsage-datebox/4.1.1/jtsage-datebox-4.1.1.jqueryui.min.css" rel="stylesheet" type="text/css">';
-        $this->data['header_include'][1] = '<script src="http://cdn.jtsage.com/jtsage-datebox/4.1.1/jtsage-datebox-4.1.1.jqueryui.min.js" type="text/javascript"></script>';
-        //$this->data['header_include'][2] = '<script src="http://cdn.jtsage.com/jtsage-datebox/i18n/jquery.mobile.datebox.i18n.fr_FR.utf8.js" type="text/javascript" ></script>';
-        //$this->data['footer_include'][0] = '<script src="'.js_url('scripts/prestation_disponibilites').'"></script>';
+        /*$this->data['header_include'][0] = '<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">';
+        $this->data['footer_include'][0] = '<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>';
+        $this->data['footer_include'][1] = '<script src="'.js_url('scripts/init_timepicker').'"></script>';
+        $this->data['footer_include'][2] = '<script src="'.js_url('scripts/definir_disponibilites').'"></script>';*/
+        
+        $this->data['header_include'][0] = '<link rel="stylesheet" type="text/css" href="'.css_url('week-calendar/jquery-ui-1.8.11.custom').'" />';
+        $this->data['header_include'][1] = '<link rel="stylesheet" type="text/css" href="'.css_url('week-calendar/jquery.weekcalendar').'" />';
+        $this->data['footer_include'][2] = '<script src="'.js_url('vendor/week-calendar/jquery-1.4.4.min').'"></script>';
+        $this->data['footer_include'][3] = '<script src="'.js_url('vendor/week-calendar/jquery-ui-1.8.11.custom.min').'"></script>';
+        $this->data['footer_include'][4] = '<script src="'.js_url('vendor/week-calendar/date').'"></script>';
+        $this->data['footer_include'][5] = '<script src="'.js_url('vendor/week-calendar/jquery.weekcalendar').'"></script>';
+        $this->data['footer_include'][6] = '<script src="'.js_url('vendor/week-calendar/init-week-calendar').'"></script>';
+        
         $this->load->view('site/header', $this->data);
         $this->load->view('site/menu', $this->data);
         $this->load->view('prestation/disponibilites', $this->data);
         $this->load->view('site/footer');
+    }
+    
+     public function valid_disponibilites(){
+         echo $this->input->post('disponibilite');
     }
     
     // Vérifie si l'id d'élève appartient au compte connecté
