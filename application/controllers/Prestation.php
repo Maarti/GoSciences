@@ -111,9 +111,38 @@ class Prestation extends CI_Controller {
                 'etat'          => 'propose',
                 'commentaire'   => $this->input->post('commentaire')
                 ));
+            return redirect ('prestation/mes_cours/prestation_demandee', 'refresh');
         }else{
             $this->definir_disponibilites($id_prest);
         }
+    }
+    
+    public function mes_cours($msg=null){
+        if(!isset($_SESSION['id']))
+            return redirect ('utilisateur/connexion/connexion_requise', 'refresh');
+        
+        $this->data['tab_title'] = 'GoSciences - Aide scolaire à Orléans et ses environs | Mes cours';
+        $this->data['meta_desc'] = 'Liste des cours GoSciences en Mathématiques, SVT, Physique et Chimie niveau collège et lycée à Orléans, La Ferté-Saint-Aubin, La Chapelle-Saint-Mesmin, Saint-Jean-de-Braye, Saint-Jean-le-Blanc, Saint-Jean-de-la-Ruelle, Olivet, Saran, Lamotte-Beuvron, Vouzon, Marcilly-en-Villette, Menestreau-en-Villette, Saint-Cyr-en-Val, Ligny-le-Ribault, Jouy-le-Potier.';
+        $this->data['page_title'] = 'Mes cours';
+      
+        switch ($msg) { // Gestion des messages à afficher en page d'accueil
+            case 'prestation_demandee':
+                $type='success';
+                $message='<h5>Demande effectuée.</h5><p>Votre demande de prestation a bien été prise en compte.<br/> L\'administrateur va bientôt prendre connaissance de votre demande et <strong>vous proposera bientôt des cours</strong> en fonction de vos horaires. Vous en serez informé(e) par e-mail.</p>'
+                .'<p>Vous pouvez à tout moment consulter, modifier ou annuler votre demande depuis cette page.</p>';
+                break;
+            default:
+                $type=NULL;
+                $message=NULL;
+        } 
+        if(!is_null($type)&&!is_null($message))
+            $this->data['msg']= '<div class="callout '.$type.'" data-closable>'.$message.'<button class="close-button" aria-label="Fermer" type="button" data-close><span aria-hidden="true">&times;</span></button></div>';
+        
+        
+        $this->load->view('site/header', $this->data);
+        $this->load->view('site/menu', $this->data);
+        $this->load->view('prestation/mes_cours', $this->data);
+        $this->load->view('site/footer');
     }
     
     // Vérifie si l'id d'élève appartient au compte connecté

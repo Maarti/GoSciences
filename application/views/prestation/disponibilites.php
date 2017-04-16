@@ -62,11 +62,6 @@
         </form>
         <br/><br/>
     </div>
- 
-<script>
 
-</script>
-
-    <? // Pour cette page, on n'inclut pas la sidebar car on a besoin d'espace pour le calendrier
-        $this->load->view('include/sidebar'); ?>
+    <? $this->load->view('include/sidebar'); ?>
 </div>
