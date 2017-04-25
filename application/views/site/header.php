@@ -44,12 +44,12 @@
     <link rel="stylesheet" href="<?= css_url('style')?>" />
     <link rel="stylesheet" href="<?= css_url('foundation-icons')?>" />
     
-    <?if(isset($header_include)){
-        foreach ($header_include as $script) {?>
-            <?=$script?>    
-        <?}
+    <? if(isset($header_include)){
+        foreach ($header_include as $script) {
+            echo $script;
+        }
     }?>
         
   </head>
   <body>
-  <? $this->load->view('include/analyticstracking'); ?>
+  <?php $this->load->view('include/analyticstracking'); ?>
