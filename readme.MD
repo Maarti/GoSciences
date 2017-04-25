@@ -10,7 +10,7 @@ Pour installer mysql-workbench :
 
 # Config
 
-## PhP
+## PhP config
 ### Short tag
 Pour activer les shorts tags "<?" en php sur notre serveur apache, on va modifier le php.ini utilisé par apache. C'est donc celui qui est situé dans :
 ```
@@ -22,7 +22,7 @@ Puis on modifie la ligne suivante :
 short_open_tag=On
 ```
 
-## Apache
+## Apache config
 ### AllowOverride
 Pour autoriser la surcharge de la configuration par des .htaccess dans le dossier /var/www/, modifier la configuration d'apache2 :
 ```
