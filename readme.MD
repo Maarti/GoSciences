@@ -42,6 +42,14 @@ Activer le module rewrite dans Apache2 (directement via CLI)
 sudo a2enmod rewrite
 ```
 
+Cela permet l'url rewriting définie dans le .htaccess à la racine :
+```
+RewriteEngine on
+RewriteCond $1 !^(index\.php|resources|robots\.txt)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php?/$1 [L,QSA] 
+```
 
 # Debug
 Pour débuguer les erreurs Apache, vérifier le fichier :
