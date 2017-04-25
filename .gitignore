@@ -16,7 +16,6 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 
 # Perso
 application/config/production/*
-application/config/database.php
 *.mwb.bak
 
 # IDE Files
