@@ -22,13 +22,10 @@
             <td><?=$tarif['description']?></td>
             <?if (isset($id_prest) && $id_prest=='s'){?>
                 <td class="text-center"><?=$tarif['nb_seance']?> x <?=intval($tarif['duree_seance'])?>h</td>
-                <td class="text-center"><span class="stat"><?=$this->format_string->format_price($tarif['tarif_brut'])?>€</span><br>
-                </td>
-            <?}else{?>
+            <?}?>
             <td class="text-center"><span class="stat"><?=$this->format_string->format_price($tarif['tarif_remise'])?>€<?=$tarif['unite_remise']?></span><br>
                 <span class="price_detail"><?=$this->format_string->format_price($tarif['tarif_brut'])?>€<?=$tarif['unite_remise']?> avant déduction fiscale</span>
             </td>
-            <?}?>
           </tr>
         <? } ?>                
         </tbody>
