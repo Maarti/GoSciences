@@ -49,7 +49,7 @@
         <br/>
         
         <label>Commentaire (optionnel)
-            <textarea name="commentaire" placeholder="Faites-nous part de vos remarques concernant vos disponibilités" rows="3" maxlength="512"><?= set_value('commentaire')?></textarea>
+            <textarea name="commentaire" placeholder="Faites-nous part de vos remarques concernant vos disponibilités" rows="3" maxlength="512"><?= set_value('commentaire',$prestation->commentaire)?></textarea>
             <?= form_error('commentaire'); ?>
         </label>
         
