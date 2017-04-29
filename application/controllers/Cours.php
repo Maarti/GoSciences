@@ -14,13 +14,13 @@ class Cours extends CI_Controller {
         $this->tarifs();
     }
 
-    public function tarifs($id_prest = null){
+    public function tarifs($id_prest = 'cp'){
         $this->load->library('format_string');
         $this->load->model('type_prestation_model');
         $this->data['tarifs'] = $this->classe_model->get_tarifs($id_prest);
         $libelle_prest = $this->type_prestation_model->read('libelle',array('id'=>$id_prest))->row();
         if (empty($this->data['tarifs']) || empty($libelle_prest))
-            redirect('site/accueil', 'refresh');
+            return redirect('site/accueil', 'refresh');
         else{
             $this->data['tab_title'] = 'GoSciences - Aide scolaire à Orléans et ses environs | Tarifs '.$libelle_prest->libelle;
             $this->data['meta_desc'] = 'Découvrez les tarifs "'.$libelle_prest->libelle.'" proposés par GoSciences en Mathématiques, SVT, Physique et Chimie pour les différentes classes du collège et du lycée à Orléans, La Ferté-Saint-Aubin, La Chapelle-Saint-Mesmin, Saint-Jean-de-Braye, Saint-Jean-le-Blanc, Saint-Jean-de-la-Ruelle, Olivet, Saran, Lamotte-Beuvron, Vouzon, Marcilly-en-Villette, Menestreau-en-Villette, Saint-Cyr-en-Val, Ligny-le-Ribault, Jouy-le-Potier.';
