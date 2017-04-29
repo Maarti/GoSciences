@@ -47,12 +47,13 @@ class Prestation extends CI_Controller {
 
         if ($this->form_validation->run()) {
             $this->prestation_model->create(array(
-                    'etat'                  =>  'propose',
+                    'etat'                  =>  'instance',
                     'disciplines'           =>  serialize($this->input->post('disciplines[]')),
                     'type_prestation_id'    =>  $this->input->post('type_prestation'),
                     'eleve_id'              =>  $this->input->post('eleve'),
                     'classe_id'             =>  $this->input->post('classe_prestation')),
-              array('date_deb'              =>  'CURDATE()')
+              array('date_deb'              =>  'CURDATE()',
+                    'date_creation'         =>  'NOW()')
             );
             // Retourne l'id de la dernière insertion
             $id_prest = $this->db->insert_id();
@@ -108,7 +109,7 @@ class Prestation extends CI_Controller {
         if ($this->form_validation->run()) {
             $this->prestation_model->update(array('id'=>$id_prest),array(
                 'disponibilite' => $this->input->post('disponibilite'),
-                'etat'          => 'propose',
+                'etat'          => 'demande',
                 'commentaire'   => $this->input->post('commentaire')
                 ));
             return redirect ('prestation/mes_cours/prestation_demandee', 'refresh');
@@ -138,7 +139,9 @@ class Prestation extends CI_Controller {
         if(!is_null($type)&&!is_null($message))
             $this->data['msg']= '<div class="callout '.$type.'" data-closable>'.$message.'<button class="close-button" aria-label="Fermer" type="button" data-close><span aria-hidden="true">&times;</span></button></div>';
         
-        
+        $this->data['propositions']= $this->prestation_model->get_array($_SESSION['id'],array('etat'=>'propose'))->result();
+        $this->data['demandes']= $this->prestation_model->get_array($_SESSION['id'],"etat = 'instance' OR etat='demande'")->result();
+
         $this->load->view('site/header', $this->data);
         $this->load->view('site/menu', $this->data);
         $this->load->view('prestation/mes_cours', $this->data);

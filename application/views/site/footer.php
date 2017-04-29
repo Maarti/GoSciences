@@ -46,7 +46,7 @@
     </div>
 </footer>
 <div id="fb-root"></div>
-<script src="<?= js_url('scripts/facebook') ?>"></script>
+
 <script src="<?= js_url('vendor/jquery.min') ?>"></script>
 <script src="<?= js_url('vendor/what-input.min') ?>"></script>
 <script src="<?= js_url('foundation.min') ?>"></script>
@@ -57,11 +57,11 @@
     if(isset($show_modal))
         echo '<script>$(document).ready(function(){$(\'#'.$show_modal.'\').foundation(\'open\')});</script>'
 ?>
-
 <? if(isset($footer_include))
      foreach ($footer_include as $script) {?>
         <?=$script?>
 
      <?}?>
+<script src="<?= js_url('scripts/facebook') ?>"></script>
 </body>
 </html>
