@@ -54,8 +54,8 @@
     $(document).foundation();
 </script>
 <? // Permet l'ouverture automatique d'un modal au chargement de la page
-    if(isset($show_modal))
-        echo '<script>$(document).ready(function(){$(\'#'.$show_modal.'\').foundation(\'open\')});</script>'
+   /* if(isset($show_modal))
+        echo '<script>$(document).ready(function(){$(\'#'.$show_modal.'\').foundation(\'open\')});</script>'*/
 ?>
 <? if(isset($footer_include))
      foreach ($footer_include as $script) {?>

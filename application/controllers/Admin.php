@@ -15,7 +15,7 @@ class Admin extends CI_Controller {
     }
     
     public function index(){
-        redirect('admin/utilisateurs');
+        redirect('admin/prestations');
     }
     
     public function utilisateurs(){
@@ -30,8 +30,8 @@ class Admin extends CI_Controller {
         $this->load->view('site/footer');
     }
     
-    public function prestations($id_prest=null,$id_class=null){
-        $this->data['page_title'] = 'Prestations';
+    public function tarifs($id_prest=null,$id_class=null){
+        $this->data['page_title'] = 'Tarifs';
         // Ouvre automatiquement le modal en erreur
         if(!empty($id_prest) && !empty($id_class))
             $this->data['footer_include'][0] = '<script>$(document).ready(function(){$(\'#modal-'.$id_prest.'-'.$id_class.'\').foundation(\'open\')});</script>';
@@ -44,11 +44,11 @@ class Admin extends CI_Controller {
         $this->data['enum_unite_remise'] = array(NULL, '/h', '/2h', '/20h', '/jour', '/semaine');
         $this->load->view('site/header', $this->data);
         $this->load->view('site/menu', $this->data);
-        $this->load->view('admin/admin_prestations', $this->data);
+        $this->load->view('admin/admin_tarifs', $this->data);
         $this->load->view('site/footer');
     }
     
-    public function valid_prestations($id_prest=null,$id_class=null) {
+    public function valid_tarifs($id_prest=null,$id_class=null) {
         $this->form_validation->set_rules('tarif_brut', 'Tarif brut', 'numeric|greater_than_equal_to[0]|less_than_equal_to[9999]');
         $this->form_validation->set_rules('tarif_remise', 'Tarif remise', 'numeric|greater_than_equal_to[0]|less_than_equal_to[9999]');
         $this->form_validation->set_rules('unite_remise', 'Unité', 'in_list[/h,/2h,/20h,/jour,/semaine]');
@@ -65,9 +65,9 @@ class Admin extends CI_Controller {
                             'nb_seance'     =>$this->input->post('nb_seance'),
                             'duree_seance'  =>$this->input->post('duree_seance')
                         ));
-            redirect('admin/prestations/'.$id_prest);
+            redirect('admin/tarifs/'.$id_prest);
         }else
-            $this->prestations($id_prest,$id_class);
+            $this->tarifs($id_prest,$id_class);
     }
     
      public function classes($id_class=null){
@@ -180,5 +180,18 @@ class Admin extends CI_Controller {
             }else
                 $this->textes($id_texte);
         }
+    }
+    
+    public function prestations(){
+        $this->load->model('prestation_model');
+        $this->data['page_title'] = 'Prestations';
+
+        $this->data['propositions']= $this->prestation_model->get_array(null,array('etat'=>'propose'))->result();
+        $this->data['demandes']= $this->prestation_model->get_array(null,"etat = 'instance' OR etat='demande'")->result();
+        
+        $this->load->view('site/header', $this->data);
+        $this->load->view('site/menu', $this->data);
+        $this->load->view('admin/admin_prestations', $this->data);
+        $this->load->view('site/footer');
     }
 }
