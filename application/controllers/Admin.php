@@ -182,16 +182,46 @@ class Admin extends CI_Controller {
         }
     }
     
+    // Listes des prestations demandées par les clients en attente de réponse admin
     public function prestations(){
         $this->load->model('prestation_model');
         $this->data['page_title'] = 'Prestations';
 
-        $this->data['propositions']= $this->prestation_model->get_array(null,array('etat'=>'propose'))->result();
-        $this->data['demandes']= $this->prestation_model->get_array(null,"etat = 'instance' OR etat='demande'")->result();
+        $this->data['demandes']= $this->prestation_model->get_array(null,array('etat'=>'demande'))->result();
         
         $this->load->view('site/header', $this->data);
         $this->load->view('site/menu', $this->data);
         $this->load->view('admin/admin_prestations', $this->data);
+        $this->load->view('site/footer');
+    }
+    
+    // Faire une propositions de cours à partir d'une demande de prestation client
+    public function faire_proposition($id_prest=null){
+        $this->load->model('prestation_model');
+        $prest = $this->prestation_model->read('*',array('id'=>$id_prest))->row();
+        if(empty($prest))
+            return redirect ('admin', 'refresh');
+        $this->data['page_title'] = 'Proposer une prestation';
+        $this->data['prestation'] = $prest;
+        
+        $eventData = (empty($prest->disponibilite))? '{events : []}' : $prest->disponibilite;        
+        $this->data['header_include'][0] = '<link rel="stylesheet" type="text/css" href="'.css_url('week-calendar/jquery-ui-1.8.11.custom').'" />';
+        $this->data['header_include'][1] = '<link rel="stylesheet" type="text/css" href="'.css_url('week-calendar/jquery.weekcalendar').'" />';
+        $this->data['header_include'][3] = '<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">';
+        
+        $this->data['footer_include'][2] = '<script src="'.js_url('vendor/week-calendar/jquery-1.4.4.min').'"></script>';
+        $this->data['footer_include'][3] = '<script src="'.js_url('vendor/week-calendar/jquery-ui-1.8.11.custom.min').'"></script>';
+        $this->data['footer_include'][4] = '<script src="'.js_url('vendor/week-calendar/date').'"></script>';
+        $this->data['footer_include'][5] = '<script src="'.js_url('vendor/week-calendar/jquery.weekcalendar').'"></script>';
+        $this->data['footer_include'][6] = '<script type="text/javascript">var eventData = '.$eventData.'</script>';
+        $this->data['footer_include'][7] = '<script src="'.js_url('vendor/week-calendar/init-week-calendar-admin').'"></script>';
+        $this->data['footer_include'][8] = '<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>';
+        $this->data['footer_include'][9] = '<script src="'.js_url('scripts/init_timepicker').'"></script>';
+        $this->data['footer_include'][10] = '<script src="'.js_url('scripts/definir_disponibilites').'"></script>';
+        
+        $this->load->view('site/header', $this->data);
+        $this->load->view('site/menu', $this->data);
+        $this->load->view('admin/admin_faire_proposition', $this->data);
         $this->load->view('site/footer');
     }
 }
