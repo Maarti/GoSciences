@@ -166,7 +166,7 @@ class Utilisateur extends CI_Controller {
         $this->data['tab_title'] = 'GoSciences - Aide scolaire à Orléans et ses environs | Mon compte';
         $this->data['meta_desc'] = 'Modifiez les informations de votre compte GoSciences, celles-ci sont strictement confidentielles.';
         $this->data['page_title'] = 'Mon Compte';
-        $this->data['user'] = $this->utilisateur_model->read('mail,nom,prenom,tel,civilite,date_naissance',array('id'=>$_SESSION['id']))->row();
+        $this->data['user'] = $this->utilisateur_model->read('mail,nom,prenom,tel,civilite,date_naissance,cp,ville,adresse',array('id'=>$_SESSION['id']))->row();
         $this->data['footer_include'][0] = '<script src="'.js_url('scripts/confpassword').'"></script>';
         if($code=='ajouter-eleve')
             $this->data['footer_include'][1] = '<script>$(document).ready(function(){$(\'#modal-create\').foundation(\'open\')});</script>';
@@ -190,6 +190,9 @@ class Utilisateur extends CI_Controller {
         $this->form_validation->set_rules('newpassconf', 'Confirmation', 'callback_verify_confpassword');
         $this->form_validation->set_rules('date_naissance', 'Date de naissance', 'max_length[10]');
         $this->form_validation->set_rules('tel', 'Téléphone', 'integer|exact_length[10]');
+        $this->form_validation->set_rules('cp', 'Code postal', 'min_length[2]|max_length[5]');
+        $this->form_validation->set_rules('ville', 'Ville', 'max_length[128]');
+        $this->form_validation->set_rules('adresse', 'Adresse', 'max_length[256]');
         $this->form_validation->set_error_delimiters('<p class="help-text valid-error">', '</p>');
 
         if ($this->form_validation->run()) {
@@ -199,7 +202,10 @@ class Utilisateur extends CI_Controller {
                 'nom' => $this->format_string->format_lastname($this->input->post('nom')),
                 'prenom' => $this->format_string->format_firstname($this->input->post('prenom')),
                 'tel' => $this->input->post('tel'),
-                'date_naissance' => $this->input->post('date_naissance')
+                'date_naissance' => $this->input->post('date_naissance'),
+                'cp' => $this->input->post('cp'),
+                'ville' => $this->input->post('ville'),
+                'adresse' => $this->input->post('adresse')
             );
             $newpass = $this->input->post('newpass');
             if(!empty($newpass))
