@@ -22,6 +22,7 @@ class Prestation extends CI_Controller {
         
         $this->load->model('eleve_model');
         $this->load->model('type_prestation_model');
+        $this->load->model('utilisateur_model');
         $this->load->model('discipline_model');
         $this->data['tab_title'] = 'GoSciences - Aide scolaire à Orléans et ses environs | Réserver une prestation';
         $this->data['meta_desc'] = 'Réservez une prestation GoSciences en Mathématiques, SVT, Physique et Chimie niveau collège et lycée à Orléans, La Ferté-Saint-Aubin, La Chapelle-Saint-Mesmin, Saint-Jean-de-Braye, Saint-Jean-le-Blanc, Saint-Jean-de-la-Ruelle, Olivet, Saran, Lamotte-Beuvron, Vouzon, Marcilly-en-Villette, Menestreau-en-Villette, Saint-Cyr-en-Val, Ligny-le-Ribault, Jouy-le-Potier.';
@@ -29,6 +30,7 @@ class Prestation extends CI_Controller {
         $this->data['classes'] = $this->classe_model->read('id,libelle',array(),null,null,'ordre ASC')->result();
         $this->data['eleves'] = $this->eleve_model->read('id,nom,prenom,classe',array('parent'=>$_SESSION['id']))->result();
         $this->data['disciplines'] = $this->discipline_model->read('id,libelle')->result();
+        $this->data['user'] = $this->utilisateur_model->read('tel,cp,ville,adresse',array('id'=>$_SESSION['id']))->row();
         // on propose tous les types de prestation sauf les stages
         $this->data['types_prest'] = $this->type_prestation_model->read('id,libelle',array('id !=' => 's'),null,null,'ordre ASC')->result();        
         $this->data['footer_include'][0] = '<script src="'.js_url('scripts/prestation_reserver').'"></script>';
@@ -39,13 +41,35 @@ class Prestation extends CI_Controller {
     }
     
     public function valid_reserver(){
+        if(!isset($_SESSION['id']))
+            return redirect ('utilisateur/connexion/connexion_requise', 'refresh');
         $this->form_validation->set_rules('eleve', 'Élève', 'required|callback_belong_to_user');
         $this->form_validation->set_rules('type_prestation', 'Type de prestation', 'required');
         $this->form_validation->set_rules('classe_prestation', 'Classe', 'required');
         $this->form_validation->set_rules('disciplines[]', 'Disciplines', 'required',array('required'=>'Vous devez sélectionner au moins une discipline.'));
+        $this->form_validation->set_rules('tel', 'Téléphone', 'integer|exact_length[10]');
+        $this->form_validation->set_rules('cp', 'Code postal', 'min_length[2]|max_length[5]');
+        $this->form_validation->set_rules('ville', 'Ville', 'max_length[128]');
+        $this->form_validation->set_rules('adresse', 'Adresse', 'max_length[256]');
         $this->form_validation->set_error_delimiters('<p class="help-text valid-error">', '</p>');
 
         if ($this->form_validation->run()) {
+            // MaJ des coordonnées utilisateur si saisies
+            $this->load->model('utilisateur_model');
+            $user = $this->utilisateur_model->read('tel,cp,ville,adresse',array('id'=>$_SESSION['id']))->row();
+            $updated_fields = array();
+            if (!empty($this->input->post('tel')) && $this->input->post('tel')!=$user->tel)
+                $updated_fields['tel'] = $this->input->post('tel');
+            if (!empty($this->input->post('cp')) && $this->input->post('cp')!=$user->cp)
+                $updated_fields['cp'] = $this->input->post('cp');
+            if (!empty($this->input->post('ville')) && $this->input->post('ville')!=$user->ville)
+                $updated_fields['ville'] = $this->input->post('ville');
+            if (!empty($this->input->post('adresse')) && $this->input->post('adresse')!=$user->adresse)
+                $updated_fields['adresse'] = $this->input->post('adresse');
+            if (!empty($updated_fields))
+                $this->utilisateur_model->update(array('id'=>$_SESSION['id']),$updated_fields);
+            
+            // Création de la prestation
             $this->prestation_model->create(array(
                     'etat'                  =>  'instance',
                     'disciplines'           =>  serialize($this->input->post('disciplines[]')),

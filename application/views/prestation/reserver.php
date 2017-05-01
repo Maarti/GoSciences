@@ -56,6 +56,37 @@
         <?= form_error('disciplines[]'); ?>
         </fieldset>
         
+        <fieldset class="fieldset">
+            <legend>Vos coordonnées :</legend>
+            <label>Téléphone
+                <input type="text" name="tel" value="<?=set_value('tel',$user->tel)?>" maxlength="10" placeholder="0600000000">
+                <?= form_error('tel'); ?>
+            </label>
+
+            <label>Code postal
+                <input type="text" pattern="[0-9]{5}" name="cp" value="<?=set_value('cp',$user->cp)?>" maxlength="5" placeholder="45000">
+                <?= form_error('cp'); ?>
+            </label>
+
+            <label>Ville
+                <input type="text" list="ville" name="ville" value="<?=set_value('ville',$user->ville)?>" maxlength="128" placeholder="Orléans">
+                <datalist id="ville">
+                    <? // Autocompletion
+                       $villes = array("Orléans", "La Ferté-Saint-Aubin", "La Chapelle-Saint-Mesmin", "Saint-Jean-de-Braye", "Saint-Jean-le-Blanc", "Saint-Jean-de-la-Ruelle", "Olivet", "Saran", "Lamotte-Beuvron", "Vouzon", "Marcilly-en-Villette", "Menestreau-en-Villette", "Saint-Cyr-en-Val", "Ligny-le-Ribault", "Jouy-le-Potier");
+                       foreach ($villes as $v){
+                           echo '<option value="'.$v.'">';
+                       }
+                    ?>
+                </datalist>
+                <?= form_error('ville'); ?>
+            </label>
+
+            <label>Adresse
+                <input type="text" name="adresse" value="<?=set_value('adresse',$user->adresse)?>" maxlength="256" placeholder="15 bis, Rue De La Réussite">
+                <?= form_error('adresse'); ?>
+            </label>
+        </fieldset>
+        
         <div class="clearfix">
             <div class="float-right">
                 <input type="submit" class="button large" value="Étape suivante">
