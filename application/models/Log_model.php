@@ -16,7 +16,7 @@ class Log_model extends MY_Model
             else                                $agent = 'Unidentified User Agent';
             $platform=$this->agent->platform();
             $ip=$this->input->ip_address();
-            if (!is_null($user) && !is_int($user)){
+            if (!is_null($user) && !is_numeric($user)){
                 $user_obj = $CI->utilisateur_model->read('id',array('mail'=>$user))->row();
                 $user = (is_null($user_obj))? null : $user_obj->id;
             }

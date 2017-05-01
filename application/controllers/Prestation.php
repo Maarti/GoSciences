@@ -139,7 +139,9 @@ class Prestation extends CI_Controller {
                 'etat'          => 'demande',
                 'commentaire'   => $this->input->post('commentaire')
                 ));
-            $this->log_model->create_log('prestation','Demande de prestation','Id: '.$prest->id,$_SESSION['id']);
+            $this->load->model('log_model');
+            echo $_SESSION['id'];
+            var_dump($this->log_model->create_log('prestation','Demande de prestation','Id: '.$prest->id,$_SESSION['id']));
             
             // Envoi de mail            
             $this->load->model('utilisateur_model');
@@ -151,7 +153,7 @@ class Prestation extends CI_Controller {
                     $this->config->item('mail_no_reply'),
                     'Système GoSciences');
                 
-            return redirect ('prestation/mes_cours/prestation_demandee', 'refresh');
+            //return redirect ('prestation/mes_cours/prestation_demandee', 'refresh');
         }else{
             $this->definir_disponibilites($id_prest);
         }
