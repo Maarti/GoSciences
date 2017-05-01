@@ -30,7 +30,7 @@
         <div class="small-6 large-3 columns">
             <p class="lead">Légal</p>
             <ul class="menu vertical">
-                <li><a href="#">Mentions Légales</a></li>
+                <li><a href="<?=site_url('site/mentions_legales')?>"><i class="fi-page-filled"></i> Mentions Légales</a></li>
             </ul>
         </div>
     </div>
@@ -53,10 +53,7 @@
 <script>
     $(document).foundation();
 </script>
-<? // Permet l'ouverture automatique d'un modal au chargement de la page
-   /* if(isset($show_modal))
-        echo '<script>$(document).ready(function(){$(\'#'.$show_modal.'\').foundation(\'open\')});</script>'*/
-?>
+
 <? if(isset($footer_include))
      foreach ($footer_include as $script) {?>
         <?=$script?>

@@ -140,20 +140,20 @@ class Prestation extends CI_Controller {
                 'commentaire'   => $this->input->post('commentaire')
                 ));
             $this->load->model('log_model');
-            echo $_SESSION['id'];
-            var_dump($this->log_model->create_log('prestation','Demande de prestation','Id: '.$prest->id,$_SESSION['id']));
+            $this->log_model->create_log('prestation','Demande de prestation','Id: '.$prest->id,$_SESSION['id']);
             
             // Envoi de mail            
             $this->load->model('utilisateur_model');
             $this->utilisateur_model->sendMail(
-                    $this->config->item('mail_maarti'),
+                    //$this->config->item('mail_maarti'),
+                    $this->config->item('mail_admins'),
                     'DEMANDE DE PRESTATION',
                     'Une demande de prestation a été faite sur le site GoSciences.<br/>'
                     . 'Connectez-vous à <a href="'.site_url("admin/prestations").'">l\'administration</a> pour la consulter et y répondre.',
                     $this->config->item('mail_no_reply'),
                     'Système GoSciences');
                 
-            //return redirect ('prestation/mes_cours/prestation_demandee', 'refresh');
+            return redirect ('prestation/mes_cours/prestation_demandee', 'refresh');
         }else{
             $this->definir_disponibilites($id_prest);
         }
@@ -203,6 +203,9 @@ class Prestation extends CI_Controller {
         
         $delete = $this->prestation_model->update(array('id'=>$id_prest),array('etat'=>'annule'));
         $msg = ($delete)? 'demande_annulee' : null;
+        // Log
+        $this->load->model('log_model');
+        $this->log_model->create_log('prestation','Annulation de prestation','Id: '.$prest->id,$_SESSION['id']);
         return redirect ('prestation/mes_cours/'.$msg, 'refresh');
     }
     

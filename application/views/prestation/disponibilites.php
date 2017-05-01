@@ -21,6 +21,10 @@
         </div>
         
         <?= form_open('prestation/valid_disponibilites/'.$prestation->id,'data-abide'); ?>
+        <div class="callout alert show-for-small-only">
+            <p>Attention, le choix des disponibilités n'est pas optimisé pour les smartphones.
+                Vous pourrez à tout moment modifier vos disponibilités depuis le menu "Mes cours".</p>
+        </div>
         <!--
         <div id="dispo-container">
             <div class="row">

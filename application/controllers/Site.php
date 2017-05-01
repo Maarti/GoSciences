@@ -132,6 +132,16 @@ class Site extends CI_Controller {
         $this->load->view('site/footer');
     }
     
+    public function mentions_legales(){
+        $this->data['tab_title'] = 'GoSciences - Aide scolaire à Orléans et ses environs | Mention Légales';
+        $this->data['meta_desc'] = 'Mentions légales de GoSciences, composée de docteurs, d’enseignants diplômés et confirmés, d’ingénieurs mais également d’étudiants issus des meilleures écoles scientifiques.';
+        $this->data['page_title'] = 'Mentions Légales';
+        $this->load->view('site/header', $this->data);
+        $this->load->view('site/menu', $this->data);
+        $this->load->view('site/mentions_legales', $this->data);
+        $this->load->view('site/footer');
+    }
+    
     public function recaptcha($str='') {
         $google_url="https://www.google.com/recaptcha/api/siteverify";
         $ip=$_SERVER['REMOTE_ADDR'];
