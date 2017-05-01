@@ -22,6 +22,12 @@ Puis on modifie la ligne suivante :
 short_open_tag=On
 ```
 
+### Xdebug (colors and formating fr var_dump)
+```
+sudo apt-get install php-xdebug
+sudo service apache2 restart
+```
+
 ## Apache config
 ### AllowOverride
 Pour autoriser la surcharge de la configuration par des .htaccess dans le dossier /var/www/, modifier la configuration d'apache2 :

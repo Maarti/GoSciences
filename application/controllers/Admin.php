@@ -198,7 +198,8 @@ class Admin extends CI_Controller {
     // Faire une propositions de cours à partir d'une demande de prestation client
     public function faire_proposition($id_prest=null){
         $this->load->model('prestation_model');
-        $prest = $this->prestation_model->read('*',array('id'=>$id_prest))->row();
+        $this->load->library('format_string');
+        $prest = $this->prestation_model->get_infos($id_prest)->row();
         if(empty($prest))
             return redirect ('admin', 'refresh');
         $this->data['page_title'] = 'Proposer une prestation';
