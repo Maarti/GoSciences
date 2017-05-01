@@ -524,6 +524,16 @@ $config['rewrite_short_tags'] = FALSE;
 $config['proxy_ips'] = '';
 
 
-// Custom :
+/*
+ * CUSTOM
+ */
+
+// Key :
 $config['public_recaptcha'] = '6LdcPxsUAAAAAO3mf3zpij84rfAg6VAZWHsyIT6b';
 $config['private_recaptcha'] = '#######################################';
+
+// Mail
+$config['mail_admin'] =     '###@###.##';
+$config['mail_maarti'] =    '###@###.##';
+$config['mail_admins'] =    '###@###.##,###@###.##';
+$config['mail_no_reply'] =  'no-reply@gosciences.fr';

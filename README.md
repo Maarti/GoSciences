@@ -22,7 +22,8 @@ Puis on modifie la ligne suivante :
 short_open_tag=On
 ```
 
-### Xdebug (colors and formating fr var_dump)
+### Xdebug (colors and formating for var_dump)
+Permet notamment de rendre plus lisibles les var_dump :
 ```
 sudo apt-get install php-xdebug
 sudo service apache2 restart

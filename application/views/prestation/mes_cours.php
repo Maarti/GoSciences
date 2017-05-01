@@ -11,11 +11,12 @@
                     <h5><strong>Propositions</strong></h5>
                 </a>
                 <div id="proposition" class="accordion-content" role="tabpanel" data-tab-content aria-labelledby="proposition-heading">
-                  <?if (!empty($propositions)){?>
+                  <?if (empty($propositions)){?>
+                     <em class="text-center" style="display:block;">Aucune proposition</em>
+                  <?}else{?>
                     <div class="callout primary">
                         <?=display('proposition_desc')?>
                     </div>
-                  <?}?>
                   <table class="hover">
                     <tbody>
                       <? foreach ($propositions as $prop){ ?>
@@ -28,6 +29,7 @@
                       <?} ?>
                     </tbody>
                   </table>
+                  <?}?>
                 </div>
             </li>
             <li class="accordion-item" data-accordion-item>
@@ -35,6 +37,9 @@
                     <h5><strong>Demandes en cours</strong></h5>
                 </a>
                 <div id="demande" class="accordion-content" role="tabpanel" data-tab-content aria-labelledby="demande-heading">
+                    <? if(empty($demandes)){?>
+                        <em class="text-center" style="display:block;">Aucune demande</em>
+                    <?}else{?>
                     <table class="hover">
                     <tbody>
                       <? foreach ($demandes as $dde){ ?>
@@ -50,6 +55,7 @@
                       <?} ?>
                     </tbody>
                   </table>
+                  <?}?>
                 </div>
             </li>
             <li class="accordion-item" data-accordion-item>
@@ -57,7 +63,11 @@
                     <h5><strong>Cours</strong></h5>
                 </a>
                 <div id="cours" class="accordion-content" role="tabpanel" data-tab-content aria-labelledby="cours-heading">
-                    
+                    <? if(empty($cours)){?>
+                        <em class="text-center" style="display:block;">Aucun cours</em>
+                    <?}else{?>
+                        
+                    <?}?>
                 </div>
             </li>
         </ul>

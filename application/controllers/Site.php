@@ -87,7 +87,7 @@ class Site extends CI_Controller {
                 $config['max_size']             = 2048; // 2048KB = 2MO
                 $this->load->library('upload', $config);
                 if ($this->upload->do_upload('cv')){
-                    $this->utilisateur_model->sendMail('contact@gosciences.fr,contact@maarti.net', 'Postulation depuis GoSciences', $message, $mail, $nom.' '.$prenom,$this->upload->data('full_path'));
+                    $this->utilisateur_model->sendMail($this->config->item('mail_admins'), 'Postulation depuis GoSciences', $message, $mail, $nom.' '.$prenom,$this->upload->data('full_path'));
                     unlink($this->upload->data('full_path'));       // supprime le fichier après envoi
                     redirect('site/contact/envoi_ok', 'refresh');
                 }else{
@@ -95,7 +95,7 @@ class Site extends CI_Controller {
                     $this->contact(NULL,'email');
                 }
             }else{                
-                $this->utilisateur_model->sendMail('contact@gosciences.fr,contact@maarti.net', 'Contact depuis GoSciences', $message, $mail, $nom.' '.$prenom);
+                $this->utilisateur_model->sendMail($this->config->item('mail_admins'), 'Contact depuis GoSciences', $message, $mail, $nom.' '.$prenom);
                 redirect('site/contact/envoi_ok', 'refresh');
             }
         }else

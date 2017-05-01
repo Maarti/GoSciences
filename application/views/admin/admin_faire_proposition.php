@@ -44,7 +44,7 @@
         
         <hr>
         <h2>Faire une proposition :</h2>
-        <?= form_open('admin/valid_faire_proposition/'.$prestation->id,'data-abide'); ?>
+        <?//= form_open('admin/valid_faire_proposition/'.$prestation->id,'data-abide'); ?>
 
         <div id="dispo-container">
             <div class="row">
@@ -71,7 +71,7 @@
         <br/>
         <div class="clearfix">
             <div class="float-right">
-                <input type="submit" class="button large" id="valid-dispo" value="Confirmer cette proposition">
+                <input type="submit" class="button large disabled" id="valid-dispo" value="Confirmer cette proposition">
             </div>
         </div>
         </form>

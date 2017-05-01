@@ -11,6 +11,9 @@
                     <h5><strong>Demandes en attente de votre réponse</strong></h5>
                 </a>
                 <div id="demande" class="accordion-content" role="tabpanel" data-tab-content aria-labelledby="demande-heading">
+                  <?if (empty($demandes)){?>
+                     <em class="text-center" style="display:block;">Aucune demande</em>
+                  <?}else{?>
                   <table class="hover">
                     <tbody>
                       <? foreach ($demandes as $d){ ?>
@@ -23,6 +26,7 @@
                       <?} ?>
                     </tbody>
                   </table>
+                  <?}?>
                 </div>
             </li>
         </ul>
