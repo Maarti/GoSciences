@@ -158,6 +158,10 @@ class Prestation extends CI_Controller {
                 $message='<h5>Demande effectuée.</h5><p>Votre demande de prestation a bien été prise en compte.<br/> L\'administrateur va bientôt prendre connaissance de votre demande et <strong>vous proposera bientôt des cours</strong> en fonction de vos horaires. Vous en serez informé(e) par e-mail.</p>'
                 .'<p>Vous pouvez à tout moment consulter, modifier ou annuler votre demande depuis cette page.</p>';
                 break;
+            case 'demande_annulee':
+                $type='success';
+                $message='<h5>Demande annulée.</h5><p>Votre demande de prestation a été annulée.</p>';
+                break;
             default:
                 $type=NULL;
                 $message=NULL;
@@ -173,6 +177,20 @@ class Prestation extends CI_Controller {
         $this->load->view('prestation/mes_cours', $this->data);
         $this->load->view('site/footer');
     }
+    
+    // Clic sur la croix "annuler la demande" sur l'écran mes_cours
+    public function annuler_demande($id_prest=null){
+        if(!isset($_SESSION['id']))
+            return redirect ('utilisateur/connexion/connexion_requise', 'refresh');
+        $prest = $this->prestation_model->read('eleve_id',array('id'=>$id_prest))->row();
+        if(empty($prest) || !$this->belong_to_user($prest->eleve_id))
+            return redirect ('site/accueil', 'refresh');
+        
+        $delete = $this->prestation_model->update(array('id'=>$id_prest),array('etat'=>'annule'));
+        $msg = ($delete)? 'demande_annulee' : null;
+        return redirect ('prestation/mes_cours/'.$msg, 'refresh');
+    }
+    
     
     // Vérifie si l'id d'élève appartient au compte connecté
     public function belong_to_user($eleve_id) {

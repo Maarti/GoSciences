@@ -19,7 +19,7 @@
                   <table class="hover">
                     <tbody>
                       <? foreach ($propositions as $prop){ ?>
-                      <tr onclick="document.location.href='<?=site_url('site/accueil')?>'">
+                      <tr onclick="document.location.href='<?=site_url('prestation/mes_cours')?>'">
                         <td width="80"><?=$prop->date_creation?></td>
                         <td width="150"><?=$prop->libelle?></td>
                         <td><?=$prop->nom?> <?=$prop->prenom?></td>
@@ -38,13 +38,13 @@
                     <table class="hover">
                     <tbody>
                       <? foreach ($demandes as $dde){ ?>
-                      <tr onclick="document.location.href='<?=site_url('prestation/definir_disponibilites/'.$dde->id)?>'">
+                      <tr>
                         <td width="80"><?=$dde->date_creation?></td>
                         <td width="150"><?=$dde->libelle?></td>
                         <td><?=$dde->nom?> <?=$dde->prenom?></td>
                         <td width="120">
                             <a href="<?=site_url('prestation/definir_disponibilites/'.$dde->id)?>" class="button" title="Modifier les disponibilités"><i class="fi-pencil"></i></a>
-                            <a href="" class="button" title="Supprimer la demande"><i class="fi-x"></i></a>
+                            <a class="button alert" title="Annuler la demande" data-open="annuler_demande_<?=$dde->id?>"><i class="fi-x"></i></a>
                         </td>
                       </tr>
                       <?} ?>
@@ -61,7 +61,23 @@
                 </div>
             </li>
         </ul>
-        
+                
+        <? foreach ($demandes as $dde){ ?>
+        <div class="reveal" id="annuler_demande_<?=$dde->id?>" data-reveal>
+          <h1>Confirmation</h1>
+          <p class="lead">Êtes-vous sûr(e) de vouloir annuler la demande ?</p>
+          <div class="clearfix">
+            <div class="float-right">
+                <button class="button" data-close aria-label="Ferme" type="button">Retour</button>
+                <a href="<?=site_url('prestation/annuler_demande/'.$dde->id)?>" class="button alert">Confirmer l'annulation</a>
+            </div>
+          </div>
+          
+          <button class="close-button" data-close aria-label="Ferme" type="button">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <?}?>
     </div>
 
     <? $this->load->view('include/sidebar'); ?>
