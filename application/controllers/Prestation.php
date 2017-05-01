@@ -45,6 +45,7 @@ class Prestation extends CI_Controller {
             return redirect ('utilisateur/connexion/connexion_requise', 'refresh');
         $this->form_validation->set_rules('eleve', 'Élève', 'required|callback_belong_to_user');
         $this->form_validation->set_rules('type_prestation', 'Type de prestation', 'required');
+        $this->form_validation->set_rules('nb_heure','Nombre d\'heures','numeric|greater_than[0]|less_than[999]');
         $this->form_validation->set_rules('classe_prestation', 'Classe', 'required');
         $this->form_validation->set_rules('disciplines[]', 'Disciplines', 'required',array('required'=>'Vous devez sélectionner au moins une discipline.'));
         $this->form_validation->set_rules('tel', 'Téléphone', 'integer|exact_length[10]');
@@ -72,6 +73,7 @@ class Prestation extends CI_Controller {
             // Création de la prestation
             $this->prestation_model->create(array(
                     'etat'                  =>  'instance',
+                    'nb_heure'              =>  $this->input->post('nb_heure'),
                     'disciplines'           =>  serialize($this->input->post('disciplines[]')),
                     'type_prestation_id'    =>  $this->input->post('type_prestation'),
                     'eleve_id'              =>  $this->input->post('eleve'),

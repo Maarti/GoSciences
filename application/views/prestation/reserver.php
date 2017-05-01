@@ -39,6 +39,11 @@
         <?= form_error('type_prestation'); ?>
         </label>
         
+        <label>Nombre d'heures :
+            <input type="number" name="nb_heure" value="<?=set_value('nb_heure')?>" step="1" min="1" max="999" placeholder="2">
+            <?= form_error('nb_heure'); ?>
+        </label>
+        
         <label>Classe :
         <select name="classe_prestation" id="classe_prestation">  
             <? foreach ($classes as $c) {?>
